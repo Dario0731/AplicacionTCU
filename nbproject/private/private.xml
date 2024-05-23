@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/xampp/htdocs/PhpProject/Lib/Core/Model.php</file>
             <file>file:/C:/xampp/htdocs/PhpProject/index.php</file>
+            <file>file:/C:/xampp/htdocs/PhpProject/App/Model/Person.php</file>
+            <file>file:/C:/xampp/htdocs/PhpProject/App/Model/User.php</file>
         </group>
     </open-files>
 </project-private>
