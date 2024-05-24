@@ -16,4 +16,8 @@ class AuthenticationController {
     public function login() {
         return View('none');
     }
+
+    public function register() {
+        return View();
+    }
 }
