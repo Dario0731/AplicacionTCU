@@ -10,7 +10,9 @@ body{
     display: grid;
     place-items: center;
 }
+header{
+    background: #052c6a;
+}
 footer{
-    align-self: flex-end;
-    width: 100%;
+    background: #052c6a;
 }
