@@ -1,5 +1,5 @@
 <main class="container">
     <h1>Index</h1>
 
-    <p>INDEX</p>
+    <p>Le paso el balon de vuelta</p>
 </main>
