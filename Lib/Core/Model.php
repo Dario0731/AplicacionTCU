@@ -20,7 +20,15 @@ class Model {
         $this->db = Database::getInstance();
         
     }
-    
+        public function create($data)
+    {
+        $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
+
+        $query = $this->db->prepare($queryString);
+        $query->execute();
+
+        return $query->rowCount();
+    }
     public function getAll()
     {
         $query = $this->db->prepare('CALL sp_get_all_' . $this->entity . '()');
@@ -38,17 +46,6 @@ class Model {
 
         return $resuldado[0];
     }
-
-    public function create($data)
-    {
-        $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
-
-        $query = $this->db->prepare($queryString);
-        $query->execute();
-
-        return $query->rowCount();
-    }
-
     public function update($id, $data)
     {
         $queryString = 'CALL sp_update_' . $this->entity . '(' . implode(', ', $data) . ')';

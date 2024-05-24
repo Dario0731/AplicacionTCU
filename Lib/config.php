@@ -25,7 +25,7 @@ $CONFIG = array(
     'request_controller' => !empty($uri_content[1]) ? $uri_content[1] : 'home',
     'request_action' => !empty($uri_content[2]) ? $uri_content[2] : 'index',
     'dbhost' => 'localhost',
-    'dbname' => '',
+    'dbname' => 'coachingapp',
     'dbuser' => 'root',
     'dbpass' => '',
 );

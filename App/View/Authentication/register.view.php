@@ -1,5 +1,5 @@
 <div class="container d-flex justify-content-center p-3">
-    <form class="p-3">
+    <form class="p-3"  action="/register" method="POST">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Ingrese el correo</label>
             <input type="email" class="form-control" placeholder="correo electrónico">

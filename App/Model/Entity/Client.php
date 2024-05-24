@@ -10,7 +10,7 @@
  *
  * @author 50685
  */
-class Person {
+class Client {
     //put your code here
     private $id;
     private $name;

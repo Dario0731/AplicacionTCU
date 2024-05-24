@@ -10,7 +10,7 @@
  *
  * @author hp
  */
-class HomeController {
+class HomeController  {
 
     public function __construct() {
         

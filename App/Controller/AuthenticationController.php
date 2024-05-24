@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Model/Repository/UserRepository.php';
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
@@ -19,5 +19,8 @@ class AuthenticationController {
 
     public function register() {
         return View();
+    }
+    public function registUser(){
+        
     }
 }
