@@ -2,3 +2,15 @@ body{
     margin: 0px;
     padding: 0px;
 }
+.body{
+    background: rgb(13, 14, 28);
+    color: white;
+}
+.principal{
+    display: grid;
+    place-items: center;
+}
+footer{
+    align-self: flex-end;
+    width: 100%;
+}
