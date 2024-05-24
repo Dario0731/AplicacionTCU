@@ -1,5 +1,5 @@
 <?php
-require_once 'Lib/Core/Model.php';
+require_once CONFIG["interface_path"].'IUserRepository.php';
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
@@ -12,14 +12,18 @@ require_once 'Lib/Core/Model.php';
  */
 class UserRepositry extends Model implements IUserRepository{
 
+        public function __construct() {
+        //Se define la entidad que se trabajará en la BD
+        parent::__construct('user');
+    }
     //put your code here
 
 
-    public function registUser($email, $password) {
+    public function registUser($email, $password,$type) {
         $data = [
             varchar($email),
             varchar($password),
-            varchar('Administrador'),
+            varchar($type)
         ];
         return $this->create($data);
     }

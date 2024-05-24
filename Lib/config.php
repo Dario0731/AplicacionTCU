@@ -14,7 +14,8 @@ $protocolo = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 
 $urlBase = $protocolo . '://' . $_SERVER['HTTP_HOST'];
 
 $uri_content = explode('/', $url);
-
+$url = substr($urlPath, strlen($folderPath));
+define('URL_PATH', $folderPath); //Define el nombre de la carpeta del proyecto
 $CONFIG = array(
     'url' => $folderPath,
     'assets' => $urlBase . $folderPath . '/Public/Assets/',
@@ -22,6 +23,9 @@ $CONFIG = array(
     'view_path' => __DIR__ . '/../App/View/',
     'controller_path' => __DIR__ . '/../App/Controller/',
     'model_path' => __DIR__ . '/../App/Model/',
+    'repository_path' => __DIR__.'/../App/Model/Repository/',   
+     'URL_PATH' => __DIR__.'/../App/Model/Repository/',   
+    'interface_path' => __DIR__.'/../App/Model/Interface/',
     'request_controller' => !empty($uri_content[1]) ? $uri_content[1] : 'home',
     'request_action' => !empty($uri_content[2]) ? $uri_content[2] : 'index',
     'dbhost' => 'localhost',
@@ -29,5 +33,5 @@ $CONFIG = array(
     'dbuser' => 'root',
     'dbpass' => '',
 );
-
+//define('MODEL_PATH', __DIR__ . '/Model/Repository');
 define("CONFIG", $CONFIG);

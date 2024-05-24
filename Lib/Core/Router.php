@@ -9,7 +9,7 @@ session_start();
 /**
  * Description of Router
  *
- * @author Brayan Vargas
+ * @author Darío Zamora
  */
 class Router {
 

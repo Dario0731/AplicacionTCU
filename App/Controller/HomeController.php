@@ -8,7 +8,7 @@
 /**
  * Description of HomeController
  *
- * @author hp
+ * @author Darío Zamora
  */
 class HomeController  {
 

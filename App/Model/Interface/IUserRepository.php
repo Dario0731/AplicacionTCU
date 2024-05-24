@@ -12,5 +12,5 @@
  */
 interface IUserRepository {
     //put your code here
-   public function registUser($email,$password);
+   public function registUser($email,$password,$type);
 }

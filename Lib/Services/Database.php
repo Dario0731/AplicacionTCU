@@ -8,7 +8,7 @@
 /**
  * Description of Database
  *
- * @author Brayan Vargas
+ * @author Darío Zamora
  */
 class Database extends PDO {
 
@@ -16,7 +16,7 @@ class Database extends PDO {
 
     public function __construct() {
         // cargar datos referentes a la base de datos
-        parent::__construct('mysql:host=' . CONFIG['dbhost'] . ';dbname=' . CONFIG['dbname'], CONFIG['dbname'], CONFIG['dbpass']);
+        parent::__construct('mysql:host=' . CONFIG['dbhost'] . ';dbname=' . CONFIG['dbname'], CONFIG['dbuser'], CONFIG['dbpass']);
     }
 
     public static function getInstance() {

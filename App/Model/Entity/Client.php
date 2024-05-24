@@ -8,7 +8,7 @@
 /**
  * Description of Persona
  *
- * @author 50685
+ * @author Darío Zamora
  */
 class Client {
     //put your code here

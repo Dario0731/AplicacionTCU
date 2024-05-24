@@ -8,7 +8,7 @@
 /**
  * Description of Usuario
  *
- * @author 50685
+ * @author Darío Zamora
  */
 class User {
    private $id;

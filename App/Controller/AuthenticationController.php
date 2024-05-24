@@ -1,6 +1,6 @@
 <?php
-require_once 'Model/Repository/UserRepository.php';
-/*
+
+/*require_onrequire_once 'Model/Repository';ce(MODEL_PATH."Event.model.php");
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
@@ -8,19 +8,33 @@ require_once 'Model/Repository/UserRepository.php';
 /**
  * Description of AuthenticationController
  *
- * @author Brayan Vargas
+ * @author Darío Zamora
  */
-class AuthenticationController {
+
+require_once(CONFIG["repository_path"]."UserRepository.php");
+require_once("Lib/Core/Controller.php");
+
+
+class AuthenticationController{
     //put your code here
     
     public function login() {
-        return View('none');
+        return View();
     }
 
     public function register() {
         return View();
     }
+    
     public function registUser(){
-        
+                //obtener los datos
+        $email = $_POST["email"];
+        $pass = $_POST["password"];
+        $type='Administrador';
+
+        //logica para crear un anuncio
+        $repo = new UserRepositry();
+        $error = $repo->registUser($email, $pass,$type);
+     //   $this->redirect("/PhpProject/Authentication/register");
     }
 }

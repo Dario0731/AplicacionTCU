@@ -8,7 +8,7 @@
 /**
  * Description of Model
  *
- * @author Brayan Vargas
+ * @author Darío Zamora
  */
 class Model {
     
@@ -26,8 +26,8 @@ class Model {
 
         $query = $this->db->prepare($queryString);
         $query->execute();
-
         return $query->rowCount();
+        
     }
     public function getAll()
     {
