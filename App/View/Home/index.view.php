@@ -6,7 +6,7 @@
         </p>
     </div>
     <div class="principal p-5">
-        <img src="Public/Assets/img/home-image.svg" alt="">
+        <img src="/Public/Assets/img/home-image.svg" alt="Imagen de inicio">
     </div>
     <div class="container">
         <article class="p-2">
