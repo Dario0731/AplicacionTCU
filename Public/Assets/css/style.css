@@ -16,3 +16,8 @@ header{
 footer{
     background: #052c6a;
 }
+.form-container{
+    height: 80%;
+    display: grid;
+    place-items: center;
+}

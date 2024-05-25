@@ -11,30 +11,42 @@
  * @author Darío Zamora
  */
 
-require_once(CONFIG["repository_path"]."UserRepository.php");
+require_once(CONFIG["repository_path"] . "UserRepository.php");
 require_once("Lib/Core/Controller.php");
 
 
-class AuthenticationController{
+class AuthenticationController
+{
     //put your code here
-    
-    public function login() {
+
+    public function login()
+    {
         return View();
     }
 
-    public function register() {
+    public function register()
+    {
         return View();
     }
-    
-    public function registUser(){
-                //obtener los datos
+
+    public function registUser()
+    {
+        //obtener los datos
         $email = $_POST["email"];
         $pass = $_POST["password"];
-        $type='Administrador';
+        $type = 'Administrador';
 
         //logica para crear un anuncio
         $repo = new UserRepositry();
-        $error = $repo->registUser($email, $pass,$type);
-     //   $this->redirect("/PhpProject/Authentication/register");
+        $error = $repo->registUser($email, $pass, $type);
+        //   $this->redirect("/PhpProject/Authentication/register");
+    }
+
+    public function loginUser()
+    {
+        //obtener los datos
+        $email = $_POST["email"];
+        $pass = $_POST["password"];
+        $type = $_POST["type"];
     }
 }

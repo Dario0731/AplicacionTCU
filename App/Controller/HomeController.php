@@ -16,7 +16,7 @@ class HomeController  {
         
     }
 
-    public function Index() {
+    public function index() {
         return View();
     }
     
