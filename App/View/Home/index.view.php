@@ -1,3 +1,5 @@
+<?php include(CONFIG['public_path'].'header.php'); ?>
+
 <main class="p-3">
     <div class="text-center">
         <h1>Bienvenido a Coaching</h1>

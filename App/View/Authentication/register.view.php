@@ -1,3 +1,5 @@
+<?php include(CONFIG['public_path'].'header.php'); ?>
+
 <div class="container justify-content-center p-3 form-container">
     <div class="bg-dark p-5 rounded-5 text-secondary shadow" style="width: 25rem">
         <div class="d-flex justify-content-center">
