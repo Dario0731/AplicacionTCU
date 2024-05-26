@@ -5,8 +5,8 @@
                 <li><a href="<?= route('', 'index'); ?>" class="nav-link px-2 text-light">Inicio</a></li>
             </ul>
             <div class="text-end">
-                <a class="btn btn-secondary me-2" href="<?= route('authentication', 'register') ?>">Registrarse</a>
-                <a class="btn btn-secondary" href="<?= route('authentication', 'login') ?>">Iniciar Sesion</a>
+                <a class="btn me-2 text-white" href="<?= route('authentication', 'register') ?>">Registrarse</a>
+                <a class="btn me-2 text-white" href="<?= route('authentication', 'login') ?>">Iniciar Sesión</a>
             </div>
         </div>
     </div>

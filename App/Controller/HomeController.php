@@ -33,6 +33,10 @@ class HomeController  {
         return View();
     }
 
+    public function admin() {
+        return View();
+    }
+
     public function accion() {
         $var = array(
             array(

@@ -6,10 +6,6 @@ body{
     background: rgb(13, 14, 28);
     color: white;
 }
-.principal{
-    display: grid;
-    place-items: center;
-}
 header{
     background: #052c6a;
 }
