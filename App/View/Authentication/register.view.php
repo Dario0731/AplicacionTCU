@@ -25,8 +25,10 @@
                 </div>
                 <input class="form-control bg-light" type="password" placeholder="confirmar contraseña" />
             </div>
-            <div class="text-white w-100 mt-2 fw-semibold shadow-sm">
-                <button type="submit" class="btn text-decoration-none text-white text-center">Registrarse</button>
+            <div class="btn btn-info text-white w-100 mt-2 fw-semibold shadow-sm">
+                <a class="text-decoration-none text-white text-content-center">
+                    <button type="submit" class="btn text-white">Registrarse</button>
+                </a>
             </div>
             <div class="d-flex gap-1 justify-content-center mt-1">
                 <div>¿Ya posees una cuenta?</div>

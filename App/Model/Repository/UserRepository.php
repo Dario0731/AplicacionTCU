@@ -28,4 +28,13 @@ class UserRepositry extends Model implements IUserRepository{
         return $this->create($data);
     }
 
+    public function loginUser($email, $password,$type) {
+        $data = [
+            varchar($email),
+            varchar($password),
+            varchar($type)
+        ];
+        return $this->create($data);
+    }
+
 }

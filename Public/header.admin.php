@@ -1,7 +1,7 @@
 <header class="p-3 text-white">
     <nav class="navbar navbar-expand-lg">
         <div class="container text-white">
-            <a class="navbar-brand text-white" href="#">LOGO</a>
+            <a class="navbar-brand text-white" href="#"><img src="../Public/Assets/img/home-image.svg" style="height: 50px;"></a>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item px-5">
