@@ -40,7 +40,7 @@ class AuthenticationController extends Controller
         //logica para crear un anuncio
         $repo = new UserRepositry();
         $error = $repo->registUser($email, $pass, $type);
-       $this ->redirect("/authentication/register'");
+       $this ->redirect("/authentication/register");
     }
 
     public function loginUser()
