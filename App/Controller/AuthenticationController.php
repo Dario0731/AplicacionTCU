@@ -15,8 +15,9 @@ require_once(CONFIG["repository_path"] . "UserRepository.php");
 require_once("Lib/Core/Controller.php");
 
 
-class AuthenticationController
+class AuthenticationController extends Controller
 {
+    
     //put your code here
 
     public function login()
@@ -39,7 +40,7 @@ class AuthenticationController
         //logica para crear un anuncio
         $repo = new UserRepositry();
         $error = $repo->registUser($email, $pass, $type);
-        //   $this->redirect("/PhpProject/Authentication/register");
+       $this ->redirect("/authentication/register'");
     }
 
     public function loginUser()

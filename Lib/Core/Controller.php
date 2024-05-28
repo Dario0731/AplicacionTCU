@@ -13,14 +13,15 @@
 class Controller {
 
     //put your code here
-    public function redirect($url, $info = null) {
-        $newURL = URL_PATH . $url;
+public function redirect($url, $info = null)
+{
+    $newURL = CONFIG["url"] . $url;
 
-        if (!is_null($info)) {
-            //     $_SESSION['redirect-info'] = $info; //se guarda la información antes de redirigir la página
-        }
-        header('Location: ' . $newURL);
-        exit;
+    if (!is_null($info)) {
+        $_SESSION['redirect-info'] = $info; //se guarda la información antes de redirigir la página
     }
+    header('Location: ' . $newURL);
+    exit;
+}
 
 }
