@@ -37,6 +37,10 @@ class HomeController  {
         return View();
     }
 
+    public function client() {
+        return View();
+    }
+
     public function accion() {
         $var = array(
             array(

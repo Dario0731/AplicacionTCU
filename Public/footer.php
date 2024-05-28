@@ -1,5 +1,7 @@
-<footer class="my-5 p-3">
-    <div class="container">
-      <span>footer</span>
-    </div>
+<footer class="p-3 text-white">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg">
+      <span>Footer</span>
+    </nav>
+  </div>
 </footer>

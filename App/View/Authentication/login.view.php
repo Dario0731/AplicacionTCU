@@ -3,18 +3,18 @@
 <div class="container justify-content-center p-3 form-container">
     <div class="bg-dark p-5 rounded-5 text-secondary shadow" style="width: 25rem">
         <div class="d-flex justify-content-center">
-            <!--<img src="Public/img/login-icon.svg" alt="login-icon" style="height: 7rem" />-->
+            <img src="../Public/Assets/img/login-icon.svg" alt="login-icon" style="height: 5rem" />
         </div>
         <div class="text-white text-center fs-1 fw-bold">Iniciar Sesión</div>
         <div class="input-group mt-4">
             <div class="input-group-text bg-info">
-                <!--<img src="/Public/img/username-icon.svg" alt="username-icon" style="height: 1rem" />-->
+                <img src="../Public/Assets/img/username-icon.svg" alt="username-icon" style="height: 1rem" />
             </div>
             <input class="form-control bg-light" type="text" placeholder="correo electrónico" />
         </div>
         <div class="input-group mt-1">
             <div class="input-group-text bg-info">
-                <!--<img src="/assets/password-icon.svg" alt="password-icon" style="height: 1rem" />-->
+                <img src="../Public/Assets/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
             </div>
             <input class="form-control bg-light" type="password" placeholder="contraseña" />
         </div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="btn d-flex gap-2 justify-content-center border mt-3 shadow-sm">
-            <!--<img src="/assets/google-icon.svg" alt="google-icon" style="height: 1.6rem" />-->
+            <img src="../Public/Assets/img/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
             <div class="fw-semibold text-secondary">inicia sesión con Google</div>
         </div>
     </div>
