@@ -20,6 +20,8 @@ class Router {
         $this->matchRoute();
     }
 
+    
+    
     public function matchRoute() {
 
         # Se establece el nombre de controlador y acción (o valores por defecto)
@@ -34,6 +36,8 @@ class Router {
         require_once($ruta);
     }
 
+
+    
     public function run() {
 
         $ClassName = $this->controller;
