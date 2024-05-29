@@ -1,19 +1,19 @@
-body{
+body {
     margin: 0px;
     padding: 0px;
 }
-.body{
+
+.body {
     background: rgb(13, 14, 28);
     color: white;
 }
-header{
-    background: #052c6a;
-}
-footer{
-    background: #052c6a;
-}
-.form-container{
+
+.form-container {
     height: 80%;
     display: grid;
     place-items: center;
+}
+
+.navbar-gradient {
+    background: linear-gradient(90deg, #4b6cb7, #182848);
 }
