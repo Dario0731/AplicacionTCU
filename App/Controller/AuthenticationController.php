@@ -1,6 +1,6 @@
 <?php
 
-/*require_onrequire_once 'Model/Repository';ce(MODEL_PATH."Event.model.php");
+/* require_onrequire_once 'Model/Repository';ce(MODEL_PATH."Event.model.php");
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
  */
@@ -10,44 +10,65 @@
  *
  * @author Darío Zamora
  */
-
 require_once(CONFIG["repository_path"] . "UserRepository.php");
 require_once("Lib/Core/Controller.php");
 
+class AuthenticationController extends Controller {
 
-class AuthenticationController extends Controller
-{
-    
     //put your code here
 
-    public function login()
-    {
+    public function login() {
         return View();
     }
 
-    public function register()
-    {
+    public function register() {
         return View();
     }
 
-    public function registUser()
-    {
-        //obtener los datos
+    public function registUser() {
+        // Obtener los datos
         $email = $_POST["email"];
         $pass = $_POST["password"];
         $type = 'Administrador';
 
-        //logica para crear un anuncio
+        // Lógica para crear un anuncio
         $repo = new UserRepositry();
-        $error = $repo->registUser($email, $pass, $type);
-       $this ->redirect("/authentication/register");
+        try {
+            $error = $repo->registUser($email, $pass, $type);
+            $info = [
+                'type' => 'success',
+                'title' => 'Registrado correctamente',
+                'text' => 'El usuario ha sido registrado con éxito.'
+            ];
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+        }
+
+        $this->redirect("/authentication/register", $info);
     }
 
-    public function loginUser()
-    {
-        //obtener los datos
-        $email = $_POST["email"];
-        $pass = $_POST["password"];
-        $type = $_POST["type"];
+    public function loginUser() {
+        $repo = new UserRepositry();
+
+        try {
+            $repo->getAll();
+            $info = [
+                'type' => 'success',
+                'title' => "usuarios encontrados",
+                'text' => 'El usuario ha sido registrado con éxito.'
+            ];
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+        }
+        $this->redirect("/authentication/login", $info);
     }
+
 }

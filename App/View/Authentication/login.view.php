@@ -11,13 +11,13 @@
                 <div class="input-group-text bg-info">
                     <img src="../Public/Assets/img/username-icon.svg" alt="username-icon" style="height: 1rem" />
                 </div>
-                <input class="form-control bg-light" type="text" placeholder="correo electrónico" />
+                <input name="email" class="form-control bg-light" type="text" placeholder="correo electrónico" />
             </div>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-info">
                     <img src="../Public/Assets/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
                 </div>
-                <input class="form-control bg-light" type="password" placeholder="contraseña" />
+                <input name="password" class="form-control bg-light" type="password" placeholder="contraseña" />
             </div>
             <div class="d-flex justify-content-around mt-1">
                 <div class="d-flex align-items-center gap-1">
@@ -49,3 +49,17 @@
         </form>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_SESSION['redirect-info'])): ?>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
+                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
+                text: '<?php echo $_SESSION['redirect-info']['text']; ?>'
+            });
+            <?php unset($_SESSION['redirect-info']); ?>
+        <?php endif; ?>
+    });
+</script>

@@ -45,3 +45,17 @@
         </form>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_SESSION['redirect-info'])): ?>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
+                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
+                text: '<?php echo $_SESSION['redirect-info']['text']; ?>'
+            });
+            <?php unset($_SESSION['redirect-info']); ?>
+        <?php endif; ?>
+    });
+</script>
