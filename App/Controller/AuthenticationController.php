@@ -26,6 +26,7 @@ class AuthenticationController extends Controller {
     }
 
     public function registUser() {
+
         // Obtener los datos
         $email = $_POST["email"];
         $pass = $_POST["password"];
@@ -53,14 +54,27 @@ class AuthenticationController extends Controller {
 
     public function loginUser() {
         $repo = new UserRepositry();
+        $email = $_POST['email'];
+        $pass = $_POST["password"];
 
         try {
-            $repo->getAll();
-            $info = [
-                'type' => 'success',
-                'title' => "usuarios encontrados",
-                'text' => 'El usuario ha sido registrado con éxito.'
-            ];
+            $personas = $repo->getAll();
+
+//            for ($i = 0; $i <= sizeof($personas) - 1; $i++) {
+//                        echo $personas[$i]
+//                if ($personas[$i]['email'] == $email || $personas[$i]['password'] == $pass) {
+//                    $this->redirect("/home/admin", $personas);
+//                } else if ($personas[$i]['email'] == $email || !$personas[$i]['password'] == $pass) {
+//                    $info = [
+//                        'type' => 'error',
+//                        'title' => 'Datos erroneos',
+//                        'text' => 'Contraseña incorrecta'
+//                    ];
+//                    $this->redirect("/home/admin", $info);
+//                }
+//            }
+            //Comentar para prueba
+            $this->redirect("/home/admin", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
@@ -68,7 +82,6 @@ class AuthenticationController extends Controller {
                 'text' => 'Ha ocurrido un problema con el servidor.'
             ];
         }
-        $this->redirect("/authentication/login", $info);
     }
 
 }
