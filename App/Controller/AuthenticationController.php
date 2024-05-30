@@ -53,28 +53,43 @@ class AuthenticationController extends Controller {
     }
 
     public function loginUser() {
+
         $repo = new UserRepositry();
         $email = $_POST['email'];
         $pass = $_POST["password"];
-
+        $bandera = "false";
         try {
             $personas = $repo->getAll();
 
-//            for ($i = 0; $i <= sizeof($personas) - 1; $i++) {
-//                        echo $personas[$i]
-//                if ($personas[$i]['email'] == $email || $personas[$i]['password'] == $pass) {
-//                    $this->redirect("/home/admin", $personas);
-//                } else if ($personas[$i]['email'] == $email || !$personas[$i]['password'] == $pass) {
-//                    $info = [
-//                        'type' => 'error',
-//                        'title' => 'Datos erroneos',
-//                        'text' => 'Contraseña incorrecta'
-//                    ];
-//                    $this->redirect("/home/admin", $info);
-//                }
-//            }
+            for ($i = 0; $i <= sizeof($personas) - 1; $i++) {
+                if ($personas[$i]['email'] == $email && $personas[$i]['password'] == $pass) {
+                    $bandera = "true";
+                } else if ($personas[$i]['email'] == $email && $personas[$i]['password'] != $pass) {
+                    $bandera = "pass";
+                }
+            }
+            
+            
+            if ($bandera == "true") {
+
+                $this->redirect("/home/admin");
+            } else if ($bandera = "pass") {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'Datos erroneos',
+                    'text' => 'Contraseña incorrecta'
+                ];
+                $this->redirect("/authentication/login", $info);
+            } else if ($bandera = "false") {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'Datos erroneos',
+                    'text' => 'El usuario ingresado no corresponde'
+                ];
+                $this->redirect("/authentication/login", $info);
+            }
             //Comentar para prueba
-            $this->redirect("/home/admin", $info);
+            // $this->redirect("/home/admin", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
