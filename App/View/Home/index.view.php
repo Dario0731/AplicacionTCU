@@ -17,3 +17,5 @@
         </article>
     </div>
 </main>
+
+<?php include(CONFIG['public_path'].'footer.php'); ?>

@@ -6,3 +6,5 @@
         <img src="../Public/Assets/img/admin-image.svg" alt="Imagen de inicio">
     </div>
 </div>
+
+<?php include(CONFIG['public_path'] . 'footer.php') ?>

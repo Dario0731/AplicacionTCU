@@ -1,7 +1,10 @@
-<?php include(CONFIG['public_path'] . 'header.php'); ?>
-
 <div class="container justify-content-center p-3 py-2 form-container">
     <div class="bg-dark p-5 rounded-5 text-secondary shadow" style="width: 25rem">
+        <div class="text-white">
+            <a href="<?= route('home', 'index') ?>">
+                <img src="../Public/Assets/img/leave-arrow.svg" alt="Salir" style="height: 27px;">
+            </a>
+        </div>
         <div class="d-flex justify-content-center">
             <img src="../Public/Assets/img/login-icon.svg" alt="login-icon" style="height: 5rem" />
         </div>
@@ -11,19 +14,19 @@
                 <div class="input-group-text bg-info">
                     <img src="../Public/Assets/img/username-icon.svg" alt="username-icon" style="height: 1rem" />
                 </div>
-                <input name="email" class="form-control bg-light" type="email" placeholder="correo electrónico" />
+                <input name="email" class="form-control bg-light" type="email" placeholder="correo electrónico" required />
             </div>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-info">
                     <img src="../Public/Assets/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
                 </div>
-                <input name="password" class="form-control bg-light" type="password" placeholder="contraseña" />
+                <input name="password" class="form-control bg-light" type="password" placeholder="contraseña" required />
             </div>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-info">
                     <img src="../Public/Assets/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
                 </div>
-                <input class="form-control bg-light" type="password" placeholder="confirmar contraseña" />
+                <input class="form-control bg-light" type="password" placeholder="confirmar contraseña" required />
             </div>
             <div class="btn btn-info text-white w-100 mt-2 fw-semibold shadow-sm">
                 <a class="text-decoration-none text-white text-content-center">
@@ -33,7 +36,10 @@
             <div class="d-flex gap-1 justify-content-center mt-1">
                 <div>¿Ya posees una cuenta?</div>
             </div>
-            <div class="p-3">
+            <div class="text-center">
+                <a href="<?= route('authentication', 'login') ?>" class="text-decoration-none text-info fw-semibold p-3 text-center">Iniciar Sesión</a>
+            </div>
+            <div class="">
                 <div class="text-center text-white" style="height: 1.1rem">
                     <span class="px-3">o</span>
                 </div>
@@ -49,11 +55,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['redirect-info'])): ?>
+        <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
                 title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
-                text: '<?php echo $_SESSION['redirect-info']['text']; ?>'
+                text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff',
+                confirmButtonColor: '#3085d6'
             });
             <?php unset($_SESSION['redirect-info']); ?>
         <?php endif; ?>

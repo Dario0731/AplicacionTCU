@@ -19,5 +19,6 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<?php include(CONFIG['public_path'] . 'footer.php') ?>

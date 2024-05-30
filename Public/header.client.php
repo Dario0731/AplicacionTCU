@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" style="background: #052c6a;">
+<nav class="navbar navbar-expand-lg navbar-gradient">
     <div class="container">
         <a href="<?= route('home', 'index') ?>" class="navbar-brand text-white">Inicio</a>
         <div class="text-white">

@@ -3,11 +3,6 @@ body {
     padding: 0px;
 }
 
-.body {
-    background: rgb(13, 14, 28);
-    color: white;
-}
-
 .form-container {
     height: 80%;
     display: grid;

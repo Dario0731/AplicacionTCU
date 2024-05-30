@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/c4a32da8f9.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="body">
+<body class="text-white" style="background: linear-gradient(to bottom, #011242, #001136);">
     <?php
     /**
      * Con esto se carga el body completo de la página, de modo 
