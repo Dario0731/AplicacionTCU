@@ -32,7 +32,9 @@
                 </div>
             </div>
             <div class="btn btn-info text-white w-100 mt-2 fw-semibold shadow-sm">
-                    <button class="text-decoration-none text-white text-content-center" type="submit" class="btn text-white">Iniciar Sesión</button>
+                <a class="text-decoration-none text-white text-content-center">
+                    <button type="submit" class="btn text-white">Iniciar Sesión</button>
+                </a>
             </div>
             <div class="d-flex gap-1 justify-content-center mt-1">
                 <div>¿No posees una cuenta?</div>
