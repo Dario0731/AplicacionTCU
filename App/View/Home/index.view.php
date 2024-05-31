@@ -8,7 +8,7 @@
         </p>
     </div>
     <div class="text-center p-5">
-        <img src="../Public/Assets/img/home-image.svg" alt="Imagen de inicio">
+        <img src="<?=CONFIG['assets']?>img/home-image.svg" alt="Imagen de inicio">
     </div>
     <div class="container">
         <article class="p-2">
@@ -19,3 +19,5 @@
 </main>
 
 <?php include(CONFIG['public_path'].'footer.php'); ?>
+
+http://localhost/AplicacionTCU/Public/Assets/img/home-image.svg
