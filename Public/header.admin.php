@@ -9,6 +9,9 @@
                 <li class="nav-item px-3">
                     <a class="nav-link text-white" href="#">Administrar Clases</a>
                 </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link text-white" href="#">Administrar página principal</a>
+                </li>
             </ul>
         </div>
         <a class="navbar-brand text-white px-2" href="<?= route('home', 'index') ?>">

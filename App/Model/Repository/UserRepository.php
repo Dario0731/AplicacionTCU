@@ -13,7 +13,6 @@ require_once CONFIG["interface_path"].'IUserRepository.php';
 class UserRepositry extends Model implements IUserRepository{
 
         public function __construct() {
-        //Se define la entidad que se trabajará en la BD
         parent::__construct('user');
     }
     //put your code here

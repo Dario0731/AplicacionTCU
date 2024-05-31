@@ -11,34 +11,31 @@
  * @author Darío Zamora
  */
 class Model {
-    
+
     protected $db;
     protected $entity;
-    
+
     public function __construct($entity) {
         $this->entity = $entity;
         $this->db = Database::getInstance();
-        
     }
-        public function create($data)
-    {
+
+    public function create($data) {
         $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
 
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();
-        
     }
-    public function getAll()
-    {
+
+    public function getAll() {
         $query = $this->db->prepare('CALL sp_get_all_' . $this->entity . '()');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function getById($id)
-    {
+    public function getById($id) {
         $queryString = 'CALL sp_get_' . $this->entity . '(' . $id . ')';
         $query = $this->db->prepare($queryString);
         $query->execute();
@@ -46,11 +43,22 @@ class Model {
 
         return $resuldado[0];
     }
-    public function update($id, $data)
-    {
+
+    public function update($data) {
         $queryString = 'CALL sp_update_' . $this->entity . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();
     }
+
+public function getByEmail($email) {
+    $queryString = 'CALL sp_get_' . $this->entity . '_by_email' . '(:email)';
+    $query = $this->db->prepare($queryString);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    return $resultado[0];
+}
+
 }

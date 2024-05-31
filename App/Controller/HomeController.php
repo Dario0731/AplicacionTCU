@@ -16,10 +16,11 @@ class HomeController  {
         
     }
 
-    public function index() {
+    public function Index() {
+        session_destroy(); // Destruir la sesión actual
         return View();
     }
-    
+        
     public function Casa() {
         //persona=sql conecttion.getPersonas
         
@@ -30,14 +31,6 @@ class HomeController  {
     }
     
     public function About() {
-        return View();
-    }
-
-    public function admin() {
-        return View();
-    }
-
-    public function client() {
         return View();
     }
 

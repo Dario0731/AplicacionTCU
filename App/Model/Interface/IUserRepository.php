@@ -11,6 +11,9 @@
  * @author 50685
  */
 interface IUserRepository {
+
     //put your code here
-   public function registUser($email,$password,$type);
+    public function registUser($email, $password, $type);
+
+    public function getAllUsers();
 }

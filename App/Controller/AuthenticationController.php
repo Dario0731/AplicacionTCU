@@ -11,6 +11,7 @@
  * @author Darío Zamora
  */
 require_once(CONFIG["repository_path"] . "UserRepository.php");
+require_once(CONFIG["repository_path"] . "CoachRepository.php");
 require_once("Lib/Core/Controller.php");
 
 class AuthenticationController extends Controller {
@@ -34,8 +35,10 @@ class AuthenticationController extends Controller {
 
         // Lógica para crear un anuncio
         $repo = new UserRepositry();
+        $coachs = new CoachRepository();
         try {
-            $error = $repo->registUser($email, $pass, $type);
+            $coachs->registCoach($email, '0');
+            $repo->registUser($email, $pass, $type);
             $info = [
                 'type' => 'success',
                 'title' => 'Registrado correctamente',
@@ -60,42 +63,52 @@ class AuthenticationController extends Controller {
         $bandera = "false";
         try {
             $personas = $repo->getAll();
-
+            $bandera = "false";
+            $bandera = "false";
             for ($i = 0; $i <= sizeof($personas) - 1; $i++) {
-                if ($personas[$i]['email'] == $email && $personas[$i]['password'] == $pass) {
-                    $bandera = "true";
-                } else if ($personas[$i]['email'] == $email && $personas[$i]['password'] != $pass) {
-                    $bandera = "pass";
+                if ($personas[$i]['email'] == $email) {
+                    if ($personas[$i]['password'] == $pass) {
+                        $bandera = "true";
+                        break;
+                    } else if ($personas[$i]['email'] == $email && $personas[$i]['password'] != $pass) {
+                        $bandera = "pass";
+                        break;
+                    }
                 }
             }
-            
-            
-            if ($bandera == "true") {
-
-                $this->redirect("/home/admin");
-            } else if ($bandera = "pass") {
-                $info = [
-                    'type' => 'error',
-                    'title' => 'Datos erroneos',
-                    'text' => 'Contraseña incorrecta'
-                ];
-                $this->redirect("/authentication/login", $info);
-            } else if ($bandera = "false") {
-                $info = [
-                    'type' => 'error',
-                    'title' => 'Datos erroneos',
-                    'text' => 'El usuario ingresado no corresponde'
-                ];
-                $this->redirect("/authentication/login", $info);
-            }
-            //Comentar para prueba
-            // $this->redirect("/home/admin", $info);
+            $this->loginValidation($bandera, $email, $pass);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
                 'title' => 'Ha ocurrido un problema',
                 'text' => 'Ha ocurrido un problema con el servidor.'
             ];
+        }
+    }
+
+    private function loginValidation($bandera, $email, $pass) {
+        if ($bandera == "true") {
+            session_start();  // Iniciar la sesión
+
+            $_SESSION['user'] = [
+                'email' => $email,
+            ]; // Almacenar datos del usuario en la sesión
+
+            $this->redirect("/admin/home");
+        } else if ($bandera == "pass") {
+            $info = [
+                'type' => 'error',
+                'title' => 'Datos erroneos',
+                'text' => 'Contraseña incorrecta'
+            ];
+            $this->redirect("/authentication/login", $info);
+        } else if ($bandera == "false") {
+            $info = [
+                'type' => 'error',
+                'title' => 'Datos erroneos',
+                'text' => 'El usuario ingresado no corresponde'
+            ];
+            $this->redirect("/authentication/login", $info);
         }
     }
 
