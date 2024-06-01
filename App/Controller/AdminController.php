@@ -12,11 +12,9 @@ require_once("Lib/Core/Controller.php");
  *
  * @author 50685
  */
-class AdminController extends Controller
-{
+class AdminController extends Controller {
 
-    public function home()
-    {
+    public function home() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -27,34 +25,71 @@ class AdminController extends Controller
         $coach = new CoachRepository();
 
         $coachsByEmail = $coach->getByEmail($email);
-        if (($coachsByEmail[0]['conections'] == 0)) {
-            $this->redirect("/admin/information");
-        } else {
-            return View();
+        if (($coachsByEmail['conections'] == 0)) {
+            $info = [
+                'type' => 'success',
+                'title' => 'Actualizado',
+                'text' => 'SIUUU'
+            ];
+            $this->redirect("/admin/information", $info);
         }
+        viewbag("coach_info", $coachsByEmail['name'].' '.$coachsByEmail['last_name']);
         return View();
         //$this->redirect("/admin/home", $info);
     }
 
     public function information() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $coach = new CoachRepository();
+        $email = $_SESSION['user']['email'];
+
+        try {
+            $coachsByEmail = $coach->getByEmail($email);
+            $coach_info = $coachsByEmail['email'] . ',' . $coachsByEmail['name'] . ',' .
+                    $coachsByEmail['last_name'] . ',' . $coachsByEmail['phone'] . ',' . $coachsByEmail['conections'];
+            viewbag("coach_info", $coach_info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+            $this->redirect("/admin/information", $info);
+        }
         return View();
     }
 
-    private function guardar()
-    {
-        for ($i = 0; $i <= sizeof($coachsCount) - 1; $i++) {
-            if ($coach[$i]['email'] == $email) {
-                $coach->updateCoach(
-                    $coach[$i]['id'],
-                    $email,
-                    $coach[$i]['name'],
-                    $coach[$i]['last_name'],
-                    $coach[$i]['image_path'],
-                    $coach[$i]['conections'],
-                    1
-                );
-                $this->redirect("/admin/home");
-            }
+    public function updateCoachInfo() {
+        $coach = new CoachRepository();
+        $email = $_POST['email'];
+        $coachsByEmail = $coach->getByEmail($email);
+        $id = $coachsByEmail['id'];
+        $name = $_POST['name'];
+        $lastName = $_POST['last_name'];
+        //   $image = $_POST['image'];
+        $image = 'jasdad.com';
+        $conection = 1;
+        $phone = $_POST['phone'];
+        try {
+            $coach->updateCoach($id, $email, $name, $lastName, $image, $conection, $phone);
+
+            $info = [
+                'type' => 'success',
+                'title' => 'Actualizado',
+                'text' => 'Se han actualizado sus datos.'
+            ];
+            $this->redirect("/admin/home", $info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+            $this->redirect("/admin/information", $info);
         }
     }
+
 }
