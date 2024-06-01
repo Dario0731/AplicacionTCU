@@ -13,9 +13,11 @@
                 </li>
             </ul>
         </div>
-        <a class="navbar-brand text-white px-2" href="<?= route('admin', 'information') ?>">
+        <a class="navbar-brand text-white px-2 nav-link" href="<?= route('admin', 'information') ?>">
             <img src="<?= CONFIG['assets'] ?>img/settings-icon.svg" alt="settings" style="height: 27px;">
         </a>
-        <a class="navbar-brand text-white" href="<?= route('home', 'index') ?>">Cerrar Sesión</a>
+        <a class="navbar-brand text-white" href="<?= route('home', 'index') ?>">
+            <img src="<?= CONFIG['assets'] ?>img/session-out-icon.svg" alt="imagen de cerrar sesión" style="height: 28px;">
+        </a>
     </div>
 </nav>

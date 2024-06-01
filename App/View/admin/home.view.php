@@ -1,7 +1,7 @@
 <?php include(CONFIG['public_path'].'header.admin.php'); ?>
 
 <div class="container">
-    <h1 class="text-center p-3">BIENVENIDO COACH <?= viewbag("coach_info") ?></h1>
+    <h1 class="text-center p-3 text-uppercase">BIENVENIDO COACH <?= viewbag("coach_info") ?></h1>
     <div class="text-center p-5">
         <img src="<?= CONFIG['assets']?>img/admin-image.svg" alt="Imagen de inicio">
     </div>
