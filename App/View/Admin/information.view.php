@@ -10,7 +10,7 @@
                 </div>
                 <div class="form-group py-2">
                     <label for="name">Nombre:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="" required>
+                    <input type="text" class="form-control" id="name" name="name" value="<?= $_SESSION['user']['name']; ?>" required>
                 </div>
                 <div class="form-group py-2">
                     <label for="last_name">Apellido:</label>
