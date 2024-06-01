@@ -12,9 +12,11 @@ require_once("Lib/Core/Controller.php");
  *
  * @author 50685
  */
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
-    public function home() {
+    public function home()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -25,25 +27,34 @@ class AdminController extends Controller {
         $coach = new CoachRepository();
 
         $coachsByEmail = $coach->getByEmail($email);
-//        if (($coachsByEmail[0]['conections'] == 0)) {
-//            $this->redirect("/admin/information");
-//        } else {
-//            return View();
-//        }
+        if (($coachsByEmail[0]['conections'] == 0)) {
+            $this->redirect("/admin/information");
+        } else {
+            return View();
+        }
         return View();
-    // $this->redirect("/admin/home",$info);
-
+        //$this->redirect("/admin/home", $info);
     }
 
-    private function guardar() {
+    public function information() {
+        return View();
+    }
+
+    private function guardar()
+    {
         for ($i = 0; $i <= sizeof($coachsCount) - 1; $i++) {
             if ($coach[$i]['email'] == $email) {
-                $coach->updateCoach($coach[$i]['id'], $email,
-                        $coach[$i]['name'], $coach[$i]['last_name'], $coach[$i]['image_path'],
-                        $coach[$i]['conections'], 1);
+                $coach->updateCoach(
+                    $coach[$i]['id'],
+                    $email,
+                    $coach[$i]['name'],
+                    $coach[$i]['last_name'],
+                    $coach[$i]['image_path'],
+                    $coach[$i]['conections'],
+                    1
+                );
                 $this->redirect("/admin/home");
             }
         }
     }
-
 }

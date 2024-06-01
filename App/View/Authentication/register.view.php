@@ -2,29 +2,29 @@
     <div class="bg-dark p-5 rounded-5 text-secondary shadow" style="width: 25rem">
         <div class="text-white">
             <a href="<?= route('home', 'index') ?>">
-                <img src="../Public/Assets/img/leave-arrow.svg" alt="Salir" style="height: 27px;">
+                <img src="<?= CONFIG['assets']?>img/leave-arrow.svg" alt="Salir" style="height: 27px;">
             </a>
         </div>
         <div class="d-flex justify-content-center">
-            <img src="../Public/Assets/img/login-icon.svg" alt="login-icon" style="height: 5rem" />
+            <img src="<?= CONFIG['assets']?>img/login-icon.svg" alt="login-icon" style="height: 5rem" />
         </div>
         <form class="p-3" action="/AplicacionTCU/Authentication/registUser" method="POST">
             <div class="text-white text-center fs-1 fw-bold">Registrarse</div>
             <div class="input-group mt-4">
                 <div class="input-group-text bg-info">
-                    <img src="../Public/Assets/img/username-icon.svg" alt="username-icon" style="height: 1rem" />
+                    <img src="<?= CONFIG['assets']?>img/username-icon.svg" alt="username-icon" style="height: 1rem" />
                 </div>
                 <input name="email" class="form-control bg-light" type="email" placeholder="correo electrónico" required />
             </div>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-info">
-                    <img src="../Public/Assets/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
+                    <img src="<?= CONFIG['assets']?>img/password-icon.svg" alt="password-icon" style="height: 1rem" />
                 </div>
                 <input name="password" class="form-control bg-light" type="password" placeholder="contraseña" required />
             </div>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-info">
-                    <img src="../Public/Assets/img/password-icon.svg" alt="password-icon" style="height: 1rem" />
+                    <img src="<?= CONFIG['assets']?>img/password-icon.svg" alt="password-icon" style="height: 1rem" />
                 </div>
                 <input class="form-control bg-light" type="password" placeholder="confirmar contraseña" required />
             </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="btn d-flex gap-2 justify-content-center border mt-3 shadow-sm">
-                <img src="../Public/Assets/img/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
+                <img src="<?= CONFIG['assets']?>img/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
                 <div class="fw-semibold text-secondary">Registrarse con Google</div>
             </div>
         </form>

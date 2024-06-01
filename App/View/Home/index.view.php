@@ -19,5 +19,3 @@
 </main>
 
 <?php include(CONFIG['public_path'].'footer.php'); ?>
-
-http://localhost/AplicacionTCU/Public/Assets/img/home-image.svg

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trainer Website</title>
-    <link rel="icon" href="../Public/Assets/img/home-image.svg" type="image/svg+xml">
+    <link rel="icon" href="<?= CONFIG['assets']?>img/home-image.svg" type="image/svg+xml">
     <link rel="stylesheet" href="<?= CONFIG['assets'] ?>css/style.css" />
     <link rel="stylesheet" href="Public/Assets/css/style.css">
     <link href="<?= CONFIG['assets'] ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
