@@ -27,9 +27,9 @@ class AdminController extends Controller {
         $coachsByEmail = $coach->getByEmail($email);
         if (($coachsByEmail['conections'] == 0)) {
             $info = [
-                'type' => 'success',
-                'title' => 'Actualizado',
-                'text' => 'SIUUU'
+                'type' => 'sucess',
+                'title' => 'Información',
+                'text' => 'Bienvenido a la aplicación. Vamos a terminar de configurar tus datos'
             ];
             $this->redirect("/admin/information", $info);
         }
