@@ -62,6 +62,10 @@ class AdminController extends Controller {
         return View();
     }
 
+    public function clients() {
+        return View();
+    }
+
     public function updateCoachInfo() {
         $coach = new CoachRepository();
         $email = $_POST['email'];

@@ -23,11 +23,10 @@ if (count($parts) >= 4) {
 <div class="container">
     <div class="row justify-content-center pt-5" style="height: 80%;">
         <div class="col-md-6">
-            <?php if ($conection == 0): ?>
+            <?php if ($conection == 0) : ?>
                 <p>Terminemos de configurar tus datos: </p>
             <?php endif; ?>
-            <form  action="/AplicacionTCU/Admin/updateCoachInfo" method="post" enctype="multipart/form-data">
-
+            <form action="/AplicacionTCU/Admin/updateCoachInfo" method="post" enctype="multipart/form-data">
                 <div class="form-group py-2">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
@@ -43,7 +42,7 @@ if (count($parts) >= 4) {
                 <div class="form-group py-2">
                     <label for="image">Imagen:</label>
                     <div><input type="file" class="form-control-file" id="image" name="image" accept="image/*"></div>
-                    <?php if (!empty($image_path)): ?>
+                    <?php if (!empty($image_path)) : ?>
                         <img src="<?= htmlspecialchars($image_path); ?>" alt="Coach Image" style="max-width: 100px; max-height: 100px;">
                     <?php endif; ?>
                 </div>
@@ -51,7 +50,9 @@ if (count($parts) >= 4) {
                     <label for="phone">Teléfono:</label>
                     <input type="tel" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($phone); ?>" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <div class="text-center form-group py-2">
+                    <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                </div>
             </form>
         </div>
     </div>
@@ -60,8 +61,8 @@ if (count($parts) >= 4) {
 <?php include(CONFIG['public_path'] . 'footer.php') ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-<?php if (isset($_SESSION['redirect-info'])) : ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
                 title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
@@ -71,7 +72,7 @@ if (count($parts) >= 4) {
                 iconColor: '#fff',
                 confirmButtonColor: '#3085d6'
             });
-    <?php unset($_SESSION['redirect-info']); ?>
-<?php endif; ?>
+            <?php unset($_SESSION['redirect-info']); ?>
+        <?php endif; ?>
     });
 </script>
