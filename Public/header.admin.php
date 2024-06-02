@@ -26,14 +26,14 @@
                         <img src="<?= CONFIG['assets'] ?>img/settings-icon.svg" alt="settings" style="height: 27px;">
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'information')?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'information') ?>">
                             <img class="px-1" src="<?= CONFIG['assets'] ?>img/update-data-icon.svg" alt="imagen de actualizar los datos personales" style="height: 17px;">
                             Actualizar datos
                         </a>
-                            <a class="dropdown-item text-white navbar-gradient">
-                            <img class="px-1" src="<? = CONFIG['assets'] ?>img/clients-icon.svg" alt="imagen de ver clientes" style="height: 15px;">
-                                Ver clientes
-                            </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="#">
+                            <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-icon.svg" alt="imagen de ver clientes" style="height: 15px;">
+                            Ver clientes
+                        </a>
                     </div>
                 </li>
             </ul>

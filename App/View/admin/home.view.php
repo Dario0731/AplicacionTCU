@@ -9,8 +9,8 @@ $image = $parts[1];
 ?>
 <div class="container">
     <h1 class="text-center p-3 text-uppercase">BIENVENIDO COACH <?= $name ?></h1>
-    <div class="text-center p-5">
-        <img   src="<?= CONFIG['assets']?><?= $image ?>" alt="Imagen de inicio">
+    <div class="text-center p-5 justify-content-center">
+        <img   src="<?= CONFIG['assets']?><?= $image ?>" alt="Imagen de inicio" style="height: 400px;">
       
     </div>
 </div>
