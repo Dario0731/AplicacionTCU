@@ -12,7 +12,7 @@
     </div>
     <div class="container">
         <article class="p-2">
-            <h3>Gestiona, organiza Y disfruta</h3>
+            <h3>Gestiona, organiza y disfruta</h3>
             <span>La manera más fácil de optimizar el tiempo</span>
         </article>
     </div>

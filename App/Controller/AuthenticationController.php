@@ -16,7 +16,7 @@ require_once("Lib/Core/Controller.php");
 
 class AuthenticationController extends Controller {
 
-    //put your code here
+//put your code here
 
     public function login() {
         return View();
@@ -28,30 +28,45 @@ class AuthenticationController extends Controller {
 
     public function registUser() {
 
-        // Obtener los datos
+// Obtener los datos
         $email = $_POST["email"];
         $pass = $_POST["password"];
         $type = 'Administrador';
-
-        // Lógica para crear un anuncio
-        $repo = new UserRepositry();
-        $coachs = new CoachRepository();
-        try {
-            $coachs->registCoach($email, '0');
-            $repo->registUser($email, $pass, $type);
-            $info = [
-                'type' => 'success',
-                'title' => 'Registrado correctamente',
-                'text' => 'El usuario ha sido registrado con éxito.'
-            ];
-        } catch (Exception $ex) {
+        $confirm = $_POST["confirm_password"];
+        if ($pass == $confirm) {
+            if (strlen($pass) < 6 || strlen($pass) > 8) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'Ha ocurrido un problema',
+                    'text' => 'La contraseña debe tener entre 6 y 8 carácteres.'
+                ];
+            } else {
+            $repo = new UserRepositry();
+            $coachs = new CoachRepository();
+            try {
+                $coachs->registCoach($email, '0');
+                $repo->registUser($email, $pass, $type);
+                $info = [
+                    'type' => 'success',
+                    'title' => 'Registrado correctamente',
+                    'text' => 'El usuario ha sido registrado con éxito.'
+                ];
+            } catch (Exception $ex) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'Ha ocurrido un problema',
+                    'text' => 'Ha ocurrido un problema con el servidor o el usuario ingresado ya existe.'
+                ];
+            }
+            }
+        } else {
             $info = [
                 'type' => 'error',
                 'title' => 'Ha ocurrido un problema',
-                'text' => 'Ha ocurrido un problema con el servidor.'
+                'text' => 'Las contraseñas no corresponden.'
             ];
         }
-
+        
         $this->redirect("/authentication/register", $info);
     }
 
@@ -60,12 +75,15 @@ class AuthenticationController extends Controller {
         $repo = new UserRepositry();
         $email = $_POST['email'];
         $pass = $_POST["password"];
+        $confirm = $_POST["confirm_password"];
         $bandera = "false";
+
         try {
             $personas = $repo->getAll();
             $bandera = "false";
-            $bandera = "false";
-            for ($i = 0; $i <= sizeof($personas) - 1; $i++) {
+            for ($i = 0;
+                    $i <= sizeof($personas) - 1;
+                    $i++) {
                 if ($personas[$i]['email'] == $email) {
                     if ($personas[$i]['password'] == $pass) {
                         $bandera = "true";
