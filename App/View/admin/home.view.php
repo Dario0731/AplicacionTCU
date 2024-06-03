@@ -7,7 +7,7 @@ $parts = explode(",", viewbag("coach_info"));
 $name = $parts[0];
 $image = $parts[1];
 ?>
-<div class="container">
+<div class="container" style="height: 100%;">
     <h1 class="text-center p-3 text-uppercase">BIENVENIDO COACH <?= $name ?></h1>
     <div class="text-center p-5 justify-content-center">
         <img   src="<?= CONFIG['assets']?><?= $image ?>" alt="Imagen de inicio" style="height: 400px;">
