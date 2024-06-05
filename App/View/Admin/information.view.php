@@ -26,35 +26,35 @@ if (count($parts) >= 4) {
             <?php if ($conection == 0) : ?>
                 <p>Terminemos de configurar tus datos: </p>
             <?php endif; ?>
-<form action="/AplicacionTCU/Admin/updateCoachInfo" method="post" enctype="multipart/form-data">
-    <div class="form-group py-2">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
-    </div>
-    <div class="form-group py-2">
-        <label for="name">Nombre:</label>
-        <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name); ?>" required>
-    </div>
-    <div class="form-group py-2">
-        <label for="last_name">Apellido:</label>
-        <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" required>
-    </div>
-    <div class="form-group py-2">
-        <label for="image">Imagen:</label>
-        <div><input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="onFileSelected(event)"></div>
-        <?php if (!empty($image_path)) : ?>
-            <img src="<?= htmlspecialchars($image_path); ?>" alt="Coach Image" style="max-width: 100px; max-height: 100px;">
-        <?php endif; ?>
-        <input type="hidden" id="image_path" name="image_path">
-    </div>
-    <div class="form-group py-2">
-        <label for="phone">Teléfono:</label>
-        <input type="tel" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($phone); ?>" required>
-    </div>
-    <div class="text-center form-group py-2">
-        <button type="submit" class="btn btn-primary">Actualizar Datos</button>
-    </div>
-</form>
+            <form action="/AplicacionTCU/Admin/updateCoachInfo" method="post" enctype="multipart/form-data">
+                <div class="form-group py-2">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
+                </div>
+                <div class="form-group py-2">
+                    <label for="name">Nombre:</label>
+                    <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name); ?>" required>
+                </div>
+                <div class="form-group py-2">
+                    <label for="last_name">Apellido:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" required>
+                </div>
+                <div class="form-group py-2">
+                    <label for="image">Imagen:</label>
+                    <div><input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="onFileSelected(event)"></div>
+                    <?php if (!empty($image_path)) : ?>
+                        <img src="<?= htmlspecialchars($image_path); ?>" alt="Coach Image" style="max-width: 100px; max-height: 100px;">
+                    <?php endif; ?>
+                    <input type="hidden" id="image_path" name="image_path">
+                </div>
+                <div class="form-group py-2">
+                    <label for="phone">Teléfono:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($phone); ?>" required>
+                </div>
+                <div class="text-center form-group py-2">
+                    <button type="submit" class="btn btn-primary">Actualizar Datos</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -62,22 +62,22 @@ if (count($parts) >= 4) {
 <?php include(CONFIG['public_path'] . 'footer.php') ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-<?php if (isset($_SESSION['redirect-info'])) : ?>
-                                Swal.fire({
-                                    icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
-                                    title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
-                                    text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
-                                    background: 'linear-gradient(to bottom, #011242, #001136)',
-                                    color: '#fff',
-                                    iconColor: '#fff',
-                                    confirmButtonColor: '#3085d6'
-                                });
-    <?php unset($_SESSION['redirect-info']); ?>
-<?php endif; ?>
-                        });
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_SESSION['redirect-info'])) : ?>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
+                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
+                text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff',
+                confirmButtonColor: '#3085d6'
+            });
+            <?php unset($_SESSION['redirect-info']); ?>
+        <?php endif; ?>
+    });
 
-   function onFileSelected(event) {
+    function onFileSelected(event) {
         var file = event.target.files[0];
         var formData = new FormData();
         formData.append('image', file);

@@ -1,4 +1,4 @@
-<div class="container justify-content-center p-3 py-2 form-container">
+<div class="container justify-content-center pt-5 form-container">
     <div class="bg-dark p-5 rounded-5 text-secondary shadow" style="width: 25rem">
         <div class="text-white">
             <a href="<?= route('home', 'index') ?>">
@@ -38,15 +38,6 @@
             </div>
             <div class="text-center">
                 <a href="<?= route('authentication', 'login') ?>" class="text-decoration-none text-info fw-semibold p-3 text-center">Iniciar Sesión</a>
-            </div>
-            <div class="">
-                <div class="text-center text-white" style="height: 1.1rem">
-                    <span class="px-3">o</span>
-                </div>
-            </div>
-            <div class="btn d-flex gap-2 justify-content-center border mt-3 shadow-sm">
-                <img src="<?= CONFIG['assets'] ?>img/google-icon.svg" alt="google-icon" style="height: 1.6rem" />
-                <div class="fw-semibold text-secondary">Registrarse con Google</div>
             </div>
         </form>
     </div>
