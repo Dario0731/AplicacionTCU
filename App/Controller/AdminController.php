@@ -33,7 +33,7 @@ class AdminController extends Controller {
             ];
             $this->redirect("/admin/information", $info);
         }
-        viewbag("coach_info", $coachsByEmail['name'] . ' ' . $coachsByEmail['last_name'] .','.$coachsByEmail['image_path']);
+        viewbag("coach_info", $coachsByEmail['name'] . ' ' . $coachsByEmail['last_name'] . ',' . $coachsByEmail['image_path']);
         return View();
 //$this->redirect("/admin/home", $info);
     }
@@ -49,7 +49,7 @@ class AdminController extends Controller {
         try {
             $coachsByEmail = $coach->getByEmail($email);
             $coach_info = $coachsByEmail['email'] . ',' . $coachsByEmail['name'] . ',' .
-                    $coachsByEmail['last_name'] . ',' . $coachsByEmail['phone'] . ',' . $coachsByEmail['conections'];
+                    $coachsByEmail['last_name'] . ',' . $coachsByEmail['image_path'] . ',' . $coachsByEmail['phone'] . ',' . $coachsByEmail['conections'];
             viewbag("coach_info", $coach_info);
         } catch (Exception $ex) {
             $info = [
@@ -63,6 +63,11 @@ class AdminController extends Controller {
     }
 
     public function clients() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+
         return View();
     }
 
@@ -73,7 +78,13 @@ class AdminController extends Controller {
         $id = $coachsByEmail['id'];
         $name = $_POST['name'];
         $lastName = $_POST['last_name'];
-        $image = $_POST['image_path']; // Usar la ruta de la imagen del campo oculto
+        if ($_POST['image_path'] == "") {
+             $image = $coachsByEmail['image_path'];
+        } else {
+            $image = $_POST['image_path']; // Usar la ruta de la imagen del campo oculto
+        }
+
+
         $conection = 1;
         $phone = $_POST['phone'];
         try {

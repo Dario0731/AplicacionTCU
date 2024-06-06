@@ -4,20 +4,21 @@
 $parts = explode(",", viewbag("coach_info"));
 
 // Verificar si hay suficientes partes
-if (count($parts) >= 4) {
+if (count($parts) >= 5) {
     $email = $parts[0];
     $name = $parts[1];
     $last_name = $parts[2];
-    // $image_path = $parts[3];
-    $phone = $parts[3];
-    $conection = $parts[4];
+    $image_path = $parts[3];
+    $phone = $parts[4];
+    $conection = $parts[5];
 } else {
     // Si no hay suficientes partes, asignar valores predeterminados
-    $email = '';
-    $name = '';
-    $last_name = '';
-    $image_path = '';
-    $phone = '';
+    $email = $parts[0];
+    $name = $parts[1];
+    $last_name = $parts[2];
+    $image_path = "NO";
+    $phone = $parts[4];
+    $conection = $parts[5];
 }
 ?>
 <div class="container">
@@ -42,11 +43,15 @@ if (count($parts) >= 4) {
                 <div class="form-group py-2">
                     <label for="image">Imagen:</label>
                     <div><input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="onFileSelected(event)"></div>
-                    <?php if (!empty($image_path)) : ?>
-                        <img src="<?= htmlspecialchars($image_path); ?>" alt="Coach Image" style="max-width: 100px; max-height: 100px;">
-                    <?php endif; ?>
                     <input type="hidden" id="image_path" name="image_path">
                 </div>
+                <?php if ($image_path != ""): ?>
+                    <div class="text-center p-5 justify-content-center">
+                        <label for="image">Imagen actual:</label>
+                        <img src="<?= CONFIG['assets'] . $image_path ?>" alt="Imagen de inicio" style="height: 400px;">
+                    </div>
+                <?php endif; ?>
+
                 <div class="form-group py-2">
                     <label for="phone">Teléfono:</label>
                     <input type="tel" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($phone); ?>" required>
@@ -62,50 +67,50 @@ if (count($parts) >= 4) {
 <?php include(CONFIG['public_path'] . 'footer.php') ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['redirect-info'])) : ?>
-            Swal.fire({
-                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
-                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
-                text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
-                background: 'linear-gradient(to bottom, #011242, #001136)',
-                color: '#fff',
-                iconColor: '#fff',
-                confirmButtonColor: '#3085d6'
-            });
-            <?php unset($_SESSION['redirect-info']); ?>
-        <?php endif; ?>
-    });
+                        document.addEventListener('DOMContentLoaded', function () {
+<?php if (isset($_SESSION['redirect-info'])) : ?>
+                                Swal.fire({
+                                    icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
+                                    title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
+                                    text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
+                                    background: 'linear-gradient(to bottom, #011242, #001136)',
+                                    color: '#fff',
+                                    iconColor: '#fff',
+                                    confirmButtonColor: '#3085d6'
+                                });
+    <?php unset($_SESSION['redirect-info']); ?>
+<?php endif; ?>
+                        });
 
-    function onFileSelected(event) {
-        var file = event.target.files[0];
-        var formData = new FormData();
-        formData.append('image', file);
+                        function onFileSelected(event) {
+                            var file = event.target.files[0];
+                            var formData = new FormData();
+                            formData.append('image', file);
 
-        fetch('/AplicacionTCU/Admin/onFileSelected', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            return response.text().then(text => {
-                console.log('Response text:', text); // Para ver la respuesta cruda
-                try {
-                    return JSON.parse(text);
-                } catch (error) {
-                    throw new Error('Invalid JSON: ' + text);
-                }
-            });
-        }).then(data => {
-            if (data.success) {
-                console.log('File uploaded successfully');
-                document.getElementById('image_path').value = data.path; // Guardar la ruta de la imagen en un campo oculto
-            } else {
-                console.error('Error uploading file: ' + data.message);
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-        });
-    }
+                            fetch('/AplicacionTCU/Admin/onFileSelected', {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    'Accept': 'application/json'
+                                }
+                            }).then(response => {
+                                return response.text().then(text => {
+                                    console.log('Response text:', text); // Para ver la respuesta cruda
+                                    try {
+                                        return JSON.parse(text);
+                                    } catch (error) {
+                                        throw new Error('Invalid JSON: ' + text);
+                                    }
+                                });
+                            }).then(data => {
+                                if (data.success) {
+                                    console.log('File uploaded successfully');
+                                    document.getElementById('image_path').value = data.path; // Guardar la ruta de la imagen en un campo oculto
+                                } else {
+                                    console.error('Error uploading file: ' + data.message);
+                                }
+                            }).catch(error => {
+                                console.error('Error:', error);
+                            });
+                        }
 </script>

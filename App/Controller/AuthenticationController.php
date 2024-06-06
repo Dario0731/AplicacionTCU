@@ -12,6 +12,7 @@
  */
 require_once(CONFIG["repository_path"] . "UserRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
+require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once("Lib/Core/Controller.php");
 
 class AuthenticationController extends Controller {
@@ -41,23 +42,23 @@ class AuthenticationController extends Controller {
                     'text' => 'La contraseña debe tener entre 6 y 8 carácteres.'
                 ];
             } else {
-            $repo = new UserRepositry();
-            $coachs = new CoachRepository();
-            try {
-                $coachs->registCoach($email, '0');
-                $repo->registUser($email, $pass, $type);
-                $info = [
-                    'type' => 'success',
-                    'title' => 'Registrado correctamente',
-                    'text' => 'El usuario ha sido registrado con éxito.'
-                ];
-            } catch (Exception $ex) {
-                $info = [
-                    'type' => 'error',
-                    'title' => 'Ha ocurrido un problema',
-                    'text' => 'Ha ocurrido un problema con el servidor o el usuario ingresado ya existe.'
-                ];
-            }
+                $repo = new UserRepositry();
+                $coachs = new CoachRepository();
+                try {
+                    $coachs->registCoach($email, '0');
+                    $repo->registUser($email, $pass, $type);
+                    $info = [
+                        'type' => 'success',
+                        'title' => 'Registrado correctamente',
+                        'text' => 'El usuario ha sido registrado con éxito.'
+                    ];
+                } catch (Exception $ex) {
+                    $info = [
+                        'type' => 'error',
+                        'title' => 'Ha ocurrido un problema',
+                        'text' => 'Ha ocurrido un problema con el servidor o el usuario ingresado ya existe.'
+                    ];
+                }
             }
         } else {
             $info = [
@@ -66,20 +67,22 @@ class AuthenticationController extends Controller {
                 'text' => 'Las contraseñas no corresponden.'
             ];
         }
-        
+
         $this->redirect("/authentication/register", $info);
     }
 
     public function loginUser() {
 
         $repo = new UserRepositry();
+        $clients = new ClientRepository();
         $email = $_POST['email'];
         $pass = $_POST["password"];
-        $confirm = $_POST["confirm_password"];
+       // $confirm = $_POST["confirm_password"];
         $bandera = "false";
-
+    $id=0;
         try {
             $personas = $repo->getAll();
+            $clientes = $clients->getAll();
             $bandera = "false";
             for ($i = 0;
                     $i <= sizeof($personas) - 1;
@@ -90,6 +93,14 @@ class AuthenticationController extends Controller {
                         break;
                     } else if ($personas[$i]['email'] == $email && $personas[$i]['password'] != $pass) {
                         $bandera = "pass";
+                        break;
+                    }
+                } if ($clientes[$i]['email'] == $email) {
+                    if ($clientes[$i]['password'] == $pass) {
+                        $bandera = "trueClient";
+                        break;
+                    } else if ($clientes[$i]['email'] == $email && $clientes[$i]['password'] != $pass) {
+                        $bandera = "passClient";
                         break;
                     }
                 }
@@ -109,11 +120,28 @@ class AuthenticationController extends Controller {
             session_start();  // Iniciar la sesión
 
             $_SESSION['user'] = [
+                'id' => $email,
                 'email' => $email,
+
             ]; // Almacenar datos del usuario en la sesión
 
             $this->redirect("/admin/home");
         } else if ($bandera == "pass") {
+            $info = [
+                'type' => 'error',
+                'title' => 'Datos erroneos',
+                'text' => 'Contraseña incorrecta'
+            ];
+            $this->redirect("/authentication/login", $info);
+        } if ($bandera == "trueClient") {
+            session_start();  // Iniciar la sesión
+
+            $_SESSION['user'] = [
+                'email' => $email,
+            ]; // Almacenar datos del usuario en la sesión
+
+            $this->redirect("/client/home");
+        } else if ($bandera == "passClient") {
             $info = [
                 'type' => 'error',
                 'title' => 'Datos erroneos',
