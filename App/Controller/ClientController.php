@@ -45,4 +45,8 @@ class ClientController extends Controller {
         return view();
     }
 
+    public function information() {
+        return view();
+    }
+
 }
