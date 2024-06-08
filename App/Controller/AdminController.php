@@ -1,5 +1,6 @@
 <?php
 
+require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
 require_once("Lib/Core/Controller.php");
 /*
@@ -72,6 +73,37 @@ class AdminController extends Controller {
     }
 
     public function clients() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $client = new ClientRepository();
+        $coach = new CoachRepository();
+        $email = $_SESSION['user']['email'];
+
+        try {
+            $coachsByEmail = $coach->getByEmail($email);
+            $clientList = $client->getByCoach($coachsByEmail['id']);
+            //     $clientList = $client->getAll();
+
+            if (empty($clientList)) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'No existen clientes',
+                    'text' => 'No hay clientes para mostrar'
+                ];
+            } else {
+                viewbag("clientes", $clientList);
+            }
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Error al recuperar los datos',
+                'text' => 'Error en la carga de datos.'
+            ];
+            $_SESSION['redirect-info'] = $info;
+        }
+
         return View();
     }
 
@@ -83,7 +115,7 @@ class AdminController extends Controller {
         $name = $_POST['name'];
         $lastName = $_POST['last_name'];
         if ($_POST['image_path'] == "") {
-             $image = $coachsByEmail['image_path'];
+            $image = $coachsByEmail['image_path'];
         } else {
             $image = $_POST['image_path']; // Usar la ruta de la imagen del campo oculto
         }

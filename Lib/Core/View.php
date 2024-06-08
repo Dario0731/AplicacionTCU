@@ -14,6 +14,14 @@ function viewbag($key, $value = null) {
     $viewBag[$key] = $value;
 }
 
+function viewbagArray($key, $value = null) {
+    static $bag = [];
+    if ($value !== null) {
+        $bag[$key] = $value;
+    }
+    return $bag[$key] ?? null;
+}
+
 function View($layout = '', $data = []) {
     $view = CONFIG['request_action'] . '.view.php';
     $viewPath = CONFIG['view_path'] . CONFIG['request_controller'] . '/' . $view;

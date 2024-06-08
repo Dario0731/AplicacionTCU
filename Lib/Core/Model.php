@@ -60,5 +60,19 @@ public function getByEmail($email) {
 
     return $resultado[0];
 }
+public function getByCoach($id) {
+    $queryString = 'CALL sp_get_' . $this->entity . '_by_coach' . '(:id)';
+    $query = $this->db->prepare($queryString);
+    $query->bindParam(':id', $id, PDO::PARAM_STR);
+    $query->execute();
+    $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
 
+    return $resultado;
+}
+    public function updateConection($data) {
+        $queryString = 'CALL sp_update_conection_' . $this->entity . '(' . implode(', ', $data) . ')';
+        $query = $this->db->prepare($queryString);
+        $query->execute();
+        return $query->rowCount();
+    }
 }

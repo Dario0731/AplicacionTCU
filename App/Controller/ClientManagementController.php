@@ -38,14 +38,15 @@ class ClientManagementController extends Controller {
                 'title' => 'Cliente Registrado correctamente',
                 'text' => 'La contraseña generada para su cliente es: ' . $password
             ];
-            $this->redirect("/admin/clients", $info);
+            
+            $this->redirect("/admin/register", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
                 'title' => 'Ha ocurrido un problema',
                 'text' => 'Ha ocurrido un problema con el servidor.'
             ];
-            $this->redirect("/admin/clients", $info);
+            $this->redirect("/admin/register", $info);
         }
     }
 

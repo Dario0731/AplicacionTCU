@@ -32,6 +32,10 @@
                             <img class="px-1" src="<?= CONFIG['assets'] ?>img/update-data-icon.svg" alt="imagen de actualizar los datos personales" style="height: 17px;">
                             Actualizar datos
                         </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('client', 'passwordAct') ?>">
+                            <img class="px-1" src="<?= CONFIG['assets'] ?>img/update-data-icon.svg" alt="imagen de actualizar los datos personales" style="height: 17px;">
+                          Cambiar contraseña
+                        </a>
                     </div>
                 </li>
             </ul>
