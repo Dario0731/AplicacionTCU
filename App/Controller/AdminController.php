@@ -62,12 +62,16 @@ class AdminController extends Controller {
         return View();
     }
 
-    public function clients() {
+    public function register() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
 
+        return View();
+    }
+
+    public function clients() {
         return View();
     }
 

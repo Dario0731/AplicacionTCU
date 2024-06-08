@@ -12,10 +12,10 @@
                         Administrar Clientes
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'clients') ?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'register') ?>">
                             Registrar un nuevo cliente
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="#">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'clients') ?>">
                             Ver lista de clientes
                         </a>
                     </div>
