@@ -175,4 +175,8 @@ class AdminController extends Controller {
         }
     }
 
+    public function editClient() {
+        return View();
+    }
+
 }

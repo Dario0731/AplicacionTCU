@@ -34,7 +34,11 @@
                         </a>
                         <a class="dropdown-item text-white navbar-gradient" href="<?= route('client', 'passwordAct') ?>">
                             <img class="px-1" src="<?= CONFIG['assets'] ?>img/update-data-icon.svg" alt="imagen de actualizar los datos personales" style="height: 17px;">
-                          Cambiar contraseña
+                            Cambiar contraseña
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('client', 'coachInfo') ?>">
+                            <img class="px-1" src="<?= CONFIG['assets'] ?>img/update-data-icon.svg" alt="imagen de actualizar los datos personales" style="height: 17px;">
+                            Información del coach
                         </a>
                     </div>
                 </li>
