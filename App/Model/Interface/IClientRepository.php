@@ -23,4 +23,6 @@ interface IClientRepository {
     public function searchByCoach($id);
     
     public function updateClientConection($id, $password);
+    
+    public function removeClient($id);
 }

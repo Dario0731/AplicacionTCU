@@ -175,7 +175,18 @@ class AdminController extends Controller {
         }
     }
 
-    public function editClient() {
+    public function editclient() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+
+        $email = isset($_GET['email']) ? $_GET['email'] : null;
+        $clientRepo = new ClientRepository();
+        $clientByEmail = $clientRepo->getByEmail($email);
+        $clientInfo = $clientByEmail['name'] . ',' .$clientByEmail['last_name'] . ',' . $clientByEmail['discipline'] . ',' . $clientByEmail['weight'] . ',' . $clientByEmail['height'] . ',' . $clientByEmail['pay_date'] . ',' .
+                $clientByEmail['coments'];
+        viewbag("client_info", $clientInfo);
         return View();
     }
 

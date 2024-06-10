@@ -13,19 +13,20 @@ $protocolo = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 
 # Construye la URL base del servidor
 $urlBase = $protocolo . '://' . $_SERVER['HTTP_HOST'];
 
-$uri_content = explode('/', $url);
+$uri_content = preg_split("/[\/\?]/", $url);
 $url = substr($urlPath, strlen($folderPath));
 define('URL_PATH', $folderPath); //Define el nombre de la carpeta del proyecto
 $CONFIG = array(
     'url' => $folderPath,
     'assets' => $urlBase . $folderPath . '/Public/Assets/',
-    'public_path' => __DIR__.'/../Public/',
+    'alerts' => $urlBase . $folderPath . '/Public/Alerts/',
+    'public_path' => __DIR__ . '/../Public/',
     'view_path' => __DIR__ . '/../App/View/',
     'controller_path' => __DIR__ . '/../App/Controller/',
     'model_path' => __DIR__ . '/../App/Model/',
-    'repository_path' => __DIR__.'/../App/Model/Repository/',   
-     'URL_PATH' => __DIR__.'/../App/Model/Repository/',   
-    'interface_path' => __DIR__.'/../App/Model/Interface/',
+    'repository_path' => __DIR__ . '/../App/Model/Repository/',
+    'URL_PATH' => __DIR__ . '/../App/Model/Repository/',
+    'interface_path' => __DIR__ . '/../App/Model/Interface/',
     'request_controller' => !empty($uri_content[1]) ? $uri_content[1] : 'home',
     'request_action' => !empty($uri_content[2]) ? $uri_content[2] : 'index',
     'dbhost' => 'localhost',

@@ -44,6 +44,14 @@ class Model {
         return $resuldado[0];
     }
 
+    public function remove($id) {
+        $queryString = 'CALL sp_remove_' . $this->entity . '(:id)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+        return $query->rowCount();
+    }
+
     public function update($data) {
         $queryString = 'CALL sp_update_' . $this->entity . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
@@ -51,28 +59,31 @@ class Model {
         return $query->rowCount();
     }
 
-public function getByEmail($email) {
-    $queryString = 'CALL sp_get_' . $this->entity . '_by_email' . '(:email)';
-    $query = $this->db->prepare($queryString);
-    $query->bindParam(':email', $email, PDO::PARAM_STR);
-    $query->execute();
-    $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+    public function getByEmail($email) {
+        $queryString = 'CALL sp_get_' . $this->entity . '_by_email' . '(:email)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    return $resultado[0];
-}
-public function getByCoach($id) {
-    $queryString = 'CALL sp_get_' . $this->entity . '_by_coach' . '(:id)';
-    $query = $this->db->prepare($queryString);
-    $query->bindParam(':id', $id, PDO::PARAM_STR);
-    $query->execute();
-    $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado[0];
+    }
 
-    return $resultado;
-}
+    public function getByCoach($id) {
+        $queryString = 'CALL sp_get_' . $this->entity . '_by_coach' . '(:id)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
+    }
+
     public function updateConection($data) {
         $queryString = 'CALL sp_update_conection_' . $this->entity . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();
     }
+
 }

@@ -69,4 +69,9 @@ class ClientRepository extends Model implements IClientRepository {
         ];
         return $this->updateConection($data);
     }
+
+    public function removeClient($id) {
+        return $this->remove($id);
+    }
+
 }

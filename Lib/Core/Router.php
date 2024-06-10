@@ -70,6 +70,11 @@ function redirect($controller, $action, $info = null) {
     exit;
 }
 
-function route($controller, $action) {
-    return CONFIG['url'] . '/' . strtolower($controller) . '/' . strtolower($action);
+function route($controller, $action, $params = []) {
+    $url = CONFIG['url'] . '/' . strtolower($controller) . '/' . strtolower($action);
+    if (!empty($params)) {
+        $url .= '?' . http_build_query($params);
+    }
+    return $url;
 }
+

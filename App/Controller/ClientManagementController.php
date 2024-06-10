@@ -38,7 +38,7 @@ class ClientManagementController extends Controller {
                 'title' => 'Cliente Registrado correctamente',
                 'text' => 'La contraseña generada para su cliente es: ' . $password
             ];
-            
+
             $this->redirect("/admin/register", $info);
         } catch (Exception $ex) {
             $info = [
@@ -50,7 +50,6 @@ class ClientManagementController extends Controller {
         }
     }
 
-
     public function randomPassword() {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $longitud = 8;
@@ -60,6 +59,27 @@ class ClientManagementController extends Controller {
             $cadena_aleatoria .= $caracteres[$indice_aleatorio];
         }
         return $cadena_aleatoria;
+    }
+
+    public function removeClient() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+
+            if (!empty($id)) {
+                $clientRepository = new ClientRepository();
+                $result = $clientRepository->removeClient($id);
+
+                if ($result) {
+                    echo json_encode(['status' => 'success']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el cliente']);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+        }
     }
 
 }

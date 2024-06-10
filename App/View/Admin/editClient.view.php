@@ -1,5 +1,16 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
+<?php
+// Dividir la cadena en partes usando la coma como delimitador
+$parts = explode(",", viewbag("client_info"));
 
+// Verificar si hay suficientes partes
+$name = $parts[0]." ". $parts[1];
+$discipline = $parts[2];
+$weight = $parts[3];
+$height = $parts[4];
+$pay_date = $parts[5];
+$coments = $parts[6];
+?>
 <div class="container" style="height: 100%;">
     <div class="row justify-content-center pt-5">
         <p class="text-center h3">Editar datos del cliente</p>
@@ -8,46 +19,28 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group py-2">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="" required>
-                        </div>
-                        <div class="form-group py-2">
                             <label for="name">Nombre:</label>
-                            <input type="text" class="form-control" id="name" name="name" value="" required>
+                            <input value="<?= htmlspecialchars($name); ?>" type="text" class="form-control" id="discipline" name="name" value="" required>
                         </div>
-                        <div class="form-group py-2">
-                            <label for="last_name">Apellido:</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="" required>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="phone">Teléfono:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="" required>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="birthday">Fecha de nacimiento:</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" value="" required>
-                        </div>
-                    </div>
-                    <div class="col">
                         <div class="form-group py-2">
                             <label for="discipline">Disciplina:</label>
-                            <input type="text" class="form-control" id="discipline" name="discipline" value="" required>
+                            <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required>
                         </div>
                         <div class="form-group py-2">
                             <label for="weight">Peso:</label>
-                            <input type="text" class="form-control" id="weight" name="weight" value="" required>
+                            <input value="<?= htmlspecialchars($weight); ?>" type="text" class="form-control" id="weight" name="weight" value="" required>
                         </div>
                         <div class="form-group py-2">
                             <label for="discipline">Altura:</label>
-                            <input type="text" class="form-control" id="height" name="height" value="" required>
+                            <input value="<?= htmlspecialchars($height); ?>" type="text" class="form-control" id="height" name="height" value="" required>
                         </div>
                         <div class="form-group py-2">
                             <label for="pay">Fecha del próximo pago:</label>
-                            <input type="date" class="form-control" id="pay" name="pay" value="" required>
+                            <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required>
                         </div>
                         <div class="form-group py-2">
                             <label for="last_name">Comentarios:</label>
-                            <input type="text" class="form-control" id="comments" name="comments" value="" required>
+                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" value="" required>
                         </div>
                     </div>
                 </div>
@@ -60,3 +53,20 @@
 </div>
 
 <?php include(CONFIG['public_path'] . 'footer.php') ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+<?php if (isset($_SESSION['redirect-info'])) : ?>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
+                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
+                text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff',
+                confirmButtonColor: '#3085d6'
+            });
+    <?php unset($_SESSION['redirect-info']); ?>
+<?php endif; ?>
+    });
+</script>
