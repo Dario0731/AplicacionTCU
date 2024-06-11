@@ -12,7 +12,8 @@
  */
 interface IClientRepository {
 
-    public function registClient($email, $name, $last_name, $phone, $birthDate, $discipline, $weight, $height, $pay_date, $comments, $password, $coach_id);
+    public function registClient($email, $name, $last_name, $phone, $birthDate, $discipline, 
+            $weight, $height, $pay_date, $comments, $password, $coach_id,$fat,$muscle,$clientComment);
 
     public function getAllClients();
 

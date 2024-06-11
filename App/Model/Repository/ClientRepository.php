@@ -18,10 +18,11 @@ class ClientRepository extends Model implements IClientRepository {
     }
 
     public function getAllClients() {
-       return $this->getAll();
+        return $this->getAll();
     }
 
-    public function registClient($email, $name, $last_name, $phone, $birthDate, $discipline, $weight, $height, $pay_date, $comments, $password, $coach_id) {
+    public function registClient($email, $name, $last_name, $phone, $birthDate, $discipline,
+            $weight, $height, $pay_date, $comments, $password, $coach_id, $fat, $muscle, $clientComment) {
         $data = [
             varchar($email),
             varchar($name),
@@ -34,7 +35,10 @@ class ClientRepository extends Model implements IClientRepository {
             varchar($pay_date),
             varchar($comments),
             varchar($password),
-            varchar($coach_id)
+            varchar($coach_id),
+            varchar($fat),
+            varchar($muscle),
+            varchar($clientComment)
         ];
         return $this->create($data);
     }
@@ -57,12 +61,14 @@ class ClientRepository extends Model implements IClientRepository {
     }
 
     public function searchByEmail($email) {
-      return  $this->getByEmail($email);
+        return $this->getByEmail($email);
     }
+
     public function searchByCoach($id) {
-       return $this->getByCoach($id);
+        return $this->getByCoach($id);
     }
-        public function updateClientConection($id, $password) {
+
+    public function updateClientConection($id, $password) {
         $data = [
             varchar($id),
             varchar($password)

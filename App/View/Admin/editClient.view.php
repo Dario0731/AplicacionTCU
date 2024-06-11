@@ -4,12 +4,15 @@
 $parts = explode(",", viewbag("client_info"));
 
 // Verificar si hay suficientes partes
-$name = $parts[0]." ". $parts[1];
+$name = $parts[0] . " " . $parts[1];
 $discipline = $parts[2];
 $weight = $parts[3];
 $height = $parts[4];
 $pay_date = $parts[5];
 $coments = $parts[6];
+$fat = $parts[7];
+$muscle = $parts[8];
+$comentsClient = $parts[9];
 ?>
 <div class="container" style="height: 100%;">
     <div class="row justify-content-center pt-5">
@@ -39,8 +42,20 @@ $coments = $parts[6];
                             <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required>
                         </div>
                         <div class="form-group py-2">
-                            <label for="last_name">Comentarios:</label>
+                            <label for="last_name">Comentarios personales hacia el cliente:</label>
                             <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" value="" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="fat">Porcentaje de grasa:</label>
+                            <input type="text" class="form-control" id="discipline" name="fat" value="<?= htmlspecialchars($fat); ?>"required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="mucle">Porcentaje de músculo:</label>
+                            <input type="text" class="form-control" id="mucle" name="mucle" value="<?= htmlspecialchars($muscle); ?>" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="clients_comments">Comentarios para el cliente:</label>
+                            <input type="text" class="form-control" id="clients_comments" name="clients_comments"value="<?= htmlspecialchars($comentsClient); ?>" required>
                         </div>
                     </div>
                 </div>

@@ -29,7 +29,7 @@
                             <td class="text-white"><?= htmlspecialchars($cliente['weight']) ?></td>
                             <td class="text-white"><?= htmlspecialchars($cliente['height']) ?></td>
                             <td class="text-white"><?= htmlspecialchars($cliente['pay_date']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['coments']) ?></td>
+                            <td class="text-white"><?= htmlspecialchars($cliente['client_comments']) ?></td>
                             <td class="text-center">
                                 <a class="px-2" href="<?= route('Admin', 'editclient', ['email' => $cliente['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
    <!--<a class="px-2" href="<?= route('Admin', 'editClient') ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>-->

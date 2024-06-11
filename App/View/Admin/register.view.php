@@ -27,6 +27,10 @@
                             <label for="birthday">Fecha de nacimiento:</label>
                             <input type="date" class="form-control" id="birthday" name="birthday" value="" required>
                         </div>
+                        <div class="form-group py-2">
+                            <label for="mucle">Porcentaje de músculo:</label>
+                            <input type="text" class="form-control" id="mucle" name="muscle" value="" required>
+                        </div>
                     </div>
                     <div class="col">
                         <div class="form-group py-2">
@@ -46,8 +50,16 @@
                             <input type="date" class="form-control" id="pay" name="pay" value="" required>
                         </div>
                         <div class="form-group py-2">
-                            <label for="last_name">Comentarios:</label>
+                            <label for="last_name">Comentarios(el cliente no los verá):</label>
                             <input type="text" class="form-control" id="comments" name="comments" value="" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="fat">Porcentaje de grasa:</label>
+                            <input type="text" class="form-control" id="discipline" name="fat" value="" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="clients_comments">Comentarios para el cliente:</label>
+                            <input type="text" class="form-control" id="clients_comments" name="clients_comments" value="" required>
                         </div>
                     </div>
                 </div>
@@ -63,8 +75,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['redirect-info'])) : ?>
+    document.addEventListener('DOMContentLoaded', function () {
+<?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
                 title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
@@ -74,7 +86,7 @@
                 iconColor: '#fff',
                 confirmButtonColor: '#3085d6'
             });
-            <?php unset($_SESSION['redirect-info']); ?>
-        <?php endif; ?>
+    <?php unset($_SESSION['redirect-info']); ?>
+<?php endif; ?>
     });
 </script>

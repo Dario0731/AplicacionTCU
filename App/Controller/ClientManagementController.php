@@ -26,11 +26,14 @@ class ClientManagementController extends Controller {
             $height = $_POST['height'];
             $pay_date = $_POST['pay'];
             $comments = $_POST['comments'];
+            $fat= $_POST['fat'];
+            $muscle = $_POST['muscle'];
+            $commentsClient = $_POST['clients_comments'];
             $password = $this->randomPassword();
 
             $client->registClient(
                     $email, $name, $lastName, $phone, $birthday, $discipline,
-                    $weight, $height, $pay_date, $comments, $password, $id
+                    $weight, $height, $pay_date, $comments, $password, $id,$fat,$muscle,$commentsClient
             );
 
             $info = [
