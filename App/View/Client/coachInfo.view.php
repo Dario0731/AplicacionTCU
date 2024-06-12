@@ -15,6 +15,7 @@ $phone = $parts[4];
         <a href="<?= route('client', 'home') ?>">
             <img src="<?= CONFIG['assets'] ?>img/leave-arrow.svg" alt="imagen de volver atrás" style="height: 27px;">
         </a>
+        <p class="h4 text-center">Información del coach</p>
         <div class="col-md-6">
             <div class="form-group py-2">
                 <label for="email">Email:</label>
@@ -28,8 +29,8 @@ $phone = $parts[4];
                 <label for="last_name">Apellido:</label>
                 <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" required>
             </div>
-            <div class="text-center p-5 justify-content-center">
-                <img src="<?= CONFIG['assets'] ?><?= $image_path ?>" alt="Imagen de inicio" style="height: 400px;">
+            <div class="py-3">
+                <img src="<?= CONFIG['assets'] ?><?= $image_path ?>" alt="Imagen de inicio" style="height: 330px;">
 
             </div>
             <div class="form-group py-2">

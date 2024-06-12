@@ -7,15 +7,15 @@
             <form action="/AplicacionTCU/Client/updatePasswordClient" method="post" enctype="multipart/form-data">
                                 <div class="form-group py-2">
                     <label for="last_name">Ingrese la contraseña actual: </label>
-                    <input type="text" class="form-control" id="last_name" name="actual_password" value="" required>
+                    <input type="password" class="form-control" id="last_name" name="actual_password" value="" required>
                 </div>
                 <div class="form-group py-2">
                     <label for="last_name">Contraseña nueva: </label>
-                    <input type="text" class="form-control" id="last_name" name="password" value="" required>
+                    <input type="password" class="form-control" id="last_name" name="password" value="" required>
                 </div>
                 <div class="form-group py-2">
                     <label for="phone">Confirmar contraseña: </label>
-                    <input type="tel" class="form-control" id="phone" name="confirm" value="" required>
+                    <input type="password" class="form-control" id="phone" name="confirm" value="" required>
                 </div>
                 <div class="text-center form-group py-2">
                     <button type="submit" class="btn btn-primary">Confirmar</button>

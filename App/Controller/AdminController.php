@@ -190,4 +190,15 @@ class AdminController extends Controller {
         return View();
     }
 
+    public function clientsInfo() {
+        $email = isset($_GET['email']) ? $_GET['email'] : null;
+        $clientRepo = new ClientRepository();
+        $clientByEmail = $clientRepo->getByEmail($email);
+        $clientInfo = $clientByEmail['name'] . ',' .$clientByEmail['last_name'] . ',' . $clientByEmail['discipline'] . ',' . $clientByEmail['weight'] . ',' . $clientByEmail['height'] . ',' . $clientByEmail['pay_date'] . ',' .
+                $clientByEmail['coments'] . ',' .$clientByEmail['fat_percentage']. ',' .$clientByEmail['muscle_percentage']. ',' .$clientByEmail['client_comments'];
+        viewbag("client_info", $clientInfo);
+        
+        return View();
+    }
+
 }

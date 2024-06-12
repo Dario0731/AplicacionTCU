@@ -1,4 +1,3 @@
-<?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 <?php
 // Dividir la cadena en partes usando la coma como delimitador
 $parts = explode(",", viewbag("client_info"));
@@ -16,7 +15,7 @@ $comentsClient = $parts[9];
 ?>
 <div class="container">
     <div class="row justify-content-center pt-5">
-        <p class="text-center h3">Editar datos del cliente</p>
+        <p class="text-center h3">Datos completos del cliente</p>
         <form action="/AplicacionTCU/ClientManagement/insertClient" method="post" enctype="multipart/form-data">
             <div class="text-center">
                 <div class="row">
@@ -27,63 +26,44 @@ $comentsClient = $parts[9];
                         </div>
                         <div class="form-group py-2">
                             <label for="discipline">Disciplina:</label>
-                            <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required>
+                            <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required readonly>
                         </div>
                         <div class="form-group py-2">
                             <label for="weight">Peso:</label>
-                            <input value="<?= htmlspecialchars($weight); ?>" type="text" class="form-control" id="weight" name="weight" value="" required>
+                            <input value="<?= htmlspecialchars($weight); ?>" type="text" class="form-control" id="weight" name="weight" value="" required readonly>
                         </div>
                         <div class="form-group py-2">
                             <label for="discipline">Altura:</label>
-                            <input value="<?= htmlspecialchars($height); ?>" type="text" class="form-control" id="height" name="height" value="" required>
+                            <input value="<?= htmlspecialchars($height); ?>" type="text" class="form-control" id="height" name="height" value="" required readonly>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group py-2">
                             <label for="pay">Fecha del próximo pago:</label>
-                            <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required>
+                            <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required readonly>
                         </div>
                         <div class="form-group py-2">
                             <label for="last_name">Comentarios personales hacia el cliente:</label>
-                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" value="" required>
+                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" value="" required readonly>
                         </div>
                         <div class="form-group py-2">
                             <label for="fat">Porcentaje de grasa:</label>
-                            <input type="text" class="form-control" id="discipline" name="fat" value="<?= htmlspecialchars($fat); ?>" required>
+                            <input type="text" class="form-control" id="discipline" name="fat" value="<?= htmlspecialchars($fat); ?>" required readonly>
                         </div>
                         <div class="form-group py-2">
                             <label for="mucle">Porcentaje de músculo:</label>
-                            <input type="text" class="form-control" id="mucle" name="mucle" value="<?= htmlspecialchars($muscle); ?>" required>
+                            <input type="text" class="form-control" id="mucle" name="mucle" value="<?= htmlspecialchars($muscle); ?>" required readonly>
                         </div>
                     </div>
                     <div class="form-group py-2">
                         <label for="clients_comments">Comentarios para el cliente:</label>
-                        <textarea class="form-control" id="clients_comments" name="clients_comments" required rows="3"><?= htmlspecialchars($comentsClient); ?></textarea>
+                        <textarea class="form-control" id="clients_comments" name="clients_comments" required rows="3" readonly><?= htmlspecialchars($comentsClient); ?></textarea>
                     </div>
                 </div>
             </div>
             <div class="text-center form-group py-2">
-                <button type="submit" class="btn btn-primary">Actualizar datos</button>
+                <a class="btn btn-primary" href="<?= route('Admin', 'clients') ?>">Volver</a>
             </div>
         </form>
     </div>
 </div>
-
-<?php include(CONFIG['public_path'] . 'footer.php') ?>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['redirect-info'])) : ?>
-            Swal.fire({
-                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
-                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
-                text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
-                background: 'linear-gradient(to bottom, #011242, #001136)',
-                color: '#fff',
-                iconColor: '#fff',
-                confirmButtonColor: '#3085d6'
-            });
-            <?php unset($_SESSION['redirect-info']); ?>
-        <?php endif; ?>
-    });
-</script>

@@ -40,10 +40,6 @@
                             <img class="px-1" src="<?= CONFIG['assets'] ?>img/update-data-icon.svg" alt="imagen de actualizar los datos personales" style="height: 17px;">
                             Actualizar datos
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="#">
-                            <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-icon.svg" alt="imagen de ver clientes" style="height: 15px;">
-                            Ver clientes
-                        </a>
                     </div>
                 </li>
             </ul>

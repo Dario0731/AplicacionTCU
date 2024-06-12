@@ -48,7 +48,7 @@ if (count($parts) >= 5) {
                     <input type="hidden" id="image_path" name="image_path">
                 </div>
                 <?php if ($image_path != "") : ?>
-                    <div class="text-center p-5 justify-content-center">
+                    <div class="text-center py-2 justify-content-center">
                         <label for="image">Imagen actual:</label>
                         <img src="<?= CONFIG['assets'] . $image_path ?>" alt="Imagen de inicio" style="height: 400px;">
                     </div>

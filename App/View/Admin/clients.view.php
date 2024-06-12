@@ -5,35 +5,35 @@
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
-                    <th class="text-white">Correo electrónico</th>
-                    <th class="text-white">Nombre</th>
-                    <th class="text-white">Apellido</th>
-                    <th class="text-white">Teléfono</th>
-                    <th class="text-white">Disciplina(s)</th>
-                    <th class="text-white">Peso</th>
-                    <th class="text-white">Estatura</th>
-                    <th class="text-white">Fecha de pago</th>
-                    <th class="text-white">Comentarios</th>
-                    <th>Acciones</th>
+                    <th class="text-center">Correo electrónico</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Apellido</th>
+                    <th class="text-center">Teléfono</th>
+                    <th class="text-center">Disciplina(s)</th>
+                    <th class="text-center">Peso</th>
+                    <th class="text-center">Estatura</th>
+                    <th class="text-center">Fecha de pago</th>
+                    <th class="text-center">Comentarios</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (is_array(viewbag("clientes"))) : ?>
                     <?php foreach (viewbag("clientes") as $cliente) : ?>
                         <tr id="cliente-<?= $cliente['id'] ?>">
-                            <td class="text-white"><?= $cliente['email'] ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['name']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['last_name']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['phone']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['discipline']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['weight']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['height']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['pay_date']) ?></td>
-                            <td class="text-white"><?= htmlspecialchars($cliente['client_comments']) ?></td>
+                            <td class="text-center"><?= $cliente['email'] ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['name']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['last_name']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['phone']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['discipline']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['weight']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['height']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['pay_date']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['client_comments']) ?></td>
                             <td class="text-center">
                                 <a class="px-2" href="<?= route('Admin', 'editclient', ['email' => $cliente['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
-   <!--<a class="px-2" href="<?= route('Admin', 'editClient') ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>-->
                                 <button type="button" class="btn delete-btn" data-id="<?= $cliente['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                                <a class="px-2" href="<?= route('Admin', 'clientsInfo', ['email' => $cliente['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/eye-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -51,8 +51,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-<?php if (isset($_SESSION['redirect-info'])) : ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
                 title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
@@ -62,12 +62,12 @@
                 iconColor: '#fff',
                 confirmButtonColor: '#3085d6'
             });
-    <?php unset($_SESSION['redirect-info']); ?>
-<?php endif; ?>
+            <?php unset($_SESSION['redirect-info']); ?>
+        <?php endif; ?>
     });
 
-    $(document).ready(function () {
-        $('.delete-btn').on('click', function () {
+    $(document).ready(function() {
+        $('.delete-btn').on('click', function() {
             var clientId = $(this).data('id');
             var row = $(this).closest('tr');
 
@@ -79,36 +79,44 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Sí, eliminarlo!',
-                cancelButtonText: 'Cancelar'
+                cancelButtonText: 'Cancelar',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         url: '/AplicacionTCU/ClientManagement/removeClient', // Asegúrate de ajustar la ruta según tu estructura de carpetas
                         type: 'POST',
-                        data: {id: clientId},
-                        success: function (response) {
+                        data: {
+                            id: clientId
+                        },
+                        success: function(response) {
                             var result = JSON.parse(response);
                             if (result.status === 'success') {
                                 row.remove();
                                 Swal.fire(
-                                        '¡Eliminado!',
-                                        'El cliente ha sido eliminado.',
-                                        'success'
-                                        );
+                                    '¡Eliminado!',
+                                    'El cliente ha sido eliminado.',
+                                    'success'
+                                );
                             } else {
                                 Swal.fire(
-                                        'Error',
-                                        result.message,
-                                        'error'
-                                        );
+                                    'Error',
+                                    result.message,
+                                    'error'
+                                );
                             }
                         },
-                        error: function () {
+                        error: function() {
                             Swal.fire(
-                                    'Error',
-                                    'Hubo un problema con la solicitud.',
-                                    'error'
-                                    );
+                                'Error',
+                                'Hubo un problema con la solicitud.',
+                                'error',
+                                'linear-gradient(to bottom, #011242, #001136)',
+                                '#fff',
+                                '#fff'
+                            );
                         }
                     });
                 }
