@@ -1,69 +1,47 @@
-<?php
-// Dividir la cadena en partes usando la coma como delimitador
-$parts = explode(",", viewbag("client_info"));
+<?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-// Verificar si hay suficientes partes
-$name = $parts[0] . " " . $parts[1];
-$discipline = $parts[2];
-$weight = $parts[3];
-$height = $parts[4];
-$pay_date = $parts[5];
-$coments = $parts[6];
-$fat = $parts[7];
-$muscle = $parts[8];
-$comentsClient = $parts[9];
-?>
-<div class="container">
-    <div class="row justify-content-center pt-5">
-        <p class="text-center h3">Datos completos del cliente</p>
-        <form action="/AplicacionTCU/ClientManagement/insertClient" method="post" enctype="multipart/form-data">
-            <div class="text-center">
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group py-2">
-                            <label for="name">Nombre:</label>
-                            <input value="<?= htmlspecialchars($name); ?>" type="text" class="form-control" id="discipline" name="name" value="" required readonly>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="discipline">Disciplina:</label>
-                            <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required readonly>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="weight">Peso:</label>
-                            <input value="<?= htmlspecialchars($weight); ?>" type="text" class="form-control" id="weight" name="weight" value="" required readonly>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="discipline">Altura:</label>
-                            <input value="<?= htmlspecialchars($height); ?>" type="text" class="form-control" id="height" name="height" value="" required readonly>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group py-2">
-                            <label for="pay">Fecha del próximo pago:</label>
-                            <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required readonly>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="last_name">Comentarios personales hacia el cliente:</label>
-                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" value="" required readonly>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="fat">Porcentaje de grasa:</label>
-                            <input type="text" class="form-control" id="discipline" name="fat" value="<?= htmlspecialchars($fat); ?>" required readonly>
-                        </div>
-                        <div class="form-group py-2">
-                            <label for="mucle">Porcentaje de músculo:</label>
-                            <input type="text" class="form-control" id="mucle" name="mucle" value="<?= htmlspecialchars($muscle); ?>" required readonly>
-                        </div>
-                    </div>
-                    <div class="form-group py-2">
-                        <label for="clients_comments">Comentarios para el cliente:</label>
-                        <textarea class="form-control" id="clients_comments" name="clients_comments" required rows="3" readonly><?= htmlspecialchars($comentsClient); ?></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center form-group py-2">
-                <a class="btn btn-primary" href="<?= route('Admin', 'clients') ?>">Volver</a>
-            </div>
-        </form>
+
+<div class="container p-4">
+    <div class="" style="height: 100%;">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th class="text-center">Fecha de registro</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Peso</th>
+                    <th class="text-center">Altura</th>
+                    <th class="text-center">comentarios personales</th>
+                    <th class="text-center">Disciplina(s)</th>
+                    <th class="text-center">Porcentaje de grasa</th>
+                    <th class="text-center">Porcentaje de músculo</th>
+                    <th class="text-center">Comentarios al cliente</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (is_array(viewbag("clientes"))) : ?>
+                    <?php foreach (viewbag("clientes") as $cliente) : ?>
+                        <tr id="cliente-<?= $cliente['progress_id'] ?>">
+                            <td class="text-center"><?= $cliente['progress_date'] ?></td>
+                            <td class="text-center"><?= $cliente['name'] . ' ' . $cliente['last_name'] ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['weight']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['height']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['comments']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['discipline']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['fat_percentage']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['muscle_percentage']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['client_comments']) ?></td>
+                            <td class="text-center">
+                                <button type="button" class="btn delete-btn" data-id="<?= $cliente['progress_id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="10" class="text-white">No hay datos disponibles</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>

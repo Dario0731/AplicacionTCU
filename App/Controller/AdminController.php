@@ -2,6 +2,7 @@
 
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
+require_once(CONFIG["repository_path"] . "ProgressRepository.php");
 require_once("Lib/Core/Controller.php");
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -184,20 +185,27 @@ class AdminController extends Controller {
         $email = isset($_GET['email']) ? $_GET['email'] : null;
         $clientRepo = new ClientRepository();
         $clientByEmail = $clientRepo->getByEmail($email);
-        $clientInfo = $clientByEmail['name'] . ',' .$clientByEmail['last_name'] . ',' . $clientByEmail['discipline'] . ',' . $clientByEmail['weight'] . ',' . $clientByEmail['height'] . ',' . $clientByEmail['pay_date'] . ',' .
-                $clientByEmail['coments'] . ',' .$clientByEmail['fat_percentage']. ',' .$clientByEmail['muscle_percentage']. ',' .$clientByEmail['client_comments'];
+        $clientInfo = $clientByEmail['name'] . '~' . $clientByEmail['last_name'] . '~' . $clientByEmail['discipline'] . '~' . $clientByEmail['weight'] . '~'
+                . $clientByEmail['height'] . '~' . $clientByEmail['pay_date'] . '~' .
+                $clientByEmail['coments'] . '~' . $clientByEmail['fat_percentage'] . '~'
+                . $clientByEmail['muscle_percentage'] . '~' . $clientByEmail['client_comments'] . '~' . $clientByEmail['email'];
         viewbag("client_info", $clientInfo);
         return View();
     }
 
     public function clientsInfo() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
         $email = isset($_GET['email']) ? $_GET['email'] : null;
-        $clientRepo = new ClientRepository();
-        $clientByEmail = $clientRepo->getByEmail($email);
-        $clientInfo = $clientByEmail['name'] . ',' .$clientByEmail['last_name'] . ',' . $clientByEmail['discipline'] . ',' . $clientByEmail['weight'] . ',' . $clientByEmail['height'] . ',' . $clientByEmail['pay_date'] . ',' .
-                $clientByEmail['coments'] . ',' .$clientByEmail['fat_percentage']. ',' .$clientByEmail['muscle_percentage']. ',' .$clientByEmail['client_comments'];
-        viewbag("client_info", $clientInfo);
-        
+        $clientRepo=new ClientRepository();
+        $result=$clientRepo->searchByEmail($email);
+        $id=$result['id'];
+        $progressRepo=new ProgressRepository();
+        $progressList=$progressRepo->getClientProgress($id);
+        viewbag("clientes", $progressList);
+
         return View();
     }
 

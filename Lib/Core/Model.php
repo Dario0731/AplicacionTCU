@@ -19,7 +19,15 @@ class Model {
         $this->entity = $entity;
         $this->db = Database::getInstance();
     }
+    public function getProgressBy($id){
+                $queryString = 'CALL sp_get_client_' . $this->entity . '(:id)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
 
+        return $resultado;
+    }
     public function create($data) {
         $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
 
@@ -81,6 +89,13 @@ class Model {
 
     public function updateConection($data) {
         $queryString = 'CALL sp_update_conection_' . $this->entity . '(' . implode(', ', $data) . ')';
+        $query = $this->db->prepare($queryString);
+        $query->execute();
+        return $query->rowCount();
+    }
+
+    public function updateClientAdmin($data) {
+        $queryString = 'CALL sp_update_' . $this->entity.'_admin' . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();

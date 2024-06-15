@@ -26,14 +26,14 @@ class ClientManagementController extends Controller {
             $height = $_POST['height'];
             $pay_date = $_POST['pay'];
             $comments = $_POST['comments'];
-            $fat= $_POST['fat'];
+            $fat = $_POST['fat'];
             $muscle = $_POST['muscle'];
             $commentsClient = $_POST['clients_comments'];
             $password = $this->randomPassword();
 
             $client->registClient(
                     $email, $name, $lastName, $phone, $birthday, $discipline,
-                    $weight, $height, $pay_date, $comments, $password, $id,$fat,$muscle,$commentsClient
+                    $weight, $height, $pay_date, $comments, $password, $id, $fat, $muscle, $commentsClient
             );
 
             $info = [
@@ -82,6 +82,41 @@ class ClientManagementController extends Controller {
             }
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+        }
+    }
+
+    public function updateClient() {
+
+       // $email = $_SESSION['user']['email'];
+        try {
+
+        $email =$_POST['email'];
+        $clientRepo = new ClientRepository();
+        $clientByEmail = $clientRepo->searchByEmail($email);
+           $id = $clientByEmail['id'];
+            $pay_date = $_POST['pay'];
+            $discipline = $_POST['discipline'];
+            $weight = $_POST['weight'];
+            $height = $_POST['height'];
+            $coments = $_POST['comments'];
+            $fat = $_POST['fat'];
+            $muscle = $_POST['mucle'];
+            $comentsForClient = $_POST['clients_comments'];
+
+            $clientRepo->updateClientByCoach($id, $discipline, $weight, $height, $pay_date, $coments, $fat, $muscle, $comentsForClient);
+            $info = [
+                'type' => 'success',
+                'title' => 'Cliente actualizado correctamente',
+                'text' => 'Se ha guardado el progreso del cliente'
+            ];
+            $this->redirect("/admin/clients", $info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+            $this->redirect("/admin/clients", $info);
         }
     }
 

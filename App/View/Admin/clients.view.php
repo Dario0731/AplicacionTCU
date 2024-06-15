@@ -29,7 +29,7 @@
                             <td class="text-center"><?= htmlspecialchars($cliente['weight']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($cliente['height']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($cliente['pay_date']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['client_comments']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($cliente['coments']) ?></td>
                             <td class="text-center">
                                 <a class="px-2" href="<?= route('Admin', 'editclient', ['email' => $cliente['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
                                 <button type="button" class="btn delete-btn" data-id="<?= $cliente['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>

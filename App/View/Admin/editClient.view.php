@@ -1,7 +1,7 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 <?php
 // Dividir la cadena en partes usando la coma como delimitador
-$parts = explode(",", viewbag("client_info"));
+$parts = explode("~", viewbag("client_info"));
 
 // Verificar si hay suficientes partes
 $name = $parts[0] . " " . $parts[1];
@@ -13,21 +13,23 @@ $coments = $parts[6];
 $fat = $parts[7];
 $muscle = $parts[8];
 $comentsClient = $parts[9];
+$email = $parts[10];
 ?>
 <div class="container">
     <div class="row justify-content-center pt-5">
         <p class="text-center h3">Editar datos del cliente</p>
-        <form action="/AplicacionTCU/ClientManagement/insertClient" method="post" enctype="multipart/form-data">
+        <form action="/AplicacionTCU/ClientManagement/updateClient" method="post" enctype="multipart/form-data">
             <div class="text-center">
                 <div class="row">
                     <div class="col">
+
                         <div class="form-group py-2">
                             <label for="name">Nombre:</label>
                             <input value="<?= htmlspecialchars($name); ?>" type="text" class="form-control" id="discipline" name="name" value="" required readonly>
                         </div>
-                        <div class="form-group py-2">
-                            <label for="discipline">Disciplina:</label>
-                            <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required>
+                                                <div class="form-group py-2">
+                            <label for="pay">Fecha del próximo pago:</label>
+                            <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required>
                         </div>
                         <div class="form-group py-2">
                             <label for="weight">Peso:</label>
@@ -39,13 +41,17 @@ $comentsClient = $parts[9];
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group py-2">
-                            <label for="pay">Fecha del próximo pago:</label>
-                            <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required>
+                                                                        <div class="form-group py-2">
+                            <input  value="<?= htmlspecialchars($email); ?>"type="hidden" class="form-control" id="discipline" name="email" value="" required readonly>
                         </div>
+
                         <div class="form-group py-2">
-                            <label for="last_name">Comentarios personales hacia el cliente:</label>
-                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" value="" required>
+                            <label for="comments">Comentarios personales hacia el cliente:</label>
+                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments"  required>
+                        </div>
+                                                <div class="form-group py-2">
+                            <label for="discipline">Disciplina:</label>
+                            <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required>
                         </div>
                         <div class="form-group py-2">
                             <label for="fat">Porcentaje de grasa:</label>

@@ -42,24 +42,22 @@ class ClientRepository extends Model implements IClientRepository {
         ];
         return $this->create($data);
     }
-
-    public function updateClient($id, $email, $name, $last_name, $phone, $birthDate, $discipline, $weight, $height, $pay_date, $comments) {
-        $data = [
+public function updateClientByCoach($id, $discipline, $weight, $height, $pay_date, $comments,$fat,$muscle,$clientComments){
+                $data = [
             varchar($id),
-            varchar($email),
-            varchar($name),
-            varchar($last_name),
-            varchar($phone),
-            varchar($birthDate),
             varchar($discipline),
             varchar($weight),
             varchar($height),
             varchar($pay_date),
-            varchar($comments)
+            varchar($comments),
+            varchar($fat),
+            varchar($muscle),
+            varchar($clientComments)
         ];
-        return $this->update($data);
-    }
+        return $this->updateClientAdmin($data);
+}
 
+    
     public function searchByEmail($email) {
         return $this->getByEmail($email);
     }

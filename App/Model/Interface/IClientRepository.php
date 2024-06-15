@@ -17,7 +17,7 @@ interface IClientRepository {
 
     public function getAllClients();
 
-    public function updateClient($id, $email, $name, $last_name, $phone, $birthDate, $discipline, $weight, $height, $pay_date, $comments);
+    public function updateClientByCoach($id, $discipline, $weight, $height, $pay_date, $comments,$fat,$muscle,$clientComments);
 
     public function searchByEmail($email);
 
