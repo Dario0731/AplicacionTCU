@@ -13,4 +13,6 @@
 interface IProgressRepository {
     //put your code here
     public function getClientProgress($id);
+
+    public function removeProgress($id);
 }

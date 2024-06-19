@@ -32,7 +32,9 @@
                             <td class="text-center"><?= htmlspecialchars($cliente['muscle_percentage']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($cliente['client_comments']) ?></td>
                             <td class="text-center">
-                                <button type="button" class="btn delete-btn" data-id="<?= $cliente['progress_id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                                <button type="button" class="btn delete-btn" data-id="<?= $cliente['progress_id'] ?>">
+                                    <img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;">
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -45,3 +47,88 @@
         </table>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+<?php if (isset($_SESSION['redirect-info'])) : ?>
+            Swal.fire({
+                icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
+                title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
+                text: '<?php echo $_SESSION['redirect-info']['text']; ?>',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff',
+                confirmButtonColor: '#3085d6'
+            });
+    <?php unset($_SESSION['redirect-info']); ?>
+<?php endif; ?>
+    });
+
+    $(document).ready(function () {
+        $('.delete-btn').on('click', function () {
+            var clientId = $(this).data('id');
+            var row = $(this).closest('tr');
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo!',
+                cancelButtonText: 'Cancelar',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/AplicacionTCU/ClientManagement/removeProgress',
+                        type: 'POST',
+                                data: {
+                                    id: clientId
+                                },
+                        success: function (response) {
+
+                            try {
+                                var result = JSON.parse(response);
+                                if (result.status === 'success') {
+                                    row.remove();
+                                    Swal.fire(
+                                            '¡Eliminado!',
+                                            'El progreso seleccionado del cliente ha sido eliminado.',
+                                            'success'
+                                            );
+                                } else {
+                                    Swal.fire(
+                                            'Error',
+                                            result.message,
+                                            'error'
+                                            );
+                                }
+                            } catch (e) {
+                                console.log(response);
+                                Swal.fire(
+                                        'Error',
+                                        'Respuesta del servidor no válida.',
+                                        'error'
+                                        );
+                            }
+                        },
+                        error: function () {
+                            Swal.fire(
+                                    'Error',
+                                    'Hubo un problema con la solicitud.',
+                                    'error'
+                                    );
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+
+</script>

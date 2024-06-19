@@ -1,6 +1,7 @@
 <?php
 
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
+require_once(CONFIG["repository_path"] . "ProgressRepository.php");
 require_once("Lib/Core/Controller.php");
 /*
   /*
@@ -52,6 +53,21 @@ class ClientController extends Controller {
     }
 
     public function information() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        try {
+            $repository = new ClientRepository();
+            $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
+            $client_info = $clientByEmail['email'] . ',' . $clientByEmail['name'] . ',' .
+                    $clientByEmail['last_name'] . ',' . $clientByEmail['phone'] . ',' . $clientByEmail['birth_date'];
+            viewbag("client_info", $client_info);
+        } catch (Exception $ex) {
+            
+        }
+
+
         return view();
     }
 
@@ -128,6 +144,49 @@ class ClientController extends Controller {
             ];
             $this->redirect("/client/passwordAct", $info);
         }
+    }
+
+    public function updatePersonalInfo() {
+        $email = $_SESSION['user']['email'];
+        $repository = new ClientRepository();
+        $clientByEmail = $repository->searchByEmail($_SESSION['user']['email']);
+        $id = $clientByEmail['id'];
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+        $last_name = $_POST['last_name'];
+        $phone = $_POST['phone'];
+        $birthdate = $_POST['birthdate'];
+        try {
+            $repository->updatePersonalInfo($id, $email,$name,$last_name,$phone,$birthdate);
+            $info = [
+                'type' => 'sucess',
+                'title' => 'Actualizado',
+                'text' => 'Datos actualizados correctamente'
+            ];
+            $this->redirect("/client/home", $info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Error en el servidor',
+                'text' => 'Error en el servidor, intentelo más tarde.'
+            ];
+            $this->redirect("/client/information", $info);
+        }
+    }
+    public function progress(){
+                if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+                    $email = $_SESSION['user']['email'];
+        $clientRepo=new ClientRepository();
+        $result=$clientRepo->searchByEmail($email);
+        $id=$result['id'];
+        $progressRepo=new ProgressRepository();
+        $progressList=$progressRepo->getClientProgress($id);
+        viewbag("clientes", $progressList);
+
+        return view();
     }
 
 }

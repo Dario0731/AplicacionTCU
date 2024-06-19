@@ -78,4 +78,16 @@ public function updateClientByCoach($id, $discipline, $weight, $height, $pay_dat
         return $this->remove($id);
     }
 
+    public function updatePersonalInfo($id, $email,$name, $lastName, $phone, $birthdate) {
+                        $data = [
+            varchar($id),
+            varchar($email),
+            varchar($name),
+            varchar($lastName),
+            varchar($phone),
+            varchar($birthdate)
+        ];
+        return $this->updateInfo($data);
+    }
+
 }

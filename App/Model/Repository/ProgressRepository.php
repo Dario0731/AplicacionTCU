@@ -18,4 +18,9 @@ class ProgressRepository extends Model implements IProgressRepository{
       public function getClientProgress($id){
          return $this->getProgressBy($id);
       }
+
+    public function removeProgress($id) {
+        return $this->remove($id);
+    }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
+require_once(CONFIG["repository_path"] . "ProgressRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
 require_once("Lib/Core/Controller.php");
 
@@ -64,26 +65,7 @@ class ClientManagementController extends Controller {
         return $cadena_aleatoria;
     }
 
-    public function removeClient() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = $_POST['id'];
 
-            if (!empty($id)) {
-                $clientRepository = new ClientRepository();
-                $result = $clientRepository->removeClient($id);
-
-                if ($result) {
-                    echo json_encode(['status' => 'success']);
-                } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el cliente']);
-                }
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
-            }
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
-        }
-    }
 
     public function updateClient() {
 
@@ -119,7 +101,46 @@ class ClientManagementController extends Controller {
             $this->redirect("/admin/clients", $info);
         }
     }
+public function removeProgress() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
 
+        if (!empty($id)) {
+            $progressRepo = new ProgressRepository();
+            $result = $progressRepo->removeProgress($id);
+
+            if ($result) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el cliente']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+    }
+}
+    public function removeClient() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+
+            if (!empty($id)) {
+                $clientRepository = new ClientRepository();
+                $result = $clientRepository->removeClient($id);
+
+                if ($result) {
+                    echo json_encode(['status' => 'success']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el cliente']);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+        }
+    }
 }
 
 ?>

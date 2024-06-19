@@ -66,7 +66,12 @@ class Model {
         $query->execute();
         return $query->rowCount();
     }
-
+    public function updateInfo($data) {
+        $queryString = 'CALL sp_update_' . $this->entity.'_info' . '(' . implode(', ', $data) . ')';
+        $query = $this->db->prepare($queryString);
+        $query->execute();
+        return $query->rowCount();
+    }
     public function getByEmail($email) {
         $queryString = 'CALL sp_get_' . $this->entity . '_by_email' . '(:email)';
         $query = $this->db->prepare($queryString);

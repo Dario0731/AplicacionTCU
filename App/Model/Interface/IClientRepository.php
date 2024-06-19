@@ -26,4 +26,6 @@ interface IClientRepository {
     public function updateClientConection($id, $password);
     
     public function removeClient($id);
+    
+    public function updatePersonalInfo($id, $email,$name, $lastName, $phone, $birthdate);
 }

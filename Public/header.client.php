@@ -11,7 +11,7 @@
                         Mis datos
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
-                        <a class="dropdown-item text-white navbar-gradient" href="#">
+                        <a  href="<?= route('client', 'progress') ?>" class="dropdown-item text-white navbar-gradient" href="#">
                             Mi progreso
                         </a>
                         <a class="dropdown-item text-white navbar-gradient" href="#">
