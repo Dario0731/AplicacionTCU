@@ -21,7 +21,7 @@ $image = $parts[2];
             </div>
         </div>
         <div class="col">
-            <img src="../Public/Assets/img/home-image.svg" alt="home-image" style="height: 5rem" />
+            <img src="<?= CONFIG['assets'] ?>img/logo.svg" alt="home-image" style="height: 5rem" />
         </div>
     </div>
 </div>

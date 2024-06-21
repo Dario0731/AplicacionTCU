@@ -7,8 +7,8 @@
             Asi como maximizar resultados!
         </p>
     </div>
-    <div class="text-center p-5">
-        <img src="<?=CONFIG['assets']?>img/home-image.svg" alt="Imagen de inicio">
+    <div class="text-center">
+        <img src="<?=CONFIG['assets']?>img/logo.svg" alt="Imagen de inicio" style="height: 400px;">
     </div>
     <div class="container">
         <article class="p-2">

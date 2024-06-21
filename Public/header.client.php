@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-gradient">
     <div class="container text-white">
         <a class="navbar-brand text-white" href="<?= route('client', 'home') ?>">
-            <img src="<?= CONFIG['assets'] ?>img/home-image.svg" style="height: 50px;">
+            <img src="<?= CONFIG['assets'] ?>img/logo.svg" style="height: 50px;">
         </a>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
