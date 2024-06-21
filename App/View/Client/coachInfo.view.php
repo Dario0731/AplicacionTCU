@@ -11,31 +11,40 @@ $image_path = $parts[3];
 $phone = $parts[4];
 ?>
 <div class="container">
-    <div class="row justify-content-center p-5">
-        <a href="<?= route('client', 'home') ?>">
+    <div class="row justify-content-center px-5 py-3">
+        <a href="<?= route('client', 'home') ?>" class="px-5">
             <img src="<?= CONFIG['assets'] ?>img/leave-arrow.svg" alt="imagen de volver atrás" style="height: 27px;">
         </a>
         <p class="h4 text-center">Información del coach</p>
         <div class="col-md-6">
-            <div class="form-group py-2">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
-            </div>
-            <div class="form-group py-2">
-                <label for="name">Nombre:</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name); ?>" required>
-            </div>
-            <div class="form-group py-2">
-                <label for="last_name">Apellido:</label>
-                <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" required>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group py-2">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" disabled>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="name">Nombre:</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name); ?>" disabled>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group py-2">
+                        <label for="last_name">Apellido:</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" disabled>
+                    </div>
+                    <div class="form-group py-2">
+                        <label for="phone">Teléfono:</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" value="<?= $phone; ?>" disabled>
+                    </div>
+                </div>
             </div>
             <div class="py-3">
-                <img src="<?= CONFIG['assets'] ?><?= $image_path ?>" alt="Imagen de inicio" style="height: 330px;">
-
+                <label for="coach_image">Imagen del coach:</label>
+                <img src="<?= CONFIG['assets'] ?><?= $image_path ?>" alt="Imagen de inicio" style="height: 300px;">
             </div>
-            <div class="form-group py-2">
-                <label for="phone">Teléfono:</label>
-                <input type="tel" class="form-control" id="phone" name="phone" value="<?= $phone; ?>" required>
+            <div class="text-center">
+                <a href="<?= route('client', 'home') ?>" class="btn btn-primary px-5">Volver</a>
             </div>
         </div>
     </div>

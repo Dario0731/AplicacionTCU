@@ -22,12 +22,11 @@ $email = $parts[10];
             <div class="text-center">
                 <div class="row">
                     <div class="col">
-
                         <div class="form-group py-2">
                             <label for="name">Nombre:</label>
                             <input value="<?= htmlspecialchars($name); ?>" type="text" class="form-control" id="discipline" name="name" value="" required readonly>
                         </div>
-                                                <div class="form-group py-2">
+                        <div class="form-group py-2">
                             <label for="pay">Fecha del próximo pago:</label>
                             <input value="<?= htmlspecialchars($pay_date); ?>" type="date" class="form-control" id="pay" name="pay" value="" required>
                         </div>
@@ -41,15 +40,11 @@ $email = $parts[10];
                         </div>
                     </div>
                     <div class="col">
-                                                                        <div class="form-group py-2">
-                            <input  value="<?= htmlspecialchars($email); ?>"type="hidden" class="form-control" id="discipline" name="email" value="" required readonly>
-                        </div>
-
                         <div class="form-group py-2">
                             <label for="comments">Comentarios personales hacia el cliente:</label>
-                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments"  required>
+                            <input value="<?= htmlspecialchars($coments); ?>" type="text" class="form-control" id="comments" name="comments" required>
                         </div>
-                                                <div class="form-group py-2">
+                        <div class="form-group py-2">
                             <label for="discipline">Disciplina:</label>
                             <input value="<?= htmlspecialchars($discipline); ?>" type="text" class="form-control" id="discipline" name="discipline" value="" required>
                         </div>
@@ -62,11 +57,12 @@ $email = $parts[10];
                             <input type="text" class="form-control" id="mucle" name="mucle" value="<?= htmlspecialchars($muscle); ?>" required>
                         </div>
                     </div>
-                    <div class="form-group py-2">
-                        <label for="clients_comments">Comentarios para el cliente:</label>
-                        <textarea class="form-control" id="clients_comments" name="clients_comments" required rows="3"><?= htmlspecialchars($comentsClient); ?></textarea>
-                    </div>
                 </div>
+                <div class="form-group py-2">
+                    <label for="clients_comments">Comentarios para el cliente:</label>
+                    <textarea class="form-control" id="clients_comments" name="clients_comments" rows="3"><?= htmlspecialchars($comentsClient); ?></textarea>
+                </div>
+
             </div>
             <div class="text-center form-group py-2">
                 <button type="submit" class="btn btn-primary">Actualizar datos</button>

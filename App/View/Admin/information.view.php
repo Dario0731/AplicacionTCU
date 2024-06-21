@@ -22,7 +22,7 @@ if (count($parts) >= 5) {
 }
 ?>
 <div class="container">
-    <div class="row justify-content-center pt-5">
+    <div class="row justify-content-center pt-3">
         <div class="col-md-6">
             <?php if ($conection == 0) { ?>
                 <p class="h3 text-center">Terminemos de configurar tus datos</p>
@@ -30,19 +30,29 @@ if (count($parts) >= 5) {
                 <p class="h3 text-center">Actualizar datos</p>
             <?php } ?>
             <form action="/AplicacionTCU/Admin/updateCoachInfo" method="post" enctype="multipart/form-data">
-                <div class="form-group py-2">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group py-2">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="name">Nombre:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name); ?>" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group py-2">
+                            <label for="phone">Teléfono:</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($phone); ?>" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <label for="last_name">Apellido:</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group py-2">
-                    <label for="name">Nombre:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name); ?>" required>
-                </div>
-                <div class="form-group py-2">
-                    <label for="last_name">Apellido:</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name); ?>" required>
-                </div>
-                <div class="form-group py-2">
+                <div class="form-group py-2 text-center">
                     <label for="image">Imagen:</label>
                     <div><input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="onFileSelected(event)"></div>
                     <input type="hidden" id="image_path" name="image_path">
@@ -50,14 +60,11 @@ if (count($parts) >= 5) {
                 <?php if ($image_path != "") : ?>
                     <div class="text-center py-2 justify-content-center">
                         <label for="image">Imagen actual:</label>
-                        <img src="<?= CONFIG['assets'] . $image_path ?>" alt="Imagen de inicio" style="height: 400px;">
+                        <img src="<?= CONFIG['assets'] . $image_path ?>" alt="Imagen de inicio" style="height: 350px;">
                     </div>
                 <?php endif; ?>
 
-                <div class="form-group py-2">
-                    <label for="phone">Teléfono:</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($phone); ?>" required>
-                </div>
+
                 <div class="text-center form-group py-2">
                     <button type="submit" class="btn btn-primary">Actualizar Datos</button>
                 </div>
