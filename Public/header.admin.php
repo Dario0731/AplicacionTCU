@@ -22,7 +22,7 @@
                 </li>
                 </li>
                 <li class="nav-item px-3">
-                    <a class="nav-link text-white" href="#">
+                    <a class="nav-link text-white" href="<?= route('admin', 'adminGroups') ?>">
                         <img class="px-1" src="<?= CONFIG['assets'] ?>img/calendar-icon.svg" alt="imagen de administrar clases" style="height: 23px;">
                         Administrar Grupos
                     </a>

@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trainer Website</title>
-    <link rel="icon" href="<?= CONFIG['assets']?>img/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="<?= CONFIG['assets'] ?>img/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="<?= CONFIG['assets'] ?>css/style.css" />
     <link rel="stylesheet" href="Public/Assets/css/style.css">
     <link href="<?= CONFIG['assets'] ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- FONT AWESOME-->
     <script src="https://kit.fontawesome.com/c4a32da8f9.js" crossorigin="anonymous"></script>
+    <!-- FULLCALENDAR -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/main.min.css' rel='stylesheet' />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+    
+
 </head>
 
 <body class="text-white" style="background: linear-gradient(to bottom, #011242, #001136);">
@@ -21,7 +26,6 @@
      */
     include_once($pageLayoutPath);
     ?>
-
     <script src="<?= CONFIG['assets'] ?>js/scripts.js"></script>
     <script src="<?= CONFIG['assets'] ?>bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 
