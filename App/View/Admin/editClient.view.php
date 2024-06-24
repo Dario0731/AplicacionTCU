@@ -20,6 +20,9 @@ $email = $parts[10];
         <p class="text-center h3">Editar datos del cliente</p>
         <form action="/AplicacionTCU/ClientManagement/updateClient" method="post" enctype="multipart/form-data">
             <div class="text-center">
+                <div class="form-group py-2">
+                    <input hidden value="<?= htmlspecialchars($email); ?>" type="text" class="form-control" id="email" name="email" required readonly>
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group py-2">
@@ -74,8 +77,8 @@ $email = $parts[10];
 <?php include(CONFIG['public_path'] . 'footer.php') ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['redirect-info'])) : ?>
+    document.addEventListener('DOMContentLoaded', function () {
+<?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
                 title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
@@ -85,7 +88,7 @@ $email = $parts[10];
                 iconColor: '#fff',
                 confirmButtonColor: '#3085d6'
             });
-            <?php unset($_SESSION['redirect-info']); ?>
-        <?php endif; ?>
+    <?php unset($_SESSION['redirect-info']); ?>
+<?php endif; ?>
     });
 </script>
