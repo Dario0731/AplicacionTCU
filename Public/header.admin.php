@@ -20,6 +20,20 @@
                         </a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
+                        Administrar grupos
+                    </a>
+                    <div class="dropdown-menu navbar-gradient text-white">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('grupo', 'registrar') ?>">
+                            Registrar un nuevo grupo
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'clients') ?>">
+                            Ver lista de clientes
+                        </a>
+                    </div>
+                </li>
                 </li>
                 <li class="nav-item px-3">
                     <a class="nav-link text-white" href="#">
