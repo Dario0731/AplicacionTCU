@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-gradient">
     <div class="container">
         <a class="navbar-brand text-white" href="<?= route('home', 'index') ?>">
-            <img src="<?= CONFIG['assets'] ?>img/logo.svg" style="height: 50px;">
+            <img src="<?= CONFIG['assets'] ?>img/logo-icon.svg" style="height: 50px;">
         </a>
         <div class="text-white">
             <ul class="navbar-nav mr-auto">
