@@ -18,7 +18,7 @@ class CoachRepository extends Model implements ICoachRepository {
     }
 
     public function getAllCoachs() {
-        $this->getAllCoachs();
+        return $this->getAllCoachs();
     }
 
     public function registCoach($email, $conection) {
