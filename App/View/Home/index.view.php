@@ -8,7 +8,7 @@
         </p>
     </div>
     <div class="text-center">
-        <img src="<?=CONFIG['assets']?>img/logo.svg" alt="Imagen de inicio" style="height: 400px;">
+        <img src="<?=CONFIG['assets']?>img/logo-icon.svg" alt="Imagen de inicio" style="height: 400px;">
     </div>
     <div class="container">
         <article class="p-2">
