@@ -81,6 +81,15 @@ class Model {
 
         return $resultado[0];
     }
+        public function getByName($name) {
+        $queryString = 'CALL sp_get_' . $this->entity . '_by_name' . '(:name)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado[0];
+    }
 
     public function getByCoach($id) {
         $queryString = 'CALL sp_get_' . $this->entity . '_by_coach' . '(:id)';

@@ -19,16 +19,16 @@
             </thead>
             <tbody>
                 <?php if (is_array(viewbag("clientes"))) : ?>
-                    <?php foreach (viewbag("clientes") as $cliente) : ?>
-                        <tr id="cliente-<?= $cliente['progress_id'] ?>">
-                            <td class="text-center"><?= $cliente['progress_date'] ?></td>
-                            <td class="text-center"><?= $cliente['name'] . ' ' . $cliente['last_name'] ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['weight']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['height']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['discipline']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['fat_percentage']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['muscle_percentage']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($cliente['client_comments']) ?></td>
+                    <?php foreach (viewbag("clientes") as $clients) : ?>
+                        <tr id="cliente-<?= $clients['progress_id'] ?>">
+                            <td class="text-center"><?= $clients['progress_date'] ?></td>
+                            <td class="text-center"><?= $clients['name'] . ' ' . $clients['last_name'] ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['weight']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['height']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['discipline']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['fat_percentage']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['muscle_percentage']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['client_comments']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else : ?>

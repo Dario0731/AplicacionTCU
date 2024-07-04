@@ -10,12 +10,10 @@
  *
  * @author 50685
  */
-interface ISportGroupRepository {
+interface IClientGroupRepository {
 
     //put your code here
-    public function registGroup($name, $comments, $coachID);
+    public function registClientGroup($clientID, $coachID);
 
-    public function getSportGroupsByCoach($coach);
-    
-    public function getSportGroupByName($name);
+    public function getAllClientGroups();
 }

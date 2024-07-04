@@ -14,9 +14,6 @@ class SportGroupRepository extends Model implements ISportGroupRepository{
             public function __construct() {
         parent::__construct('sport_group');
     }
-    public function getAllGroups() {
-        return $this->getAll();
-    }
 
     public function registGroup($name, $comments, $coachID) {
                 $data = [
@@ -25,6 +22,14 @@ class SportGroupRepository extends Model implements ISportGroupRepository{
             varchar($coachID)
         ];
         return $this->create($data);
+    }
+
+    public function getSportGroupByName($name) {
+        return $this->getByName($name);
+    }
+
+    public function getSportGroupsByCoach($coach) {
+         return $this->getByCoach($coach);
     }
 
 }

@@ -29,8 +29,8 @@
                         <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'registrar') ?>">
                             Registrar un nuevo grupo
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('admin', 'clients') ?>">
-                            Ver lista de clientes
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'groups') ?>">
+                            Ver lista de grupos
                         </a>
                     </div>
                 </li>
