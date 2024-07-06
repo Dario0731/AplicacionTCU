@@ -1,6 +1,6 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-<div class="container">
+<div class="container"  style="height: 100%;">
     <div class="row justify-content-center pt-2">
         <p class="text-center h3">Registrar nuevo grupo</p>
         <form action="/AplicacionTCU/SportGroup/insertGroup" method="post" enctype="multipart/form-data">
