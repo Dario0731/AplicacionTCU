@@ -32,4 +32,8 @@ class SportGroupRepository extends Model implements ISportGroupRepository{
          return $this->getByCoach($coach);
     }
 
+    public function removeGroup($id) {
+        return $this->remove($id);
+    }
+
 }

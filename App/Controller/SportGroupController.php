@@ -24,35 +24,35 @@ class SportGroupController extends Controller {
         return view();
     }
 
-public function insertGroup() {
-    $coach = new CoachRepository();
-    $email = $_SESSION['user']['email'];
-    // $email = '123@gmail.com';
-    $coachsByEmail = $coach->getByEmail($email);
-    $id = $coachsByEmail['id'];
-    $name = $_POST['name'];
-    $comments = $_POST['comments'];
-    try{
-        $repo= new SportGroupRepository();
-        $repo->registGroup($name, $comments, $id);
-        $info = [
-            'type' => 'success',
-            'title' => 'Grupo Registrado correctamente',
-            'text' => 'Ahora seleccionaremos los clientes para el grupo'
-        ];
-        $encodedName = urlencode($name);
-        $this->redirect("/SportGroup/clients?name={$encodedName}", $info);
-    } catch (Exception $ex) {
-        $info = [
-            'type' => 'error',
-            'title' => 'Ha ocurrido un problema',
-            'text' => 'Ha ocurrido un problema con el servidor.'
-        ];
-        $this->redirect("/SportGroup/registrar", $info);
+    public function insertGroup() {
+        $coach = new CoachRepository();
+        $email = $_SESSION['user']['email'];
+        // $email = '123@gmail.com';
+        $coachsByEmail = $coach->getByEmail($email);
+        $id = $coachsByEmail['id'];
+        $name = $_POST['name'];
+        $comments = $_POST['comments'];
+        try {
+            $repo = new SportGroupRepository();
+            $repo->registGroup($name, $comments, $id);
+            $info = [
+                'type' => 'success',
+                'title' => 'Grupo Registrado correctamente',
+                'text' => 'Ahora seleccionaremos los clientes para el grupo'
+            ];
+            $encodedName = urlencode($name);
+            $this->redirect("/SportGroup/clients?name={$encodedName}", $info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+            $this->redirect("/SportGroup/registrar", $info);
+        }
     }
-}
 
-        public function groups() {
+    public function groups() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -64,7 +64,6 @@ public function insertGroup() {
         try {
             $coachsByEmail = $coach->getByEmail($email);
             $groupsList = $group->getSportGroupsByCoach($coachsByEmail['id']);
-
             if (empty($groupsList)) {
                 $info = [
                     'type' => 'error',
@@ -85,6 +84,7 @@ public function insertGroup() {
 
         return View();
     }
+
     public function clients() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
@@ -118,5 +118,25 @@ public function insertGroup() {
         }
 
         return View();
+    }
+    public function removeGroup() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+
+            if (!empty($id)) {
+                $groupRepo = new SportGroupRepository();
+                $result = $groupRepo->removeGroup($id);
+
+                if ($result) {
+                    echo json_encode(['status' => 'success']);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el grupo']);
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+        }
     }
 }

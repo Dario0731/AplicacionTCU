@@ -14,8 +14,8 @@ class ClientGroupRepository extends Model implements IClientGroupRepository{
             public function __construct() {
         parent::__construct('clients_group');
     }
-    public function getAllClientGroups() {
-                return $this->getAll();
+    public function getAllClientGroups($id) {
+                return $this->getGroupModel($id);
     }
 
     public function registClientGroup($clientID, $coachID) {
@@ -24,6 +24,14 @@ class ClientGroupRepository extends Model implements IClientGroupRepository{
             varchar($coachID)
         ];
         return $this->create($data);
+    }
+
+    public function getGroup($id) {
+        return $this->getGroupById($id);
+    }
+
+    public function removeGroup($id, $groupID) {
+         return $this->remove2Params($id, $groupID);
     }
 
 }

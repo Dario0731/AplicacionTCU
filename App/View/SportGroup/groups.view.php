@@ -14,10 +14,12 @@
                 <?php if (is_array(viewbag("grupos"))) : ?>
                     <?php foreach (viewbag("grupos") as $groups) : ?>
                         <tr id="cliente-<?= $groups['id'] ?>">
-                            <td class="text-center"><?= htmlspecialchars($groups['name']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($groups['comments']) ?></td>
-                            <td class="text-center">
-                                <button type="button" class="btn insert-btn" data-id="<?= $groups['id'] ?>" data-group="<?= htmlspecialchars(urldecode($_GET['name'])) ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                            <td class="text-center"><?= htmlspecialchars($groups['groupName']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($groups['groupComments']) ?></td>
+                                                        <td class="text-center">
+                                <a class="px-2" href="<?= route('SportGroup', 'editGroup', ['name' => $groups['groupName']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
+                                <button type="button" class="btn delete-btn" data-id="<?= $groups['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                                <a class="px-2" href="<?= route('ClientGroup', 'clientsGroup', ['id' => $groups['id']]) ?>"><img src="<?= CONFIG['assets'] ?>img/eye-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -70,7 +72,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/AplicacionTCU/ClientManagement/removeClient', // Asegúrate de ajustar la ruta según tu estructura de carpetas
+                        url: '/AplicacionTCU/SportGroup/removeGroup', // Asegúrate de ajustar la ruta según tu estructura de carpetas
                         type: 'POST',
                         data: {
                             id: clientId
@@ -81,7 +83,7 @@
                                 row.remove();
                                 Swal.fire(
                                     '¡Eliminado!',
-                                    'El cliente ha sido eliminado.',
+                                    'El grupo ha sido eliminado.',
                                     'success'
                                 );
                             } else {

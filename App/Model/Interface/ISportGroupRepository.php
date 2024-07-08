@@ -18,4 +18,6 @@ interface ISportGroupRepository {
     public function getSportGroupsByCoach($coach);
     
     public function getSportGroupByName($name);
+    
+    public function removeGroup($id);
 }

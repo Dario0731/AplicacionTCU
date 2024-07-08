@@ -15,5 +15,9 @@ interface IClientGroupRepository {
     //put your code here
     public function registClientGroup($clientID, $coachID);
 
-    public function getAllClientGroups();
+    public function getAllClientGroups($id);
+    
+    public function getGroup($id);
+    
+    public function removeGroup($id,$groupID);
 }
