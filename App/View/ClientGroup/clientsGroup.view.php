@@ -1,10 +1,9 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
 <div class="container p-4">
-    <h2>Grupo <?= viewbag("grupos")[0]['groupName']; ?></h2>
-    <h2>Comentarios del grupo: <?= viewbag("grupos")[0]['groupComments']; ?></h2>
-    <br>
-    <h2>Integrantes del grupo</h2>
+    <div class="pt-2 text-center"><p class="h1"><!--Nombre del grupo:--> <?= viewbag("grupos")[0]['groupName']; ?></p></div>
+    <div class="pt-2 pb-4 text-center"><p class="h5"><!--Descripción del grupo:--> <?= viewbag("grupos")[0]['groupComments']; ?></p></div>
+    <div class="pt-2 pb-2"><p class="h2">Integrantes del grupo</p></div>
     <div class="" style="height: 100%;">
         <table class="table table-striped table-dark">
             <thead>
@@ -34,6 +33,7 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <div class="text-end"><a href="<?= route('sportgroup', 'groups') ?>" class="btn btn-primary">Volver</a></div>
     </div>
 </div>
 

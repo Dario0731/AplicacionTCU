@@ -1,10 +1,10 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-<div class="container p-4">
-    <?php if (isset($_GET['name'])): ?>
+<div class="container p-4" style="height: 100%;">
+    <?php if (isset($_GET['name'])) : ?>
         <h2>Agregar a grupo: <?= htmlspecialchars(urldecode($_GET['name'])) ?></h2>
     <?php endif; ?>
-    <div class="" style="height: 100%;">
+    <div class="">
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
@@ -20,13 +20,15 @@
                 <?php if (is_array(viewbag("clientes"))) : ?>
                     <?php foreach (viewbag("clientes") as $clients) : ?>
                         <tr id="cliente-<?= $clients['id'] ?>">
-                            <td class="text-center"><?= htmlspecialchars($clients['name']) ?><?= ' '.htmlspecialchars($clients['last_name']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['name']) ?><?= ' ' . htmlspecialchars($clients['last_name']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['discipline']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['weight']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['height']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['coments']) ?></td>
                             <td class="text-center">
-                                <button type="button" class="btn insert-btn" data-id="<?= $clients['id'] ?>" data-group="<?= htmlspecialchars(urldecode($_GET['name'])) ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                                <button type="button" class="btn insert-btn border border-0" data-id="<?= $clients['id'] ?>" data-group="<?= htmlspecialchars(urldecode($_GET['name'])) ?>">
+                                    <img src="<?= CONFIG['assets'] ?>img/add-client.svg" alt="icono de eliminar al cliente" style="height: 20px;">
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -37,6 +39,7 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <div class="text-end"><a class="btn btn-primary" href="<?= route('admin', 'home') ?>">Aceptar</a></div>
     </div>
 </div>
 
@@ -59,7 +62,6 @@
         <?php endif; ?>
     });
 
-$(document).ready(function() {
     $('.insert-btn').on('click', function() {
         var button = $(this); // Captura el botón que se hizo clic
         var clientId = button.data('id');
@@ -83,8 +85,8 @@ $(document).ready(function() {
                         );
 
                         // Cambiar el icono del botón después de la inserción exitosa
-                        button.html('<img src="<?= CONFIG['assets'] ?>img/registered-icon.svg" alt="Cliente registrado" style="height: 20px;">');
-                        button.prop('disabled', true); // Opcional: deshabilitar el botón después de registrar
+                        button.html('<img src="<?= CONFIG['assets'] ?>img/check-icon.svg" alt="Cliente eliminado del grupo" style="height: 20px;">');
+                        button.prop('disabled', true);
                     } else {
                         Swal.fire(
                             'Error',
@@ -111,5 +113,4 @@ $(document).ready(function() {
             }
         });
     });
-});
 </script>
