@@ -19,8 +19,9 @@ class Model {
         $this->entity = $entity;
         $this->db = Database::getInstance();
     }
-    public function getProgressBy($id){
-                $queryString = 'CALL sp_get_client_' . $this->entity . '(:id)';
+
+    public function getProgressBy($id) {
+        $queryString = 'CALL sp_get_client_' . $this->entity . '(:id)';
         $query = $this->db->prepare($queryString);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
@@ -28,12 +29,22 @@ class Model {
 
         return $resultado;
     }
+
     public function create($data) {
         $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
 
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();
+    }
+
+    public function createGP($data) {
+        $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
+
+        $query = $this->db->prepare($queryString);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['new_id'];
     }
 
     public function getAll() {
@@ -59,16 +70,15 @@ class Model {
         $query->execute();
         return $query->rowCount();
     }
-    
-    
-public function remove2Params($id, $secondParam) {
-    $queryString = 'CALL sp_remove_' . $this->entity . '(:id, :secondParam)';
-    $query = $this->db->prepare($queryString);
-    $query->bindParam(':id', $id, PDO::PARAM_STR);
-    $query->bindParam(':secondParam', $secondParam, PDO::PARAM_STR);
-    $query->execute();
-    return $query->rowCount();
-}
+
+    public function remove2Params($id, $secondParam) {
+        $queryString = 'CALL sp_remove_' . $this->entity . '(:id, :secondParam)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->bindParam(':secondParam', $secondParam, PDO::PARAM_STR);
+        $query->execute();
+        return $query->rowCount();
+    }
 
     public function update($data) {
         $queryString = 'CALL sp_update_' . $this->entity . '(' . implode(', ', $data) . ')';
@@ -76,12 +86,14 @@ public function remove2Params($id, $secondParam) {
         $query->execute();
         return $query->rowCount();
     }
+
     public function updateInfo($data) {
-        $queryString = 'CALL sp_update_' . $this->entity.'_info' . '(' . implode(', ', $data) . ')';
+        $queryString = 'CALL sp_update_' . $this->entity . '_info' . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();
     }
+
     public function getByEmail($email) {
         $queryString = 'CALL sp_get_' . $this->entity . '_by_email' . '(:email)';
         $query = $this->db->prepare($queryString);
@@ -91,7 +103,8 @@ public function remove2Params($id, $secondParam) {
 
         return $resultado[0];
     }
-        public function getByName($name) {
+
+    public function getByName($name) {
         $queryString = 'CALL sp_get_' . $this->entity . '_by_name' . '(:name)';
         $query = $this->db->prepare($queryString);
         $query->bindParam(':name', $name, PDO::PARAM_STR);
@@ -110,8 +123,8 @@ public function remove2Params($id, $secondParam) {
 
         return $resultado;
     }
-    
-        public function getGroupById($id) {
+
+    public function getGroupById($id) {
         $queryString = 'CALL sp_get_' . $this->entity . '_by_id' . '(:id)';
         $query = $this->db->prepare($queryString);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
@@ -121,7 +134,7 @@ public function remove2Params($id, $secondParam) {
         return $resultado;
     }
 
-        public function getGroupModel($id) {
+    public function getGroupModel($id) {
         $queryString = 'CALL sp_get_' . $this->entity . '(:id)';
         $query = $this->db->prepare($queryString);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
@@ -130,7 +143,7 @@ public function remove2Params($id, $secondParam) {
 
         return $resultado;
     }
-    
+
     public function updateConection($data) {
         $queryString = 'CALL sp_update_conection_' . $this->entity . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
@@ -139,7 +152,7 @@ public function remove2Params($id, $secondParam) {
     }
 
     public function updateClientAdmin($data) {
-        $queryString = 'CALL sp_update_' . $this->entity.'_admin' . '(' . implode(', ', $data) . ')';
+        $queryString = 'CALL sp_update_' . $this->entity . '_admin' . '(' . implode(', ', $data) . ')';
         $query = $this->db->prepare($queryString);
         $query->execute();
         return $query->rowCount();

@@ -1,6 +1,7 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
 <div class="container p-4">
+        <div class="pt-2 pb-2"><p class="h2">Administrar integrantes del grupo</p></div>
     <div class="pt-2 text-center"><p class="h1"><!--Nombre del grupo:--> <?= viewbag("grupos")[0]['groupName']; ?></p></div>
     <div class="pt-2 pb-4 text-center"><p class="h5"><!--Descripción del grupo:--> <?= viewbag("grupos")[0]['groupComments']; ?></p></div>
     <div class="pt-2 pb-2"><p class="h2">Integrantes del grupo</p></div>

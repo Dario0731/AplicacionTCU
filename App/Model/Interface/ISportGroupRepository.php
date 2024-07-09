@@ -20,4 +20,6 @@ interface ISportGroupRepository {
     public function getSportGroupByName($name);
     
     public function removeGroup($id);
+    
+    public function editGroup($id,$name,$comments);
 }

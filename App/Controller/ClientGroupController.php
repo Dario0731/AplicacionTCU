@@ -20,23 +20,17 @@ public function insertClientGroup() {
             throw new Exception('Datos de entrada faltantes.');
         }
 
-        $groupName = $_POST['group_name'];
+        $groupID = $_POST['group_name'];
         $clientId = $_POST['client_id'];
 
         $sport = new SportGroupRepository();
         $repo = new ClientGroupRepository();
 
-        $sportGr = $sport->getSportGroupByName($groupName);
  
-        // Verifica que el grupo de deportes exista
-        if (!$sportGr) {
-            throw new Exception('Grupo de deportes no encontrado.');
-        }
 
-        $sportID = $sportGr['groupID'];
 
         // Registra al cliente en el grupo
-        $repo->registClientGroup($clientId, $sportID);
+        $repo->registClientGroup($clientId, $groupID);
        
         echo json_encode(['status' => 'success']);
     } catch (Exception $ex) {
@@ -94,4 +88,38 @@ public function removeClient() {
         echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
     }
 }
+
+    public function editClients() {
+    if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+        // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+        $this->redirect("/authentication/login");
+    }
+
+    $groupRepo = new ClientGroupRepository();
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    
+    try {
+       $group= $groupRepo->getGroup($id);
+        $groupsList = $groupRepo->getAllClientGroups($id);
+
+        if (empty($groupsList)) {
+            $info = [
+                'type' => 'error',
+                'title' => 'No existen grupos',
+                'text' => 'No hay grupos para mostrar'
+            ];
+        } else {
+            viewbag("grupos", $groupsList);
+            viewbag("grupInfo", $group);
+        }
+    } catch (Exception $ex) {
+        $info = [
+            'type' => 'error',
+            'title' => 'Error al recuperar los datos',
+            'text' => 'Error en la carga de datos.'
+        ];
+        $_SESSION['redirect-info'] = $info;
+    }
+    return View();
+    }
 }

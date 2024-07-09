@@ -1,6 +1,7 @@
 <?php
 
 require_once(CONFIG["repository_path"] . "SportGroupRepository.php");
+require_once(CONFIG["repository_path"] . "ClientGroupRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once("Lib/Core/Controller.php");
@@ -34,14 +35,14 @@ class SportGroupController extends Controller {
         $comments = $_POST['comments'];
         try {
             $repo = new SportGroupRepository();
-            $repo->registGroup($name, $comments, $id);
+           $idGrupo= $repo->registGroup($name, $comments, $id);
             $info = [
                 'type' => 'success',
                 'title' => 'Grupo Registrado correctamente',
                 'text' => 'Ahora seleccionaremos los clientes para el grupo'
             ];
-            $encodedName = urlencode($name);
-            $this->redirect("/SportGroup/clients?name={$encodedName}", $info);
+            $encodedID = urlencode($idGrupo);
+           $this->redirect("/SportGroup/clients?id={$encodedID}", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
@@ -139,4 +140,57 @@ class SportGroupController extends Controller {
             echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
         }
     }
+    
+        public function editGroup() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $group = new ClientGroupRepository();
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+        try {
+            $groupsList = $group->getGroup($id);
+            if (empty($groupsList)) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'No existen grupos',
+                    'text' => 'No hay grupos para mostrar'
+                ];
+            } else {
+                viewbag("grupos", $groupsList);
+            }
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Error al recuperar los datos',
+                'text' => 'Error en la carga de datos.'
+            ];
+            $_SESSION['redirect-info'] = $info;
+        }
+       return View();
+    }
+public function updateGroup(){
+    $group = new SportGroupRepository();
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $comments = $_POST['comments'];
+
+    try {
+        $group->editGroup($id, $name, $comments);
+        $info = [
+            'type' => 'success',
+            'title' => 'Actualizado',
+            'text' => 'Datos actualizados correctamente'
+        ];
+    } catch (Exception $ex) {
+        $info = [
+            'type' => 'error',
+            'title' => 'Error en el servidor',
+            'text' => 'Error en el servidor, inténtelo más tarde.'
+        ];
+    }
+    $_SESSION['redirect-info'] = $info;
+    $this->redirect("/sportgroup/editGroup?id=$id");
+}
 }

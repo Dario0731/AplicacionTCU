@@ -1,12 +1,13 @@
-<?php include(CONFIG['public_path'] . 'header.admin.php');
- 
+<?php include(CONFIG['public_path'] . 'header.admin.php'); 
+$idNuevo=viewbag("grupInfo")[0]['groupID'];
 ?>
 
-<div class="container p-4" style="height: 100%;">
-    <?php if (isset($_GET['name'])) : ?>
-        <h2>Agregar a grupo: <?= htmlspecialchars(urldecode($_GET['name'])) ?></h2>
-    <?php endif; ?>
-    <div class="">
+<div class="container p-4">
+        <div class="pt-2 pb-2"><p class="h2">Agregar integrantes</p></div>
+    <div class="pt-2 text-center"><p class="h1"><?= viewbag("grupInfo")[0]['groupName']; ?></p></div>
+    <div class="pt-2 pb-4 text-center"><p class="h5"><?= viewbag("grupInfo")[0]['groupComments']; ?></p></div>
+    <div class="pt-2 pb-2"><p class="h2">Agregar integrantes al grupo</p></div>
+    <div class="" style="height: 100%;">
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
@@ -19,14 +20,14 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (is_array(viewbag("clientes"))) : ?>
-                    <?php foreach (viewbag("clientes") as $clients) : ?>
+                <?php if (is_array(viewbag("grupos"))) : ?>
+                    <?php foreach (viewbag("grupos") as $clients) : ?>
                         <tr id="cliente-<?= $clients['id'] ?>">
-                            <td class="text-center"><?= htmlspecialchars($clients['name']) ?><?= ' ' . htmlspecialchars($clients['last_name']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['clientName']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['discipline']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['weight']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['height']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['coments']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($clients['comments']) ?></td>
                             <td class="text-center">
                                 <button type="button" class="btn insert-btn border border-0" data-id="<?= $clients['id'] ?>" data-group="<?= htmlspecialchars(urldecode($_GET['id'])) ?>">
                                     <img src="<?= CONFIG['assets'] ?>img/add-client.svg" alt="icono de eliminar al cliente" style="height: 20px;">
@@ -41,15 +42,18 @@
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="text-end"><a class="btn btn-primary" href="<?= route('SportGroup', 'groups',$infoNueva) ?>">Aceptar</a></div>
+        <div class="text-end"><a href="<?= route('sportgroup', 'groups') ?>" class="btn btn-primary">Volver</a></div>
+                <div class="text-end"><a href="<?=route('ClientGroup', 'clientsGroup', ['id' => $idNuevo])?>" class="btn btn-primary">Ver integrantes del grupo</a></div>
     </div>
+    
+
 </div>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
@@ -64,7 +68,7 @@
         <?php endif; ?>
     });
 
-    $('.insert-btn').on('click', function() {
+   $('.insert-btn').on('click', function() {
         var button = $(this); // Captura el botón que se hizo clic
         var clientId = button.data('id');
         var groupName = button.data('group');
@@ -115,4 +119,5 @@
             }
         });
     });
+
 </script>
