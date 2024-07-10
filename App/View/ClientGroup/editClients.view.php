@@ -1,12 +1,17 @@
-<?php include(CONFIG['public_path'] . 'header.admin.php'); 
-$idNuevo=viewbag("grupInfo")[0]['groupID'];
+<?php include(CONFIG['public_path'] . 'header.admin.php');
+$idNuevo = viewbag("grupInfo")[0]['groupID'];
 ?>
 
 <div class="container p-4">
-        <div class="pt-2 pb-2"><p class="h2">Agregar integrantes</p></div>
-    <div class="pt-2 text-center"><p class="h1"><?= viewbag("grupInfo")[0]['groupName']; ?></p></div>
-    <div class="pt-2 pb-4 text-center"><p class="h5"><?= viewbag("grupInfo")[0]['groupComments']; ?></p></div>
-    <div class="pt-2 pb-2"><p class="h2">Agregar integrantes al grupo</p></div>
+    <div class="pt-2 text-center">
+        <p class="h1"><?= viewbag("grupInfo")[0]['groupName']; ?></p>
+    </div>
+    <div class="pt-2 pb-4 text-center">
+        <p class="h5"><?= viewbag("grupInfo")[0]['groupComments']; ?></p>
+    </div>
+    <div class="pt-2 pb-2">
+        <p class="h2">Agregar integrantes al grupo</p>
+    </div>
     <div class="" style="height: 100%;">
         <table class="table table-striped table-dark">
             <thead>
@@ -42,10 +47,10 @@ $idNuevo=viewbag("grupInfo")[0]['groupID'];
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="text-end"><a href="<?= route('sportgroup', 'groups') ?>" class="btn btn-primary">Volver</a></div>
-                <div class="text-end"><a href="<?=route('ClientGroup', 'clientsGroup', ['id' => $idNuevo])?>" class="btn btn-primary">Ver integrantes del grupo</a></div>
+        <div class="text-end py-2"><a href="<?= route('sportgroup', 'groups') ?>" class="btn btn-primary">Volver</a></div>
+        <div class="text-end py-2"><a href="<?= route('ClientGroup', 'clientsGroup', ['id' => $idNuevo]) ?>" class="btn btn-primary">Ver integrantes del grupo</a></div>
     </div>
-    
+
 
 </div>
 
@@ -53,7 +58,7 @@ $idNuevo=viewbag("grupInfo")[0]['groupID'];
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
@@ -68,7 +73,7 @@ $idNuevo=viewbag("grupInfo")[0]['groupID'];
         <?php endif; ?>
     });
 
-   $('.insert-btn').on('click', function() {
+    $('.insert-btn').on('click', function() {
         var button = $(this); // Captura el botón que se hizo clic
         var clientId = button.data('id');
         var groupName = button.data('group');
@@ -119,5 +124,4 @@ $idNuevo=viewbag("grupInfo")[0]['groupID'];
             }
         });
     });
-
 </script>

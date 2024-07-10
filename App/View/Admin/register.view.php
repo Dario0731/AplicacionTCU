@@ -9,58 +9,59 @@
                     <div class="col">
                         <div class="form-group py-1">
                             <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="" required>
+                            <input type="email" class="form-control text-center" id="email" name="email" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="name">Nombre:</label>
-                            <input type="text" class="form-control" id="name" name="name" value="" required>
+                            <input type="text" class="form-control text-center" id="name" name="name" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="last_name">Apellido:</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" value="" required>
+                            <input type="text" class="form-control text-center" id="last_name" name="last_name" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="phone">Teléfono:</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="" required>
+                            <input type="tel" class="form-control text-center" id="phone" name="phone" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="birthday">Fecha de nacimiento:</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" value="" required>
+                            <input type="date" class="form-control text-center" id="birthday" name="birthday" value="" required>
                         </div>
                         <div class="form-group py-1">
-                            <label for="mucle">Porcentaje de músculo:</label>
-                            <input type="text" class="form-control" id="mucle" name="muscle" value="" required>
+
+                            <label for="pay">Fecha del próximo pago:</label>
+                            <input type="date" class="form-control text-center" id="pay" name="pay" value="" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group py-1">
                             <label for="discipline">Disciplina:</label>
-                            <input type="text" class="form-control" id="discipline" name="discipline" value="" required>
+                            <input type="text" class="form-control text-center" id="discipline" name="discipline" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="weight">Peso:</label>
-                            <input type="text" class="form-control" id="weight" name="weight" value="" required>
+                            <input type="text" class="form-control text-center" id="weight" name="weight" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="discipline">Altura:</label>
-                            <input type="text" class="form-control" id="height" name="height" value="" required>
+                            <input type="text" class="form-control text-center" id="height" name="height" value="" required>
                         </div>
                         <div class="form-group py-1">
-                            <label for="pay">Fecha del próximo pago:</label>
-                            <input type="date" class="form-control" id="pay" name="pay" value="" required>
-                        </div>
-                        <div class="form-group py-1">
-                            <label for="last_name">Comentarios(el cliente no los verá):</label>
-                            <input type="text" class="form-control" id="comments" name="comments" value="" required>
+                            <label for="mucle">Porcentaje de músculo:</label>
+                            <input type="text" class="form-control text-center" id="mucle" name="muscle" value="" required>
                         </div>
                         <div class="form-group py-1">
                             <label for="fat">Porcentaje de grasa:</label>
-                            <input type="text" class="form-control" id="discipline" name="fat" value="" required>
+                            <input type="text" class="form-control text-center" id="discipline" name="fat" value="" required>
+                        </div>
+                        <div class="form-group py-1">
+                            <label for="last_name">Comentarios(el cliente no los verá):</label>
+                            <input type="text" class="form-control text-center" id="comments" name="comments" value="" required>
                         </div>
                     </div>
                     <div class="form-group py-1">
                         <label for="clients_comments">Comentarios para el cliente:</label>
-                        <textarea class="form-control" id="clients_comments" name="clients_comments" required rows="2"></textarea>
+                        <textarea class="form-control text-center" id="clients_comments" name="clients_comments" required rows="2"></textarea>
                     </div>
                 </div>
             </div>

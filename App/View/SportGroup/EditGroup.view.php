@@ -1,33 +1,33 @@
-<?php include(CONFIG['public_path'] . 'header.admin.php'); 
-$idNuevo=viewbag("grupos")[0]['groupID'];
+<?php include(CONFIG['public_path'] . 'header.admin.php');
+$idNuevo = viewbag("grupos")[0]['groupID'];
 ?>
-        <div class="col-md-6">
-            <p class="h4 text-center">Actualizar grupo</p>
-            <form action="/AplicacionTCU/SportGroup/updateGroup" method="post" enctype="multipart/form-data">
-                <div class="form-group py-2">
-                    <label for="text">Nombre del grupo:</label>
-                    <input type="text" class="form-control" id="name" name="name"  value="<?= viewbag("grupos")[0]['groupName']; ?>" required>
-                </div>
-                <div class="form-group py-2">
-                    <label for="name">Comentarios del grupo:</label>
-                    <input type="text" class="form-control" id="comments" name="comments"  value="<?= viewbag("grupos")[0]['groupComments']; ?>"  required>
-                </div>
-                
-                <input hidden type="text" class="form-control" id="id" name="id"  value="<?= viewbag("grupos")[0]['groupID']; ?>"  required>
-                <div class="text-center form-group py-2">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                </div>
-                            </form>
+<div class="container justify-content-center text-center" style="height: 100%;">
+    <p class="h4 text-center pt-5">Actualizar grupo</p>
+    <form action="/AplicacionTCU/SportGroup/updateGroup" method="post" enctype="multipart/form-data">
+        <div class="form-group py-2">
+            <label for="text" class="py-2">Nombre del grupo:</label>
+            <input type="text" class="form-control text-center" id="name" name="name" value="<?= viewbag("grupos")[0]['groupName']; ?>" required>
+        </div>
+        <div class="form-group py-2">
+            <label for="name" class="py-2">Comentarios del grupo:</label>
+            <input type="text" class="form-control text-center" id="comments" name="comments" value="<?= viewbag("grupos")[0]['groupComments']; ?>" required>
+        </div>
+
+        <input hidden type="text" class="form-control" id="id" name="id" value="<?= viewbag("grupos")[0]['groupID']; ?>" required>
         <div class="text-center form-group py-2">
-            <div class="text-end"><a class="btn btn-primary" href="<?= route('clientgroup', 'editClients', ['id' => $idNuevo]) ?>">Administrar integrantes</a></div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
-        </div>
+    </form>
+    <div class="text-center form-group py-2">
+        <a class="btn btn-primary" href="<?= route('clientgroup', 'editClients', ['id' => $idNuevo]) ?>">Administrar integrantes</a>
+    </div>
+</div>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
@@ -41,6 +41,4 @@ $idNuevo=viewbag("grupos")[0]['groupID'];
             <?php unset($_SESSION['redirect-info']); ?>
         <?php endif; ?>
     });
-
-
 </script>
