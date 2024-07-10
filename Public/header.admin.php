@@ -23,7 +23,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-group-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
-                        Administrar grupos
+                        Administrar Grupos
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
                         <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'registrar') ?>">
