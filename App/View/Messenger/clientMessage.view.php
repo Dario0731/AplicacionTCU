@@ -2,7 +2,7 @@
 
 <div class="container p-4">
     <div class="" style="height: 100%;">
-        <form action="<?= route('Admin', 'saveSelectedClient') ?>" method="POST">
+        <form action="<?= route('Messenger', 'sendMessage') ?>" method="POST">
             <div class="form-group">
                 <label for="selectClient" class="text-white">Seleccionar Cliente:</label>
                 <select class="form-control" id="selectClient" name="client_id" required>
@@ -19,7 +19,7 @@
                 </select>
                                     <div class="form-group py-1">
                         <label for="clients_comments">Mensaje para el cliente:</label>
-                        <textarea class="form-control text-center" id="clients_comments" name="clients_comments" required rows="2"></textarea>
+                        <textarea class="form-control text-center" id="message" name="message" required rows="2"></textarea>
                     </div>
             </div>
             <div class="form-group text-center">

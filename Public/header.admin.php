@@ -41,12 +41,22 @@
                         Calendario
                     </a>
                 </li>
-                
-                                <li class="nav-item px-3">
-                    <a class="nav-link text-white" href="<?= route('messenger', 'clientMessage') ?>">
-                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/calendar-icon.svg" alt="imagen de administrar clases" style="height: 23px;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-group-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
                         Mensajeria
                     </a>
+                    <div class="dropdown-menu navbar-gradient text-white">
+                        <a class="nav-link text-white" href="<?= route('messenger', 'clientMessage') ?>">
+                            Enviar mensaje
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'groups') ?>">
+                            Ver mensajes
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'groups') ?>">
+                            Bandeja de entrada
+                        </a>
+                    </div>
                 </li>
             </ul>
         </div>

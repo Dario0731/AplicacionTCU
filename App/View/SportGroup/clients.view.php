@@ -41,7 +41,7 @@
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="text-end"><a class="btn btn-primary" href="<?= route('SportGroup', 'groups',$infoNueva) ?>">Aceptar</a></div>
+        <div class="text-end"><a class="btn btn-primary" href="<?= route('SportGroup', 'groups') ?>">Aceptar</a></div>
     </div>
 </div>
 

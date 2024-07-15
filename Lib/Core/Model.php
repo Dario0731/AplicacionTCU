@@ -60,7 +60,7 @@ class Model {
         $query->execute();
         $resuldado = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        return $resuldado[0];
+        return $resuldado;
     }
 
     public function remove($id) {
@@ -124,6 +124,16 @@ class Model {
         return $resultado;
     }
 
+        public function getByClient($id) {
+        $queryString = 'CALL sp_get_' . $this->entity . '_by_client' . '(:id)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
+    }
+    
     public function getGroupById($id) {
         $queryString = 'CALL sp_get_' . $this->entity . '_by_id' . '(:id)';
         $query = $this->db->prepare($queryString);

@@ -1,6 +1,8 @@
 <?php
+
 require_once("Lib/Core/Controller.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
+require_once(CONFIG["repository_path"] . "MessengerRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,11 +14,12 @@ require_once(CONFIG["repository_path"] . "CoachRepository.php");
  *
  * @author 50685
  */
-class MessengerController extends Controller  {
+class MessengerController extends Controller {
+
     //put your code here
-    
-    public function clientMessage(){
-              if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+
+    public function clientMessage() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
@@ -49,4 +52,34 @@ class MessengerController extends Controller  {
 
         return View();
     }
+
+    public function sendMessage() {
+        $coach = new CoachRepository();
+        $messageREPO = new MessengerRepository();
+        $email = $_SESSION['user']['email'];
+        try {
+
+            $coachsByEmail = $coach->getByEmail($email);
+            $CoachID = $coachsByEmail['id'];
+
+            $clientID = $_POST['client_id'];
+            $message = $_POST['message'];
+            $messageREPO->sendMessage($message, $CoachID, $clientID);
+            $info = [
+                'type' => 'success',
+                'title' => 'Mensaje enviado correctamente',
+                'text' => 'El mensaje fue enviado correctamente al cliente'
+            ];
+
+            $this->redirect("/messenger/clientMessage", $info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'Ha ocurrido un problema con el servidor.'
+            ];
+           $this->redirect("/messenger/clientMessage", $info);
+        }
+    }
+
 }
