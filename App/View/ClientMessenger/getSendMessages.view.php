@@ -1,11 +1,11 @@
-<?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
-
+<?php include(CONFIG['public_path'] . 'header.client.php'); ?>
 <div class="container p-4">
     <div class="" style="height: 100%;">
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
-                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Para: </th>
+                                        <th class="text-center">De: </th>
                     <th class="text-center">Mensaje</th>
                     <th class="text-center">Visto</th>
                 </tr>
@@ -14,7 +14,8 @@
                 <?php if (is_array(viewbag("messages"))) : ?>
                     <?php foreach (viewbag("messages") as $message) : ?>
                         <tr>
-                            <td class="text-center"><?= htmlspecialchars($message['name']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($message['coachName']) ?></td>
+                                                        <td class="text-center"><?= htmlspecialchars($message['clientName']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($message['message']) ?></td>
                             <td class="text-center">
                                 <?= $message['isRead'] == 0 ? 'Entregado' : 'Visto' ?>

@@ -1,4 +1,4 @@
-<?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
+<?php include(CONFIG['public_path'] . 'header.client.php'); ?>
 
 <div class="container p-4">
     <div class="" style="height: 100%;">

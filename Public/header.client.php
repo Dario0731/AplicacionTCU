@@ -20,6 +20,23 @@
                     </div>
                 </li>
             </ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-group-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
+                        Mensajeria
+                    </a>
+                    <div class="dropdown-menu navbar-gradient text-white">
+                        <a class="nav-link text-white" href="<?= route('clientmessenger', 'clientMessage') ?>">
+                            Enviar mensaje
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger', 'getSendMessages') ?>">
+                            Ver mensajes
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger    ', 'myMessages') ?>">
+                            Bandeja de entrada
+                        </a>
+                    </div>
+                </li>
         </div>
         <div id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">

@@ -1,5 +1,4 @@
 <?php
-
 require_once("Lib/Core/Controller.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once(CONFIG["repository_path"] . "MessengerRepository.php");
@@ -10,63 +9,30 @@ require_once(CONFIG["repository_path"] . "CoachRepository.php");
  */
 
 /**
- * Description of MessengerController
+ * Description of ClientMessengerController
  *
  * @author 50685
  */
-class MessengerController extends Controller {
-
-    //put your code here
-
-    public function clientMessage() {
+class ClientMessengerController extends Controller{
+       public function clientMessage() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
-        }
-        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
-            $this->redirect("/authentication/login");
-        }
-        $client = new ClientRepository();
-        $coach = new CoachRepository();
-        $email = $_SESSION['user']['email'];
-
-        try {
-            $coachsByEmail = $coach->getByEmail($email);
-            $clientList = $client->getByCoach($coachsByEmail['id']);
-            //     $clientList = $client->getAll();
-
-            if (empty($clientList)) {
-                $info = [
-                    'type' => 'error',
-                    'title' => 'No existen clientes',
-                    'text' => 'No hay clientes para mostrar'
-                ];
-            } else {
-                viewbag("clientes", $clientList);
-            }
-        } catch (Exception $ex) {
-            $info = [
-                'type' => 'error',
-                'title' => 'Error al recuperar los datos',
-                'text' => 'Error en la carga de datos.'
-            ];
-            $_SESSION['redirect-info'] = $info;
         }
 
         return View();
     }
 
     public function sendMessage() {
-        $coach = new CoachRepository();
+        $client = new ClientRepository();
         $messageREPO = new MessengerRepository();
         $email = $_SESSION['user']['email'];
         try {
 
-            $coachsByEmail = $coach->getByEmail($email);
-            $CoachID = $coachsByEmail['id'];
+            $clientInfo= $client->searchByEmail($email);
+            $CoachID = $clientInfo['coach_id'];
 
-            $clientID = $_POST['client_id'];
+            $clientID = $clientInfo['id'];
             $message = $_POST['message'];
             $messageREPO->sendMessage($message, $CoachID, $clientID);
             $info = [
@@ -75,64 +41,28 @@ class MessengerController extends Controller {
                 'text' => 'El mensaje fue enviado correctamente al cliente'
             ];
 
-            $this->redirect("/messenger/clientMessage", $info);
+            $this->redirect("/ClientMessenger/clientMessage", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
                 'title' => 'Ha ocurrido un problema',
                 'text' => 'Ha ocurrido un problema con el servidor.'
             ];
-            $this->redirect("/messenger/clientMessage", $info);
+            $this->redirect("/ClientMessenger/clientMessage", $info);
         }
     }
-
-    public function mySendMessages() {
-        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
-            $this->redirect("/authentication/login");
-        }
-        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+    public function getSendMessages() {
+                if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
         $client = new ClientRepository();
-        $coach = new CoachRepository();
-        $email = $_SESSION['user']['email'];
-
-        try {
-            $coachsByEmail = $coach->getByEmail($email);
-            $clientList = $client->getByCoach($coachsByEmail['id']);
-            //     $clientList = $client->getAll();
-
-            if (empty($clientList)) {
-                $info = [
-                    'type' => 'error',
-                    'title' => 'No existen clientes',
-                    'text' => 'No hay clientes para mostrar'
-                ];
-            } else {
-                viewbag("clientes", $clientList);
-            }
-        } catch (Exception $ex) {
-            $info = [
-                'type' => 'error',
-                'title' => 'Error al recuperar los datos',
-                'text' => 'Error en la carga de datos.'
-            ];
-            $_SESSION['redirect-info'] = $info;
-        }
-
-        return View();
-    }
-
-    public function getSendMessages() {
-        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
-            $this->redirect("/authentication/login");
-        }
         $messageREPO = new MessengerRepository();
+        $email = $_SESSION['user']['email'];
         try {
-            $client_id = $_GET['client_id'];
+
+            $clientInfo= $client->searchByEmail($email);
+            $client_id = $clientInfo['id'];
             $messageList = $messageREPO->getClientMessages($client_id);
             if (sizeof($messageList) == 0) {
                 $info = [
@@ -186,5 +116,4 @@ class MessengerController extends Controller {
         }
         return View();
     }
-
 }
