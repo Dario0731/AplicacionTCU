@@ -47,13 +47,13 @@
                         Mensajeria
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
-                        <a class="nav-link text-white" href="<?= route('messenger', 'clientMessage') ?>">
+                        <a class="nav-link text-white" href="<?= route('CoachMessenger', 'clientMessage') ?>">
                             Enviar mensaje
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('messenger', 'mySendMessages') ?>">
-                            Ver mensajes
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('coachmessenger', 'mySendMessages') ?>">
+                            Ver mensajes enviados
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('messenger', 'myMessages') ?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('coachmessenger', 'myMessages') ?>">
                             Bandeja de entrada
                         </a>
                     </div>

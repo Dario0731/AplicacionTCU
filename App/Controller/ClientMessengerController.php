@@ -1,4 +1,5 @@
 <?php
+
 require_once("Lib/Core/Controller.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once(CONFIG["repository_path"] . "MessengerRepository.php");
@@ -13,8 +14,9 @@ require_once(CONFIG["repository_path"] . "CoachRepository.php");
  *
  * @author 50685
  */
-class ClientMessengerController extends Controller{
-       public function clientMessage() {
+class ClientMessengerController extends Controller {
+
+    public function clientMessage() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -29,7 +31,7 @@ class ClientMessengerController extends Controller{
         $email = $_SESSION['user']['email'];
         try {
 
-            $clientInfo= $client->searchByEmail($email);
+            $clientInfo = $client->searchByEmail($email);
             $CoachID = $clientInfo['coach_id'];
 
             $clientID = $clientInfo['id'];
@@ -38,7 +40,7 @@ class ClientMessengerController extends Controller{
             $info = [
                 'type' => 'success',
                 'title' => 'Mensaje enviado correctamente',
-                'text' => 'El mensaje fue enviado correctamente al cliente'
+                'text' => 'El mensaje fue enviado correctamente al entrenador'
             ];
 
             $this->redirect("/ClientMessenger/clientMessage", $info);
@@ -51,8 +53,9 @@ class ClientMessengerController extends Controller{
             $this->redirect("/ClientMessenger/clientMessage", $info);
         }
     }
+
     public function getSendMessages() {
-                if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
@@ -61,13 +64,13 @@ class ClientMessengerController extends Controller{
         $email = $_SESSION['user']['email'];
         try {
 
-            $clientInfo= $client->searchByEmail($email);
+            $clientInfo = $client->searchByEmail($email);
             $client_id = $clientInfo['id'];
             $messageList = $messageREPO->getClientMessages($client_id);
             if (sizeof($messageList) == 0) {
                 $info = [
                     'type' => 'error',
-                    'title' => 'No existen mensajes enviados a este cliente',
+                    'title' => 'No ha enviado mensajes aún',
                     'text' => 'No hay mensajes para mostrar'
                 ];
                 $_SESSION['redirect-info'] = $info;
@@ -85,15 +88,16 @@ class ClientMessengerController extends Controller{
     }
 
     public function myMessages() {
-                if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
+        $coach= new CoachRepository();
         $messageREPO = new MessengerRepository();
-        $coach = new CoachRepository();
-        $email = $_SESSION['user']['email'];
-
+        $repository = new ClientRepository();
         try {
+            $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
+            $email=$clientByEmail['coachEmail'];
             $coachsByEmail = $coach->getByEmail($email);
             $CoachID = $coachsByEmail['id'];
             $messageList = $messageREPO->getMyMessages($CoachID);
@@ -116,4 +120,5 @@ class ClientMessengerController extends Controller{
         }
         return View();
     }
+
 }

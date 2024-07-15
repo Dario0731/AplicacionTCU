@@ -2,7 +2,7 @@
 
 <div class="container p-4">
     <div class="" style="height: 100%;">
-        <form action="<?= route('Messenger', 'sendMessage') ?>" method="POST">
+        <form action="<?= route('coachmessenger', 'sendMessage') ?>" method="POST">
             <div class="form-group">
                 <label for="selectClient" class="text-white">Seleccionar Cliente:</label>
                 <select class="form-control" id="selectClient" name="client_id" required>

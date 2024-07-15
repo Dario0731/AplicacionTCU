@@ -3,8 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/AplicacionTCU/App/View/Messenger/clientMessage.view.php</file>
-            <file>file:/C:/xampp/htdocs/AplicacionTCU/App/Controller/MessengerController.php</file>
+            <file>file:/C:/xampp/htdocs/AplicacionTCU/App/View/CoachMessenger/myMessages.view.php</file>
+            <file>file:/C:/xampp/htdocs/AplicacionTCU/App/Controller/CoachMessengerController.php</file>
         </group>
     </open-files>
 </project-private>

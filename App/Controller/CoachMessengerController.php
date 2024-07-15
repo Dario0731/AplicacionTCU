@@ -2,7 +2,7 @@
 
 require_once("Lib/Core/Controller.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
-require_once(CONFIG["repository_path"] . "MessengerRepository.php");
+require_once(CONFIG["repository_path"] . "CoachMessengerRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,7 +14,7 @@ require_once(CONFIG["repository_path"] . "CoachRepository.php");
  *
  * @author 50685
  */
-class MessengerController extends Controller {
+class CoachMessengerController extends Controller {
 
     //put your code here
 
@@ -59,7 +59,7 @@ class MessengerController extends Controller {
 
     public function sendMessage() {
         $coach = new CoachRepository();
-        $messageREPO = new MessengerRepository();
+        $messageREPO = new CoachMessengerRepository();
         $email = $_SESSION['user']['email'];
         try {
 
@@ -75,14 +75,14 @@ class MessengerController extends Controller {
                 'text' => 'El mensaje fue enviado correctamente al cliente'
             ];
 
-            $this->redirect("/messenger/clientMessage", $info);
+            $this->redirect("/coachmessenger/clientMessage", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
                 'title' => 'Ha ocurrido un problema',
                 'text' => 'Ha ocurrido un problema con el servidor.'
             ];
-            $this->redirect("/messenger/clientMessage", $info);
+            $this->redirect("/coachmessenger/clientMessage", $info);
         }
     }
 
@@ -130,7 +130,7 @@ class MessengerController extends Controller {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
-        $messageREPO = new MessengerRepository();
+        $messageREPO = new CoachMessengerRepository();
         try {
             $client_id = $_GET['client_id'];
             $messageList = $messageREPO->getClientMessages($client_id);
@@ -159,7 +159,7 @@ class MessengerController extends Controller {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
-        $messageREPO = new MessengerRepository();
+        $messageREPO = new CoachMessengerRepository();
         $coach = new CoachRepository();
         $email = $_SESSION['user']['email'];
 
@@ -186,5 +186,24 @@ class MessengerController extends Controller {
         }
         return View();
     }
+public function updateMessage() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
 
+        if (!empty($id)) {
+            $messageREPO = new CoachMessengerRepository();
+            $result = $messageREPO->updateCoachMessage($id);
+
+            if ($result) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el cliente']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+    }
+}
 }

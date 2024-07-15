@@ -30,9 +30,9 @@
                             Enviar mensaje
                         </a>
                         <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger', 'getSendMessages') ?>">
-                            Ver mensajes
+                            Ver mensajes enviados
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger    ', 'myMessages') ?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger', 'myMessages') ?>">
                             Bandeja de entrada
                         </a>
                     </div>
