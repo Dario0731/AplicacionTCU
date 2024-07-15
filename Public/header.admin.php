@@ -50,10 +50,10 @@
                         <a class="nav-link text-white" href="<?= route('messenger', 'clientMessage') ?>">
                             Enviar mensaje
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'groups') ?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('messenger', 'mySendMessages') ?>">
                             Ver mensajes
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('sportgroup', 'groups') ?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('messenger', 'myMessages') ?>">
                             Bandeja de entrada
                         </a>
                     </div>
