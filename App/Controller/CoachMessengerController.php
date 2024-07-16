@@ -258,7 +258,7 @@ class CoachMessengerController extends Controller {
             $ListIDS = $clientGroupRepo->getGroupsIDS($_POST['groupID']);
 
             for ($i = 0; $i < count($ListIDS); $i++) {
-                $clientID = $ListIDS[$i]; // Get the client ID from the ListIDS array
+                $clientID = $ListIDS[$i]['client_id']; // Get the client ID from the ListIDS array
                 $messageREPO->sendMessage($message, $CoachID, $clientID);
             }
             $info = [
@@ -266,8 +266,7 @@ class CoachMessengerController extends Controller {
                 'title' => 'Mensaje enviado correctamente',
                 'text' => 'El mensaje fue enviado correctamente al grupo de clientes'
             ];
-
-            $this->redirect("/coachmessenger/groupMessage", $info);
+           $this->redirect("/coachmessenger/groupMessage", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
@@ -275,6 +274,8 @@ class CoachMessengerController extends Controller {
                 'text' => 'El servidor se ha caido'
             ];
             $this->redirect("/coachmessenger/groupMessage", $info);
+            
+              echo "HOLA";
         }
     }
 

@@ -5,8 +5,8 @@
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
+                                        <th class="text-center">De: </th>
                     <th class="text-center">Para: </th>
-                    <th class="text-center">De: </th>
                     <th class="text-center">Mensaje</th>
                     <th class="text-center">Fecha</th>
                     <th class="text-center">Hora</th>
