@@ -4,7 +4,7 @@
     <div class="" style="height: 100%;">
         <form action="<?= route('coachmessenger', 'sendGroupMessage') ?>" method="POST">
             <div class="form-group">
-                <label for="selectClient" class="text-white">Seleccionar grupo:</label>
+                <label for="selectClient" class="text-white py-2">Seleccionar grupo:</label>
                 <select class="form-control" id="selectClient" name="groupID" required>
                     <option value="" selected disabled>Seleccione un grupo</option>
                     <?php if (is_array(viewbag("groups"))) : ?>
@@ -17,18 +17,16 @@
                         <option value="" disabled>No hay grupos disponibles</option>
                     <?php endif; ?>
                 </select>
-                                    <div class="form-group py-1">
-                        <label for="clients_comments">Mensaje para el grupo:</label>
-                        <textarea class="form-control text-center" id="message" name="message" required rows="2"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="clients_comments" class="py-2">Mensaje para el grupo:</label>
+                    <textarea class="form-control text-center" id="message" name="message" required rows="4"></textarea>
+                </div>
             </div>
-            <div class="form-group text-center">
+            <div class="form-group text-center py-3">
                 <button type="submit" class="btn btn-primary">Enviar mensaje</button>
             </div>
-            <br>
-                        <br>
-                        <div class="form-group text-center">
-                      <div class="text-end"><a class="btn btn-primary" href="<?= route('coachmessenger', 'clientMessage') ?>">Volver</a></div>
+            <div class="form-group text-center">
+                <div class="text-center"><a class="btn btn-primary" href="<?= route('coachmessenger', 'clientMessage') ?>">Volver</a></div>
             </div>
         </form>
     </div>

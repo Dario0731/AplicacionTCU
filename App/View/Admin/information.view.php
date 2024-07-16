@@ -63,8 +63,6 @@ if (count($parts) >= 5) {
                         <img src="<?= CONFIG['assets'] . $image_path ?>" alt="Imagen de inicio" style="height: 350px;">
                     </div>
                 <?php endif; ?>
-
-
                 <div class="text-center form-group py-2">
                     <button type="submit" class="btn btn-primary">Actualizar Datos</button>
                 </div>

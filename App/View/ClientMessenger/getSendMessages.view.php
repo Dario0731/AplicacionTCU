@@ -33,6 +33,9 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <div class="form-group text-center">
+            <div class="text-center"><a class="btn btn-primary" href="<?= route('client', 'home') ?>">Volver</a></div>
+        </div>
     </div>
 </div>
 

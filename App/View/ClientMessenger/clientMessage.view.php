@@ -4,15 +4,18 @@
     <div class="" style="height: 100%;">
         <form action="<?= route('ClientMessenger', 'sendMessage') ?>" method="POST">
             <div class="form-group">
-                                    <div class="form-group py-1">
-                        <label for="clients_comments">Mensaje para el entrenador:</label>
-                        <textarea class="form-control text-center" id="message" name="message" required rows="2"></textarea>
-                    </div>
+                <div class="form-group py-1">
+                    <label for="clients_comments" class="py-2">Mensaje para el entrenador:</label>
+                    <textarea class="form-control" id="message" name="message" required rows="5"></textarea>
+                </div>
             </div>
-            <div class="form-group text-center">
+            <div class="form-group text-center py-3">
                 <button type="submit" class="btn btn-primary">Enviar mensaje</button>
             </div>
         </form>
+        <div class="form-group text-center">
+            <div class="text-center"><a class="btn btn-primary" href="<?= route('client', 'home') ?>">Volver</a></div>
+        </div>
     </div>
 </div>
 

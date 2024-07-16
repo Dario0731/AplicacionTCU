@@ -4,7 +4,7 @@
     <div class="" style="height: 100%;">
         <form action="<?= route('coachmessenger', 'sendMessage') ?>" method="POST">
             <div class="form-group">
-                <label for="selectClient" class="text-white">Seleccionar Cliente:</label>
+                <label for="selectClient" class="text-white py-2">Seleccionar Cliente:</label>
                 <select class="form-control" id="selectClient" name="client_id" required>
                     <option value="" selected disabled>Seleccione un cliente</option>
                     <?php if (is_array(viewbag("clientes"))) : ?>
@@ -17,21 +17,25 @@
                         <option value="" disabled>No hay clientes disponibles</option>
                     <?php endif; ?>
                 </select>
-                                    <div class="form-group py-1">
-                        <label for="clients_comments">Mensaje para el cliente:</label>
-                        <textarea class="form-control text-center" id="message" name="message" required rows="2"></textarea>
-                    </div>
+                <div class="form-group">
+                    <label for="clients_comments" class="py-2">Mensaje para el cliente:</label>
+                    <textarea class="form-control" id="message" name="message" required rows="4"></textarea>
+                </div>
             </div>
-            <div class="form-group text-center">
+            <div class="form-group text-center py-3">
                 <button type="submit" class="btn btn-primary">Enviar mensaje</button>
             </div>
             <br>
-                        <br>
-                        <div class="form-group text-center">
-                                <label for="clients_comments">Si quiere seleccionar un grupo de clientes presione aquí:</label>
-                      <div class="text-end"><a class="btn btn-primary" href="<?= route('coachmessenger', 'groupMessage') ?>">Ir a grupos</a></div>
+            <br>
+            <div class="form-group text-center">
+                <label for="clients_comments">Si quiere seleccionar un grupo de clientes presione aquí: 
+                    <a class="btn btn-primary" href="<?= route('coachmessenger', 'groupMessage') ?>">Ir a grupos</a>
+                </label>
             </div>
         </form>
+        <div class="form-group text-center py-3">
+            <a class="btn btn-primary" href="<?= route('admin', 'home') ?>">Volver</a>
+        </div>
     </div>
 </div>
 

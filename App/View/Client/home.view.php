@@ -14,14 +14,14 @@ $image = $parts[2];
             <span>Fecha del proximo pago: <?= $payDate ?></span>
         </div>
         <div class="col">
-            <h1 class="pb-5">Bienvenido <?= $name ?></h1>
+            <h1 class="pb-2">Bienvenido <?= $name ?></h1>
             <div class="text-center p-5 justify-content-center">
                 <img src="<?= CONFIG['assets'] ?><?= $image ?>" alt="Imagen de inicio" style="height: 400px;">
 
             </div>
         </div>
         <div class="col">
-            <img src="<?= CONFIG['assets'] ?>img/logo-icon.svg" alt="home-image" style="height: 5rem" />
+            
         </div>
     </div>
 </div>

@@ -11,7 +11,7 @@
                         Mis datos
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
-                        <a  href="<?= route('client', 'progress') ?>" class="dropdown-item text-white navbar-gradient" href="#">
+                        <a href="<?= route('client', 'progress') ?>" class="dropdown-item text-white navbar-gradient" href="#">
                             Mi progreso
                         </a>
                         <a class="dropdown-item text-white navbar-gradient" href="#">
@@ -20,13 +20,15 @@
                     </div>
                 </li>
             </ul>
+        </div>
+        <div id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-group-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
-                        Mensajeria
+                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/message-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
-                        <a class="nav-link text-white" href="<?= route('clientmessenger', 'clientMessage') ?>">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger', 'clientMessage') ?>">
                             Enviar mensaje
                         </a>
                         <a class="dropdown-item text-white navbar-gradient" href="<?= route('clientmessenger', 'getSendMessages') ?>">
@@ -37,9 +39,6 @@
                         </a>
                     </div>
                 </li>
-        </div>
-        <div id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link navbar-brand text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="<?= CONFIG['assets'] ?>img/settings-icon.svg" alt="settings" style="height: 27px;">
