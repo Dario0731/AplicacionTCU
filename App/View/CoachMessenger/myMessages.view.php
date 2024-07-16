@@ -63,7 +63,7 @@
         var id = button.data('id');
 
         $.ajax({
-            url: '/AplicacionTCU/CoachMessengerController/updateMessage',
+            url: '/AplicacionTCU/CoachMessenger/updateMessage',
             type: 'POST',
             data: {
                 id: id

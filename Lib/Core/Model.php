@@ -30,6 +30,16 @@ class Model {
         return $resultado;
     }
 
+    public function getIDS($id) {
+        $queryString = 'CALL sp_get_' . $this->entity . '_ids' . '(:id)';
+        $query = $this->db->prepare($queryString);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultado;
+    }
+    
     public function create($data) {
         $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
 

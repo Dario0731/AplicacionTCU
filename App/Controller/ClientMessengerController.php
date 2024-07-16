@@ -92,15 +92,13 @@ class ClientMessengerController extends Controller {
 // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
-        $coach= new CoachRepository();
+                $email = $_SESSION['user']['email'];
         $messageREPO = new MessengerRepository();
         $repository = new ClientRepository();
         try {
-            $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
-            $email=$clientByEmail['coachEmail'];
-            $coachsByEmail = $coach->getByEmail($email);
-            $CoachID = $coachsByEmail['id'];
-            $messageList = $messageREPO->getMyMessages($CoachID);
+            $clientsByEmail = $repository->searchByEmail($email);
+            $clientID = $clientsByEmail['id'];
+            $messageList = $messageREPO->getMyMessages($clientID);
             if (sizeof($messageList) == 0) {
                 $info = [
                     'type' => 'error',
@@ -120,5 +118,24 @@ class ClientMessengerController extends Controller {
         }
         return View();
     }
+public function updateMessage() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
 
+        if (!empty($id)) {
+            $messageREPO = new MessengerRepository();
+            $result = $messageREPO->updateMessage($id);
+
+            if ($result) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el cliente']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'ID no válido']);
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
+    }
+}
 }

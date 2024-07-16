@@ -17,4 +17,6 @@ interface IMessengerRepository {
    public function getClientMessages($id);
    
    public function getMyMessages($id);
+   
+   public function updateMessage($id);
 }

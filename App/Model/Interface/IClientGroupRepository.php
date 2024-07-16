@@ -20,4 +20,6 @@ interface IClientGroupRepository {
     public function getGroup($id);
     
     public function removeGroup($id,$groupID);
+    
+    public function getGroupsIDS($id);
 }

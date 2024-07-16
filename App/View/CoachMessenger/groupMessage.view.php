@@ -2,23 +2,23 @@
 
 <div class="container p-4">
     <div class="" style="height: 100%;">
-        <form action="<?= route('coachmessenger', 'sendMessage') ?>" method="POST">
+        <form action="<?= route('coachmessenger', 'sendGroupMessage') ?>" method="POST">
             <div class="form-group">
-                <label for="selectClient" class="text-white">Seleccionar Cliente:</label>
-                <select class="form-control" id="selectClient" name="client_id" required>
-                    <option value="" selected disabled>Seleccione un cliente</option>
-                    <?php if (is_array(viewbag("clientes"))) : ?>
-                        <?php foreach (viewbag("clientes") as $client) : ?>
+                <label for="selectClient" class="text-white">Seleccionar grupo:</label>
+                <select class="form-control" id="selectClient" name="groupID" required>
+                    <option value="" selected disabled>Seleccione un grupo</option>
+                    <?php if (is_array(viewbag("groups"))) : ?>
+                        <?php foreach (viewbag("groups") as $client) : ?>
                             <option value="<?= $client['id'] ?>">
-                                <?= htmlspecialchars($client['name']) . ' ' . htmlspecialchars($client['last_name']) ?>
+                                <?= htmlspecialchars($client['groupName']) ?>
                             </option>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <option value="" disabled>No hay clientes disponibles</option>
+                        <option value="" disabled>No hay grupos disponibles</option>
                     <?php endif; ?>
                 </select>
                                     <div class="form-group py-1">
-                        <label for="clients_comments">Mensaje para el cliente:</label>
+                        <label for="clients_comments">Mensaje para el grupo:</label>
                         <textarea class="form-control text-center" id="message" name="message" required rows="2"></textarea>
                     </div>
             </div>
@@ -28,8 +28,7 @@
             <br>
                         <br>
                         <div class="form-group text-center">
-                                <label for="clients_comments">Si quiere seleccionar un grupo de clientes presione aquí:</label>
-                      <div class="text-end"><a class="btn btn-primary" href="<?= route('coachmessenger', 'groupMessage') ?>">Ir a grupos</a></div>
+                      <div class="text-end"><a class="btn btn-primary" href="<?= route('coachmessenger', 'clientMessage') ?>">Volver</a></div>
             </div>
         </form>
     </div>

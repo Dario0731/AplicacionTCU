@@ -21,6 +21,9 @@
                             <td class="text-center"><?= htmlspecialchars($message['date']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($message['time']) ?></td>
                             <td class="text-center">
+                                <button type="button" class="btn read-btn border border-0" data-id="<?= $message['id'] ?>">
+                                    <img src="<?= CONFIG['assets'] ?>img/add-client.svg" alt="icono de eliminar al cliente" style="height: 20px;">
+                                </button>
                                 <?= $message['isRead'] == 0 ? 'Entregado' : 'Visto' ?>
                             </td>
                         </tr>
@@ -52,5 +55,57 @@
             });
     <?php unset($_SESSION['redirect-info']); ?>
 <?php endif; ?>
+    });
+       $('.read-btn').on('click', function () {
+        var button = $(this); // Captura el botón que se hizo clic
+        var id = button.data('id');
+
+        $.ajax({
+            url: '/AplicacionTCU/ClientMessenger/updateMessage',
+            type: 'POST',
+            data: {
+                id: id
+            },
+
+            success: function (response) {
+                try {
+                    var result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        Swal.fire(
+                                '¡Acualizado!',
+                                'El mensaje se ha marcado como visto.',
+                                'success'
+                                );
+
+                        // Cambiar el icono del botón después de la inserción exitosa
+         //               button.html('<img src="<?= CONFIG['assets'] ?>img/check-icon.svg" alt="Cliente eliminado del grupo" style="height: 20px;">');
+          //              button.prop('disabled', true);
+                    } else {
+                        Swal.fire(
+                                'Error',
+                                result.message,
+                                'error'
+                                );
+                    }
+                } catch (e) {
+                    console.error('Error parsing JSON:', e, response);
+                    console.log(response);
+                    Swal.fire(
+                            'Error',
+                            'Hubo un problema con la respuesta del servidor.',
+                            'error'
+                            );
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error:', status, error, xhr);
+                console.log(response);
+                Swal.fire(
+                        'Error',
+                        'Hubo un problema con la solicitud.',
+                        'error'
+                        );
+            }
+        });
     });
 </script>

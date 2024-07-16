@@ -34,4 +34,12 @@ class MessengerRepository extends Model implements IMessengerRepository {
         return $this->getById($id);
     }
 
+    public function updateMessage($id) {
+                $data = [
+            varchar($id)
+        ];
+        return $this->update($data);
+    
+    }
+
 }

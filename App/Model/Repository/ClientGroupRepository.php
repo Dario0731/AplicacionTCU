@@ -34,4 +34,8 @@ class ClientGroupRepository extends Model implements IClientGroupRepository{
          return $this->remove2Params($id, $groupID);
     }
 
+    public function getGroupsIDS($id) {
+        return $this->getIDS($id);
+    }
+
 }
