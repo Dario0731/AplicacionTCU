@@ -9,7 +9,7 @@
                     <th class="text-center">Mensaje</th>
                     <th class="text-center">Fecha</th>
                     <th class="text-center">Hora</th>
-                    <th class="text-center">Estado</th>
+                    <th class="text-center">Visto</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,9 +20,12 @@
                             <td class="text-center"><?= htmlspecialchars($message['message']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($message['date']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($message['time']) ?></td>
-                                                        <td class="text-center">
-                                <button type="button" class="btn read-btn" data-id="<?= $message['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
-                                                                <?= $message['isRead'] == 0 ? 'Entregado' : 'Visto' ?>
+                            <td class="text-center">
+                                <?php if ($message['isRead'] == 0) { ?>
+                                    <button type="button" class="btn read-btn" data-id="<?= $message['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/see-message.svg" alt="icono leer mensaje" style="height: 20px;"></button>
+                                <?php } else { ?> <img src="<?= CONFIG['assets'] ?>img/seen-icon.svg" alt="icono de mensaje visto" style="height: 28px;">
+                                <?php }  ?>
+                                <div><?= $message['isRead'] == 0 ? 'Marcar como visto' : 'Visto' ?></div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -76,11 +79,9 @@
                             '¡Acualizado!',
                             'El mensaje se ha marcado como visto.',
                             'success'
-                        );
-
-                        // Cambiar el icono del botón después de la inserción exitosa
-                        //               button.html('<img src="<?= CONFIG['assets'] ?>img/check-icon.svg" alt="Cliente eliminado del grupo" style="height: 20px;">');
-                        //              button.prop('disabled', true);
+                        ).then(() => {
+                            location.reload();
+                        });
                     } else {
                         Swal.fire(
                             'Error',
