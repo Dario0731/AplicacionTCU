@@ -20,8 +20,9 @@
                             <td class="text-center"><?= htmlspecialchars($message['message']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($message['date']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($message['time']) ?></td>
-                            <td class="text-center">
-                                <?= $message['isRead'] == 0 ? 'Entregado' : 'Visto' ?>
+                                                        <td class="text-center">
+                                <button type="button" class="btn read-btn" data-id="<?= $message['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                                                                <?= $message['isRead'] == 0 ? 'Entregado' : 'Visto' ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

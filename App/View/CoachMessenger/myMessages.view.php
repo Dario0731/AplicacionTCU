@@ -22,6 +22,7 @@
                             <td class="text-center"><?= htmlspecialchars($message['time']) ?></td>
 
                             <td class="text-center">
+                                <button type="button" class="btn read-btn" data-id="<?= $message['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
                                 <?= $message['isRead'] == 0 ? 'Entregado' : 'Visto' ?>
                             </td>
                         </tr>
@@ -40,8 +41,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        <?php if (isset($_SESSION['redirect-info'])) : ?>
+    document.addEventListener('DOMContentLoaded', function () {
+<?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
                 title: '<?php echo $_SESSION['redirect-info']['title']; ?>',
@@ -51,11 +52,11 @@
                 iconColor: '#fff',
                 confirmButtonColor: '#3085d6'
             });
-            <?php unset($_SESSION['redirect-info']); ?>
-        <?php endif; ?>
+    <?php unset($_SESSION['redirect-info']); ?>
+<?php endif; ?>
     });
 
-    $('.read-btn').on('click', function() {
+    $('.read-btn').on('click', function () {
         var button = $(this); // Captura el botón que se hizo clic
         var id = button.data('id');
 
@@ -66,44 +67,44 @@
                 id: id
             },
 
-            success: function(response) {
+            success: function (response) {
                 try {
                     var result = JSON.parse(response);
                     if (result.status === 'success') {
                         Swal.fire(
-                            '¡Acualizado!',
-                            'El mensaje se ha marcado como visto.',
-                            'success'
-                        );
+                                '¡Acualizado!',
+                                'El mensaje se ha marcado como visto.',
+                                'success'
+                                );
 
                         // Cambiar el icono del botón después de la inserción exitosa
                         //               button.html('<img src="<?= CONFIG['assets'] ?>img/check-icon.svg" alt="Cliente eliminado del grupo" style="height: 20px;">');
                         //              button.prop('disabled', true);
                     } else {
                         Swal.fire(
-                            'Error',
-                            result.message,
-                            'error'
-                        );
+                                'Error',
+                                result.message,
+                                'error'
+                                );
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e, response);
                     console.log(response);
                     Swal.fire(
-                        'Error',
-                        'Hubo un problema con la respuesta del servidor.',
-                        'error'
-                    );
+                            'Error',
+                            'Hubo un problema con la respuesta del servidor.',
+                            'error'
+                            );
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('AJAX Error:', status, error, xhr);
                 console.log(response);
                 Swal.fire(
-                    'Error',
-                    'Hubo un problema con la solicitud.',
-                    'error'
-                );
+                        'Error',
+                        'Hubo un problema con la solicitud.',
+                        'error'
+                        );
             }
         });
     });
