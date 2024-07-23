@@ -31,9 +31,10 @@
                             <td class="text-center"><?= htmlspecialchars($clients['pay_date']) ?></td>
                             <td class="text-center"><?= htmlspecialchars($clients['coments']) ?></td>
                             <td class="text-center">
-                                <a class="px-2" href="<?= route('Admin', 'editclient', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
-                                <button type="button" class="btn delete-btn" data-id="<?= $clients['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
-                                <a class="px-2" href="<?= route('Admin', 'clientsInfo', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/eye-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
+                                <a class="px-1" href="<?= route('Admin', 'editclient', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
+                                <button type="button" class="btn delete-btn px-1" data-id="<?= $clients['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                                <a class="px-1" href="<?= route('Admin', 'clientsInfo', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/eye-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
+                                <a class="px-1" href="<?= route('Admin', 'graphic', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/graphic-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

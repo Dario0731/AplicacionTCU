@@ -209,6 +209,22 @@ class AdminController extends Controller {
         return View();
     }
 
+    public function graphic() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $email = isset($_GET['email']) ? $_GET['email'] : null;
+        $clientRepo=new ClientRepository();
+        $result=$clientRepo->searchByEmail($email);
+        $id=$result['id'];
+        $progressRepo=new ProgressRepository();
+        $progressList=$progressRepo->getClientProgress($id);
+        viewbag("progress", $progressList);
+
+        return View();
+    }
+
     public function adminGroups() {
         return View();
     }
