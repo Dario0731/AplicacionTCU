@@ -197,8 +197,23 @@ class ClientController extends Controller
         return view();
     }
 
+
     public function graphic()
     {
-        return View();
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $email = $_SESSION['user']['email'];
+        $clientRepo = new ClientRepository();
+        $result = $clientRepo->searchByEmail($email);
+        $id = $result['id'];
+        $progressRepo = new ProgressRepository();
+        $progressList = $progressRepo->getClientProgress($id);
+
+        // Pasar los datos a la vista
+        viewbag("progress", $progressList);
+
+        return view();
     }
 }

@@ -1,62 +1,137 @@
 <?php include(CONFIG['public_path'] . 'header.client.php'); ?>
 
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="container" style="height: 100%;">
-    <div>
+<div class="container">
+    <div class="text-center py-5">
         <p class="h2">Peso</p>
-        <div id="weight"></div>
+        <canvas id="weight"></canvas>
+    </div>
+    <div class="text-center py-5">
+        <p class="h2">Porcentaje de Musculo</p>
+        <canvas id="muscle_percentage"></canvas>
+    </div>
+    <div class="text-center py-5">
+        <p class="h2">Porcentaje de Grasa</p>
+        <canvas id="fat_percentage"></canvas>
     </div>
 </div>
 
+
+<!--Gráfico de peso-->
 <script>
-    //var data = [12, 19, 3, 5, 2, 3];
-
     // Obtener datos desde PHP (viewbag)
-    var data = <?php viewbag('weight'); ?>;
+    var data = <?php echo json_encode(viewbag("progress")); ?>;
 
-    var width = 500;
-    var height = 500;
-    var margin = {
-        top: 20,
-        right: 30,
-        bottom: 40,
-        left: 40
-    };
+    // Extraer los valores de peso y fechas de los datos obtenidos
+    var labels = data.map(d => d.progress_date);
+    var weight = data.map(d => d.weight);
 
-    var svg = d3.select("#weight")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // Usar map y replace para quitar el símbolo 'kg'
+    var cleanWeight = weight.map(function(item) {
+        return parseFloat(item.replace('kg', ''));
+    });
 
-    var x = d3.scaleBand()
-        .domain(data.map((d, i) => i))
-        .range([0, width - margin.left - margin.right])
-        .padding(0.1);
+    console.log(cleanWeight)
 
-    var y = d3.scaleLinear()
-        .domain([0, d3.max(data)])
-        .nice()
-        .range([height - margin.top - margin.bottom, 0]);
+    // Crear el gráfico utilizando Chart.js
+    var ctx = document.getElementById('weight').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Peso',
+                data: cleanWeight,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
-    svg.append("g")
-        .selectAll("rect")
-        .data(data)
-        .enter().append("rect")
-        .attr("x", (d, i) => x(i))
-        .attr("y", d => y(d))
-        .attr("width", x.bandwidth())
-        .attr("height", d => y(0) - y(d))
-        .attr("fill", "steelblue");
+<!--Gráfico de porcentaje de musculo-->
+<script>
+    // Obtener datos desde PHP (viewbag)
+    var data = <?php echo json_encode(viewbag("progress")); ?>;
 
-    svg.append("g")
-        .attr("transform", "translate(0," + (height - margin.top - margin.bottom) + ")")
-        .call(d3.axisBottom(x).tickFormat((d, i) => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'][i]));
+    // Extraer los valores de peso y fechas de los datos obtenidos
+    var labels = data.map(d => d.progress_date);
+    var muscle = data.map(d => d.muscle_percentage);
 
-    svg.append("g")
-        .call(d3.axisLeft(y));
+    // Usar map y replace para quitar el símbolo '%'
+    var cleanMuscle = muscle.map(function(item) {
+        return parseFloat(item.replace('%', ''));
+    });
+
+    // Crear el gráfico utilizando Chart.js
+    var ctx = document.getElementById('muscle_percentage').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Porcentaje de Musculo',
+                data: cleanMuscle,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<!--Gráfico de porcentaje de grasa-->
+<script>
+    // Obtener datos desde PHP (viewbag)
+    var data = <?php echo json_encode(viewbag("progress")); ?>;
+
+    // Extraer los valores de peso y fechas de los datos obtenidos
+    var labels = data.map(d => d.progress_date);
+    var fat = data.map(d => d.fat_percentage);
+
+    // Usar map y replace para quitar el símbolo '%'
+    var cleanFat = fat.map(function(item) {
+        return parseFloat(item.replace('%', ''));
+    });
+
+    // Crear el gráfico utilizando Chart.js
+    var ctx = document.getElementById('fat_percentage').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Porcentaje de Grasa',
+                data: cleanFat,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 </script>
 
 <?php include(CONFIG['public_path'] . 'footer.php') ?>

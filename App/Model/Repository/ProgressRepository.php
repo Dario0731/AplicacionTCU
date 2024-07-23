@@ -23,4 +23,5 @@ class ProgressRepository extends Model implements IProgressRepository{
         return $this->remove($id);
     }
 
+
 }
