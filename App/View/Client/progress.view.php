@@ -38,6 +38,9 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        <div class="text-center">
+        <a href="<?= route('client', 'graphic') ?>" class="btn btn-primary px-5">Ver gráfico</a>
+        </div>
     </div>
 </div>
 

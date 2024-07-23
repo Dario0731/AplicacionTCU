@@ -14,11 +14,13 @@ require_once("Lib/Core/Controller.php");
  *
  * @author 50685
  */
-class ClientController extends Controller {
+class ClientController extends Controller
+{
 
-    public function home() {
+    public function home()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
         $this->firstConection();
@@ -26,7 +28,7 @@ class ClientController extends Controller {
             $repository = new ClientRepository();
             $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
             $clientInfo = $clientByEmail['name'] . ' ' . $clientByEmail['last_name'] . ', ' . $clientByEmail['pay_date']
-                    . ',' . $clientByEmail['imagenCoach'];
+                . ',' . $clientByEmail['imagenCoach'];
             viewbag("client_info", $clientInfo);
         } catch (Exception $ex) {
             $info = [
@@ -39,43 +41,46 @@ class ClientController extends Controller {
         return View();
     }
 
-    public function coachInfo() {
+    public function coachInfo()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
         $repository = new ClientRepository();
         $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
         $coach_info = $clientByEmail['coachEmail'] . ',' . $clientByEmail['coachName'] . ',' .
-                $clientByEmail['coachLast_name'] . ',' . $clientByEmail['imagenCoach'] . ',' . $clientByEmail['coachPhone'];
+            $clientByEmail['coachLast_name'] . ',' . $clientByEmail['imagenCoach'] . ',' . $clientByEmail['coachPhone'];
         viewbag("coach_info", $coach_info);
         return view();
     }
 
-    public function information() {
+    public function information()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
         try {
             $repository = new ClientRepository();
             $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
             $client_info = $clientByEmail['email'] . ',' . $clientByEmail['name'] . ',' .
-                    $clientByEmail['last_name'] . ',' . $clientByEmail['phone'] . ',' . $clientByEmail['birth_date'];
+                $clientByEmail['last_name'] . ',' . $clientByEmail['phone'] . ',' . $clientByEmail['birth_date'];
             viewbag("client_info", $client_info);
         } catch (Exception $ex) {
-            
         }
 
 
         return view();
     }
 
-    public function passwordAct() {
+    public function passwordAct()
+    {
         return view();
     }
 
-    private function firstConection() {
+    private function firstConection()
+    {
         $email = $_SESSION['user']['email'];
         $repository = new ClientRepository();
         $clientByEmail = $repository->searchByEmail($_SESSION['user']['email']);
@@ -90,9 +95,10 @@ class ClientController extends Controller {
         }
     }
 
-    public function updatePasswordClient() {
+    public function updatePasswordClient()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
         $email = $_SESSION['user']['email'];
@@ -146,7 +152,8 @@ class ClientController extends Controller {
         }
     }
 
-    public function updatePersonalInfo() {
+    public function updatePersonalInfo()
+    {
         $email = $_SESSION['user']['email'];
         $repository = new ClientRepository();
         $clientByEmail = $repository->searchByEmail($_SESSION['user']['email']);
@@ -157,7 +164,7 @@ class ClientController extends Controller {
         $phone = $_POST['phone'];
         $birthdate = $_POST['birthdate'];
         try {
-            $repository->updatePersonalInfo($id, $email,$name,$last_name,$phone,$birthdate);
+            $repository->updatePersonalInfo($id, $email, $name, $last_name, $phone, $birthdate);
             $info = [
                 'type' => 'sucess',
                 'title' => 'Actualizado',
@@ -173,20 +180,25 @@ class ClientController extends Controller {
             $this->redirect("/client/information", $info);
         }
     }
-    public function progress(){
-                if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+    public function progress()
+    {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
-                    $email = $_SESSION['user']['email'];
-        $clientRepo=new ClientRepository();
-        $result=$clientRepo->searchByEmail($email);
-        $id=$result['id'];
-        $progressRepo=new ProgressRepository();
-        $progressList=$progressRepo->getClientProgress($id);
+        $email = $_SESSION['user']['email'];
+        $clientRepo = new ClientRepository();
+        $result = $clientRepo->searchByEmail($email);
+        $id = $result['id'];
+        $progressRepo = new ProgressRepository();
+        $progressList = $progressRepo->getClientProgress($id);
         viewbag("clientes", $progressList);
 
         return view();
     }
 
+    public function graphic()
+    {
+        return View();
+    }
 }
