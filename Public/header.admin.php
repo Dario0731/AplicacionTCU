@@ -47,6 +47,23 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link navbar-brand text-white px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/calendar-icon.svg" alt="imagen de administrar clases" style="height: 23px;">
+                    </a>
+                    <div class="dropdown-menu navbar-gradient text-white">
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('Event', 'newEvent') ?>">
+                            Crear eventos
+                        </a>
+                        <a class="dropdown-item text-white navbar-gradient" href="<?= route('Event', 'listEvents') ?>">
+                            Ver eventos
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link navbar-brand text-white px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="<?= CONFIG['assets'] ?>img/message-icon.svg" alt="settings" style="height: 25px;">
                     </a>
                     <div class="dropdown-menu navbar-gradient text-white">
