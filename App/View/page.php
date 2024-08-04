@@ -6,13 +6,15 @@
     <title>Trainer Website</title>
     <link rel="icon" href="<?= CONFIG['assets'] ?>img/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="<?= CONFIG['assets'] ?>css/style.css" />
+    <link rel="stylesheet" href="<?= CONFIG['assets'] ?>css/calendar.css" />
     <link rel="stylesheet" href="Public/Assets/css/style.css">
     <link href="<?= CONFIG['assets'] ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- FONT AWESOME-->
     <script src="https://kit.fontawesome.com/c4a32da8f9.js" crossorigin="anonymous"></script>
     <!-- FULLCALENDAR -->
-    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/main.min.css' rel='stylesheet' />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/main.min.css' rel='stylesheet' />
+    
     
 
 </head>
@@ -27,6 +29,7 @@
     include_once($pageLayoutPath);
     ?>
     <script src="<?= CONFIG['assets'] ?>js/scripts.js"></script>
+    <script src="<?= CONFIG['assets'] ?>js/calendar.js"></script>
     <script src="<?= CONFIG['assets'] ?>bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 
 </body>

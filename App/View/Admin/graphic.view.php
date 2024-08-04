@@ -21,7 +21,7 @@
 <script>
     // Obtener datos desde PHP (viewbag)
     var data = <?php echo json_encode(viewbag("progress")); ?>;
-
+    
     // Extraer los valores de peso y fechas de los datos obtenidos
     var labels = data.map(d => d.progress_date);
     var weight = data.map(d => d.weight);

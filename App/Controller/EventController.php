@@ -13,19 +13,22 @@ require_once(CONFIG["repository_path"] . "CoachRepository.php");
  *
  * @author 50685
  */
-class EventController extends Controller {
+class EventController extends Controller
+{
 
     //put your code here
 
-    public function newEvent() {
+    public function newEvent()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
         return View();
     }
 
-    public function createEvent() {
+    public function createEvent()
+    {
         try {
             $coach = new CoachRepository();
             $email = $_SESSION['user']['email'];
@@ -60,12 +63,13 @@ class EventController extends Controller {
         }
     }
 
-    public function listEvents() {
+    public function listEvents()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
-// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
-       $event=new EventRepository();
+        $event = new EventRepository();
         $coach = new CoachRepository();
         $email = $_SESSION['user']['email'];
 
@@ -92,7 +96,42 @@ class EventController extends Controller {
         }
         return View();
     }
-    public function removeEvent() {
+
+    public function calendar() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+            // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $event = new EventRepository();
+        $coach = new CoachRepository();
+        $email = $_SESSION['user']['email'];
+
+        try {
+            $coachsByEmail = $coach->getByEmail($email);
+            $eventList = $event->getEvents($coachsByEmail['id']);
+
+            if (empty($eventList)) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'No existen eventos',
+                    'text' => 'No hay eventos para mostrar'
+                ];
+            } else {
+                viewbag("events", $eventList);
+            }
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Error al recuperar los datos',
+                'text' => 'Error en la carga de datos.'
+            ];
+            $_SESSION['redirect-info'] = $info;
+        }
+        return View();
+    }
+
+    public function removeEvent()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
 
