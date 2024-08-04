@@ -225,7 +225,7 @@ class AdminController extends Controller {
         return View();
     }
 
-    public function adminGroups() {
+    public function callendar() {
         return View();
     }
 
