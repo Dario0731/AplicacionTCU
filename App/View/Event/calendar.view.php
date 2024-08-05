@@ -1,8 +1,7 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
 <div class="container">
-    <div class="py-3 text-end"><button id="addEventButton" class="btn btn-primary">Añadir Evento</button></div>
-    <div id='calendar' class="pb-5"></div>
+    <div id='calendar' class="p-4"></div>
 </div>
 
 <script>
@@ -15,41 +14,42 @@
 
         // obtener los eventos de la BD
         var event = <?php echo json_encode(viewbag("events")); ?>;
-        console.log(event);
 
         var title = event.map(d => d.title);
         var start = event.map(d => d.startDate);
-        console.log(start)
         var end = event.map(d => d.endDate);
         var color = event.map(d => d.color);
 
+        // Se crea y recorre el array de eventos
+        var events = [];
+        for (let i = 0; i < title.length; i++) {
+            events.push({
+                title: title[i],
+                start: start[i],
+                end: addDays(end[i], 2), // se le suma un dia a la fecha final
+                color: color[i]
+            });
+        }
+
         // carga los eventos
         var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title'
-                },
-                initialDate: `${year}-${month}-${day}`,
-                editable: false,
-                events: [{
-                        title: title,
-                        start: start[0],
-                        end: end[0],
-                        color: color
-                    }
-                    // Más eventos...
-                ]
-            });
-            calendar.render();
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title'
+            },
+            initialDate: `${year}-${month}-${day}`,
+            editable: false,
+            events: events
+        });
+        calendar.render();
 
 
         // añade un evento
         document.getElementById('addEventButton').addEventListener('click', function() {
             var newEvent = {
                 title: 'Entrenar equipo',
-                start: '2024-08-08',
-                end: addDays('2024-08-15', 2)
+                start: '2024-05-08'
             };
             calendar.addEvent(newEvent);
         });
@@ -64,16 +64,6 @@
         }
 
     });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const calendarEl = document.getElementById('calendar')
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-        })
-        calendar.render()
-    })
 </script>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>
