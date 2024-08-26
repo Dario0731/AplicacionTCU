@@ -3,6 +3,8 @@
 require_once("Lib/Core/Controller.php");
 require_once(CONFIG["repository_path"] . "EventRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
+require_once(CONFIG["repository_path"] . "ClientRepository.php");
+require_once(CONFIG["repository_path"] . "ProgressRepository.php");
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
@@ -107,9 +109,16 @@ class EventController extends Controller
         $coach = new CoachRepository();
         $email = $_SESSION['user']['email'];
 
+        $client = new ClientRepository();
+        $coach = new CoachRepository();
+        $emailClient = $_SESSION['user']['email'];
+
         try {
             $coachsByEmail = $coach->getByEmail($email);
             $eventList = $event->getEvents($coachsByEmail['id']);
+
+            $coachsByEmail = $coach->getByEmail($emailClient);
+            $clientList = $client->getByCoach($coachsByEmail['id']);
 
             if (empty($eventList)) {
                 $info = [
@@ -119,6 +128,7 @@ class EventController extends Controller
                 ];
             } else {
                 viewbag("events", $eventList);
+                viewbag("clients", $clientList);
             }
         } catch (Exception $ex) {
             $info = [
