@@ -1,6 +1,10 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
 <div class="container">
+    <div class="text-center my-3">
+        <label for="datePicker" class="form-label text-light">Ingrese la fecha que desea buscar</label>
+        <input type="date" class="form-control text-center" id="datePicker">
+    </div>
     <div id='calendar' class="p-4"></div>
 </div>
 
@@ -35,24 +39,15 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
-                left: 'prev,next today',
-                center: 'title'
+                left: 'title',
+                center: '',
+                right: 'prev,next today'
             },
             initialDate: `${year}-${month}-${day}`,
             editable: false,
             events: events
         });
         calendar.render();
-
-
-        // añade un evento
-        document.getElementById('addEventButton').addEventListener('click', function() {
-            var newEvent = {
-                title: 'Entrenar equipo',
-                start: '2024-05-08'
-            };
-            calendar.addEvent(newEvent);
-        });
 
         function addDays(dateString, days) {
             let date = new Date(dateString);
@@ -62,6 +57,13 @@
             let day = date.getDate().toString().padStart(2, '0');
             return `${year}-${month}-${day}`;
         }
+
+        // Funcionalidad para el selector de fechas
+        var datePicker = document.getElementById('datePicker');
+        datePicker.addEventListener('change', function() {
+            var selectedDate = this.value; // Obtiene la fecha seleccionada en formato YYYY-MM-DD
+            calendar.gotoDate(selectedDate); // Mueve el calendario a la fecha seleccionada
+        });
 
     });
 </script>

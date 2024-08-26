@@ -97,7 +97,8 @@ class EventController extends Controller
         return View();
     }
 
-    public function calendar() {
+    public function calendar()
+    {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
