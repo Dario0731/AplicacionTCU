@@ -26,7 +26,7 @@ class EventRepository extends Model implements IEventRepository {
             varchar($color),
             varchar($coachID)
         ];
-        return $this->create($data);
+        return $this->createEV($data);
     }
 
     public function getEvents($id) {

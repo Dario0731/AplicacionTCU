@@ -57,6 +57,15 @@ class Model {
         return $result['new_id'];
     }
 
+        public function createEV($data) {
+        $queryString = 'CALL sp_create_' . $this->entity . '(' . implode(', ', $data) . ')';
+
+        $query = $this->db->prepare($queryString);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['new_id'];
+    }
+    
     public function getAll() {
         $query = $this->db->prepare('CALL sp_get_all_' . $this->entity . '()');
         $query->execute();

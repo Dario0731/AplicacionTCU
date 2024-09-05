@@ -15,13 +15,11 @@ require_once(CONFIG["repository_path"] . "ProgressRepository.php");
  *
  * @author 50685
  */
-class EventController extends Controller
-{
+class EventController extends Controller {
 
     //put your code here
 
-    public function newEvent()
-    {
+    public function newEvent() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -29,8 +27,7 @@ class EventController extends Controller
         return View();
     }
 
-    public function createEvent()
-    {
+    public function createEvent() {
         try {
             $coach = new CoachRepository();
             $email = $_SESSION['user']['email'];
@@ -46,7 +43,7 @@ class EventController extends Controller
             $color = $_POST['color'];
             $coachID = $id;
 
-            $event->createEvent($title, $description, $startDate, $endDate, $color, $coachID);
+            $idSportGr = $event->createEvent($title, $description, $startDate, $endDate, $color, $coachID);
 
             $info = [
                 'type' => 'success',
@@ -54,19 +51,19 @@ class EventController extends Controller
                 'text' => 'El evento ha sido agregado al calendario'
             ];
 
-            $this->redirect("/event/newEvent", $info);
+            $encodedID = urlencode($idSportGr);
+            $this->redirect("/event/newClientsToEvent?id={$encodedID}", $info);
         } catch (Exception $ex) {
             $info = [
                 'type' => 'error',
                 'title' => 'Ha ocurrido un problema',
                 'text' => 'Ha ocurrido un problema con el servidor.'
             ];
-            $this->redirect("/event/newEvent", $info);
+            $this->redirect("/event/newClientsToEvent", $info);
         }
     }
 
-    public function listEvents()
-    {
+    public function listEvents() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -99,8 +96,7 @@ class EventController extends Controller
         return View();
     }
 
-    public function calendar()
-    {
+    public function calendar() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -141,8 +137,7 @@ class EventController extends Controller
         return View();
     }
 
-    public function removeEvent()
-    {
+    public function removeEvent() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
 
@@ -162,4 +157,40 @@ class EventController extends Controller
             echo json_encode(['status' => 'error', 'message' => 'Método no permitido']);
         }
     }
+
+    public function newClientsToEvent() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $client = new ClientRepository();
+        $coach = new CoachRepository();
+        $email = $_SESSION['user']['email'];
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+        try {
+            $coachsByEmail = $coach->getByEmail($email);
+            $clientList = $client->getByCoach($coachsByEmail['id']);
+            //     $clientList = $client->getAll();
+
+            if (empty($clientList)) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'No existen clientes',
+                    'text' => 'No hay clientes para mostrar'
+                ];
+            } else {
+                viewbag("clientes", $clientList);
+            }
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Error al recuperar los datos',
+                'text' => 'Error en la carga de datos.'
+            ];
+            $_SESSION['redirect-info'] = $info;
+        }
+
+        return View();
+    }
+  
 }
