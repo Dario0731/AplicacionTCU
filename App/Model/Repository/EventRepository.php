@@ -37,4 +37,8 @@ class EventRepository extends Model implements IEventRepository {
         return $this->remove($id);
     }
 
+    public function getEventsByID($id) {
+        return $this->getGroupById($id);
+    }
+
 }

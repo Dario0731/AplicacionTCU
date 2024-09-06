@@ -275,7 +275,6 @@ class CoachMessengerController extends Controller {
             ];
             $this->redirect("/coachmessenger/groupMessage", $info);
             
-              echo "HOLA";
         }
     }
 

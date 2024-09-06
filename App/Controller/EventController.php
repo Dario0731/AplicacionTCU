@@ -5,6 +5,9 @@ require_once(CONFIG["repository_path"] . "EventRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once(CONFIG["repository_path"] . "ProgressRepository.php");
+require_once(CONFIG["repository_path"] . "SportGroupRepository.php");
+require_once(CONFIG["repository_path"] . "EventClientRepository.php");
+require_once(CONFIG["repository_path"] . "ClientGroupRepository.php");
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
@@ -192,5 +195,68 @@ class EventController extends Controller {
 
         return View();
     }
-  
+
+    public function groupEvent() {
+        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
+// Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+            $this->redirect("/authentication/login");
+        }
+        $email = $_SESSION['user']['email'];
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
+        $repo = new EventRepository();
+        $group = new SportGroupRepository();
+        $coach = new CoachRepository();
+        try {
+            $coachsByEmail = $coach->getByEmail($email);
+            $groupstList = $group->getSportGroupsByCoach($coachsByEmail['id']);
+            $eventInfo = $repo->getEventsByID($id);
+            if (empty($groupstList) || empty($eventInfo)) {
+                $info = [
+                    'type' => 'error',
+                    'title' => 'No existe información',
+                    'text' => 'No hay información para mostrar'
+                ];
+            } else {
+                viewbag("events", $eventInfo);
+                viewbag("groups", $groupstList);
+            }
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Error al recuperar los datos',
+                'text' => 'Error en la carga de datos.'
+            ];
+            $_SESSION['redirect-info'] = $info;
+        }
+        return view();
+    }
+
+    public function sendGroupEvent() {
+        $repo = new EventClientRepository();
+        $clientGroupRepo = new ClientGroupRepository ();
+        $eventID=$_POST['eventID'];
+        try {
+
+            $ListIDS = $clientGroupRepo->getGroupsIDS($_POST['groupID']);
+            for ($i = 0; $i < count($ListIDS); $i++) {
+                $clientID = $ListIDS[$i]['client_id']; // Get the client ID from the ListIDS array
+                $repo->createEventClient($clientID, $eventID);
+            }
+            $info = [
+                'type' => 'success',
+                'title' => 'Clientes agregados a evento',
+                'text' => 'Los clientes fueron agregados al evento correctamente'
+            ];
+            $this->redirect("/event/listEvents", $info);
+        } catch (Exception $ex) {
+            $info = [
+                'type' => 'error',
+                'title' => 'Ha ocurrido un problema',
+                'text' => 'El servidor se ha caido'
+            ];
+        //    $this->redirect("/event/listEvents", $info);
+        }
+
+    }
+
 }

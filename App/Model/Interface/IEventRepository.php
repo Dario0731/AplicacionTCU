@@ -13,7 +13,7 @@
 interface IEventRepository {
     //put your code here
     public function getEvents($id);
-
+  public function getEventsByID($id);
         public function removeEvent($id);
     
     public function createEvent($title,$description,$startDate,$endDate,$color,$coachID);

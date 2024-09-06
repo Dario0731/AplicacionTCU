@@ -43,6 +43,15 @@
         </table>
         <div class="text-end"><a class="btn btn-primary" href="<?= route('Event', 'listEvents') ?>">Aceptar</a></div>
     </div>
+        
+                    <br>
+            <br>
+            <div class="form-group text-center">
+                <label for="clients_comments">Si quiere seleccionar un grupo de clientes presione aquí: 
+<a class="btn btn-primary" href="<?= route('Event', 'groupEvent') . '?id=' . htmlspecialchars($_GET['id']) ?>">Ir a grupos</a>
+
+                </label>
+            </div>
 </div>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>
