@@ -5,7 +5,7 @@
         </a>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown px-3">
                     <a class="nav-link text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="px-1" src="<?= CONFIG['assets'] ?>img/clients-icon.svg" alt="imagen de administrar clientes" style="height: 23px;">
                         Mis datos
@@ -18,6 +18,12 @@
                             Ver Clases
                         </a>
                     </div>
+                </li>
+                <li class="nav-item px-3">
+                    <a class="nav-link text-white" href="<?= route('client', 'calendar') ?>">
+                        <img class="px-1" src="<?= CONFIG['assets'] ?>img/calendar-icon.svg" alt="imagen de administrar clases" style="height: 23px;">
+                        Calendario
+                    </a>
                 </li>
             </ul>
         </div>
