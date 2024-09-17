@@ -1,9 +1,11 @@
 <?php
+
 require_once("Lib/Core/Controller.php");
 require_once(CONFIG["repository_path"] . "ClientRepository.php");
 require_once(CONFIG["repository_path"] . "ProgressRepository.php");
 require_once(CONFIG["repository_path"] . "EventRepository.php");
 require_once(CONFIG["repository_path"] . "CoachRepository.php");
+require_once(CONFIG["repository_path"] . "EventClientRepository.php");
 /*
   /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,11 +17,9 @@ require_once(CONFIG["repository_path"] . "CoachRepository.php");
  *
  * @author 50685
  */
-class ClientController extends Controller
-{
+class ClientController extends Controller {
 
-    public function home()
-    {
+    public function home() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -29,7 +29,7 @@ class ClientController extends Controller
             $repository = new ClientRepository();
             $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
             $clientInfo = $clientByEmail['name'] . ' ' . $clientByEmail['last_name'] . ', ' . $clientByEmail['pay_date']
-                . ',' . $clientByEmail['imagenCoach'];
+                    . ',' . $clientByEmail['imagenCoach'];
             viewbag("client_info", $clientInfo);
         } catch (Exception $ex) {
             $info = [
@@ -42,8 +42,7 @@ class ClientController extends Controller
         return View();
     }
 
-    public function coachInfo()
-    {
+    public function coachInfo() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -51,13 +50,12 @@ class ClientController extends Controller
         $repository = new ClientRepository();
         $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
         $coach_info = $clientByEmail['coachEmail'] . ',' . $clientByEmail['coachName'] . ',' .
-            $clientByEmail['coachLast_name'] . ',' . $clientByEmail['imagenCoach'] . ',' . $clientByEmail['coachPhone'];
+                $clientByEmail['coachLast_name'] . ',' . $clientByEmail['imagenCoach'] . ',' . $clientByEmail['coachPhone'];
         viewbag("coach_info", $coach_info);
         return view();
     }
 
-    public function information()
-    {
+    public function information() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -66,22 +64,21 @@ class ClientController extends Controller
             $repository = new ClientRepository();
             $clientByEmail = $repository->getByEmail($_SESSION['user']['email']);
             $client_info = $clientByEmail['email'] . ',' . $clientByEmail['name'] . ',' .
-                $clientByEmail['last_name'] . ',' . $clientByEmail['phone'] . ',' . $clientByEmail['birth_date'];
+                    $clientByEmail['last_name'] . ',' . $clientByEmail['phone'] . ',' . $clientByEmail['birth_date'];
             viewbag("client_info", $client_info);
         } catch (Exception $ex) {
+            
         }
 
 
         return view();
     }
 
-    public function passwordAct()
-    {
+    public function passwordAct() {
         return view();
     }
 
-    private function firstConection()
-    {
+    private function firstConection() {
         $email = $_SESSION['user']['email'];
         $repository = new ClientRepository();
         $clientByEmail = $repository->searchByEmail($_SESSION['user']['email']);
@@ -96,8 +93,7 @@ class ClientController extends Controller
         }
     }
 
-    public function updatePasswordClient()
-    {
+    public function updatePasswordClient() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -153,8 +149,7 @@ class ClientController extends Controller
         }
     }
 
-    public function updatePersonalInfo()
-    {
+    public function updatePersonalInfo() {
         $email = $_SESSION['user']['email'];
         $repository = new ClientRepository();
         $clientByEmail = $repository->searchByEmail($_SESSION['user']['email']);
@@ -181,8 +176,8 @@ class ClientController extends Controller
             $this->redirect("/client/information", $info);
         }
     }
-    public function progress()
-    {
+
+    public function progress() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -198,9 +193,7 @@ class ClientController extends Controller
         return view();
     }
 
-
-    public function graphic()
-    {
+    public function graphic() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
@@ -218,15 +211,19 @@ class ClientController extends Controller
         return view();
     }
 
-    public function calendar()
-    {
+    public function calendar() {
         if (!isset($_SESSION['user']) || !isset($_SESSION['user']['email'])) {
             // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
             $this->redirect("/authentication/login");
         }
-
+     
         try {
-
+            $email = $_SESSION['user']['email'];
+            $clientRepo = new ClientRepository();
+            $eventRepo= new EventClientRepository();
+            $result = $clientRepo->searchByEmail($email);
+            $id = $result['id'];
+            $eventList=$eventRepo->getEventsClients($id);
             if (empty($eventList)) {
                 $info = [
                     'type' => 'error',
@@ -236,6 +233,7 @@ class ClientController extends Controller
             } else {
                 // Pasar los datos a la vista
                 viewbag("events", $eventList);
+          //      echo $eventList[0]['title'];
             }
         } catch (Exception $ex) {
             $info = [
@@ -248,4 +246,5 @@ class ClientController extends Controller
 
         return View();
     }
+
 }

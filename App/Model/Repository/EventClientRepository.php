@@ -19,7 +19,7 @@ class EventClientRepository extends Model implements IEventClientRepository{
         return $this->create($data);    }
 
     public function getEventsClients($id) {
-        
+        return $this->getById($id);
     }
 
     public function removeEventClients($id) {
