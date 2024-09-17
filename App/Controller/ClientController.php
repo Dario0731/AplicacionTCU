@@ -233,6 +233,7 @@ class ClientController extends Controller {
             } else {
                 // Pasar los datos a la vista
                 viewbag("events", $eventList);
+                viewbag("client", $result);
           //      echo $eventList[0]['title'];
             }
         } catch (Exception $ex) {

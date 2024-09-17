@@ -1,5 +1,8 @@
 <?php include(CONFIG['public_path'] . 'header.client.php'); ?>
 
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/main.min.css' rel='stylesheet' />
+
 <div class="container">
     <div class="text-center my-3">
         <label for="datePicker" class="form-label text-light">Ingrese la fecha que desea buscar</label>
@@ -18,12 +21,16 @@
 
         // obtener los eventos de la BD
         var event = <?php echo json_encode(viewbag("events")); ?>;
-        console.log(event);
+
+        var client = <?php echo json_encode(viewbag("client")); ?>;
+        console.log(client);
 
         var title = event.map(d => d.title);
         var start = event.map(d => d.startDate);
         var end = event.map(d => d.endDate);
         var color = event.map(d => d.color);
+
+        var pay_date = client.pay_date;
 
         // Se crea y recorre el array de eventos
         var events = [];
@@ -36,24 +43,10 @@
             });
         }
 
+
         // Se agregan los cumpleaños repetidos
         let currentYear = new Date().getFullYear();
         let yearsToShow = 5; // Mostrar cumpleaños para los próximos 5 años
-
-        for (let i = 0; i < birth_day.length; i++) {
-            let originalDate = new Date(birth_day[i]);
-            for (let j = 0; j < yearsToShow; j++) {
-                let birthdayThisYear = new Date(currentYear + j, originalDate.getMonth(), originalDate.getDate());
-                let formattedBirthday = formatDate(birthdayThisYear);
-
-                events.push({
-                    title: 'Cumpleaños de ' + client_name[i],
-                    start: formattedBirthday,
-                    end: formattedBirthday, // El cumpleaños es un solo día
-                    color: '#408602'
-                });
-            }
-        }
 
         // Se agregan las fechas de pago repetidas
         for (let i = 0; i < pay_date.length; i++) {
@@ -63,14 +56,13 @@
                 let formattedPayDate = formatDate(payDateThisYear);
 
                 events.push({
-                    title: 'Fecha de pago de ' + client_name[i],
+                    title: 'Fecha de pago',
                     start: formattedPayDate,
                     end: formattedPayDate, // La fecha de pago es un solo día
                     color: '#FF5733'
                 });
             }
         }
-
 
         // carga los eventos
         var calendarEl = document.getElementById('calendar');

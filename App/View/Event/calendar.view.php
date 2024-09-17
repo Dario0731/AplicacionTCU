@@ -21,7 +21,6 @@
 
         // obtener los clientes de la BD
         var clients = <?php echo json_encode(viewbag("clients")); ?>;
-        console.log(clients);
 
         var title = event.map(d => d.title);
         var start = event.map(d => d.startDate);
