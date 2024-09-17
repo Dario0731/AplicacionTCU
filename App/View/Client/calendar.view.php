@@ -23,7 +23,6 @@
         var event = <?php echo json_encode(viewbag("events")); ?>;
 
         var client = <?php echo json_encode(viewbag("client")); ?>;
-        console.log(client);
 
         var title = event.map(d => d.title);
         var start = event.map(d => d.startDate);
