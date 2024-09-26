@@ -61,12 +61,15 @@
             }
         }
 
-        // Se agregan las fechas de pago repetidas
+        // Se agregan las fechas de pago repetidas mensualmente
         for (let i = 0; i < pay_date.length; i++) {
             let originalPayDate = new Date(pay_date[i]);
-            for (let j = 0; j < yearsToShow; j++) {
-                let payDateThisYear = new Date(currentYear + j, originalPayDate.getMonth(), originalPayDate.getDate());
-                let formattedPayDate = formatDate(payDateThisYear);
+            let monthsToShow = 12 * yearsToShow; // Mostrar pagos para los próximos 5 años (12 meses por año)
+
+            for (let j = 0; j < monthsToShow; j++) {
+                let payDateNextMonth = new Date(originalPayDate);
+                payDateNextMonth.setMonth(originalPayDate.getMonth() + j); // Agregar j meses a la fecha original
+                let formattedPayDate = formatDate(payDateNextMonth);
 
                 events.push({
                     title: 'Fecha de pago de ' + client_name[i],
