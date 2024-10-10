@@ -2,7 +2,7 @@
  
 ?>
 
-<div class="container p-4" style="height: 100%;">
+<div class="container p-4 d-flex flex-column min-vh-100">
     <?php if (isset($_GET['name'])) : ?>
         <h2>Agregar a grupo: <?= htmlspecialchars(urldecode($_GET['name'])) ?></h2>
     <?php endif; ?>

@@ -1,51 +1,49 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-<div class="container p-4">
-    <div class="" style="height: 100%;">
-        <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th class="text-center">Correo electrónico</th>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Apellido</th>
-                    <th class="text-center">Teléfono</th>
-                    <th class="text-center">Disciplina(s)</th>
-                    <th class="text-center">Peso</th>
-                    <th class="text-center">Estatura</th>
-                    <th class="text-center">Fecha de pago</th>
-                    <th class="text-center">Comentarios</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (is_array(viewbag("clientes"))) : ?>
-                    <?php foreach (viewbag("clientes") as $clients) : ?>
-                        <tr id="cliente-<?= $clients['id'] ?>">
-                            <td class="text-center"><?= $clients['email'] ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['name']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['last_name']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['phone']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['discipline']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['weight']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['height']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['pay_date']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($clients['coments']) ?></td>
-                            <td class="text-center">
-                                <a class="px-1" href="<?= route('Admin', 'editclient', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
-                                <button type="button" class="btn delete-btn px-1" data-id="<?= $clients['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
-                                <a class="px-1" href="<?= route('Admin', 'clientsInfo', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/eye-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
-                                <a class="px-1" href="<?= route('Admin', 'graphic', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/graphic-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr>
-                        <td colspan="10" class="text-white">No hay datos disponibles</td>
+<div class="container p-4 d-flex flex-column min-vh-100">
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th class="text-center">Correo electrónico</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Apellido</th>
+                <th class="text-center">Teléfono</th>
+                <th class="text-center">Disciplina(s)</th>
+                <th class="text-center">Peso</th>
+                <th class="text-center">Estatura</th>
+                <th class="text-center">Fecha de pago</th>
+                <th class="text-center">Comentarios</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (is_array(viewbag("clientes"))) : ?>
+                <?php foreach (viewbag("clientes") as $clients) : ?>
+                    <tr id="cliente-<?= $clients['id'] ?>">
+                        <td class="text-center"><?= $clients['email'] ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['name']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['last_name']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['phone']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['discipline']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['weight']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['height']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['pay_date']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($clients['coments']) ?></td>
+                        <td class="text-center">
+                            <a class="px-1" href="<?= route('Admin', 'editclient', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/edit-icon.svg" alt="icono de editar al cliente" style="height: 20px;"></a>
+                            <button type="button" class="btn delete-btn px-1" data-id="<?= $clients['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/delete-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></button>
+                            <a class="px-1" href="<?= route('Admin', 'clientsInfo', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/eye-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
+                            <a class="px-1" href="<?= route('Admin', 'graphic', ['email' => $clients['email']]) ?>"><img src="<?= CONFIG['assets'] ?>img/graphic-icon.svg" alt="icono de eliminar al cliente" style="height: 20px;"></a>
+                        </td>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="10" class="text-white">No hay datos disponibles</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>

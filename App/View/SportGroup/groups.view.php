@@ -1,7 +1,6 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-<div class="container p-4">
-    <div class="" style="height: 100%;">
+<div class="container p-4 d-flex flex-column min-vh-100">
         <table class="table table-striped table-dark">
             <thead>
                 <tr>
@@ -30,7 +29,6 @@
                 <?php endif; ?>
             </tbody>
         </table>
-    </div>
 </div>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>

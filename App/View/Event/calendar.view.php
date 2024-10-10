@@ -1,6 +1,6 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-<div class="container">
+<div class="container d-flex flex-column min-vh-100">
     <div class="text-center my-3">
         <label for="datePicker" class="form-label text-light">Ingrese la fecha que desea buscar</label>
         <input type="date" class="form-control text-center" id="datePicker">

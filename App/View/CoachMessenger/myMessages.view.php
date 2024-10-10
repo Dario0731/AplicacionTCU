@@ -1,46 +1,46 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
-<div class="container p-4">
-    <div class="" style="height: 100%;">
-        <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th class="text-center">De</th>
-                    <th class="text-center">Mensaje</th>
-                    <th class="text-center">Fecha</th>
-                    <th class="text-center">Hora</th>
-                    <th class="text-center">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (is_array(viewbag("messages"))) : ?>
-                    <?php foreach (viewbag("messages") as $message) : ?>
-                        <tr>
-                            <td class="text-center"><?= htmlspecialchars($message['clientName']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($message['message']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($message['date']) ?></td>
-                            <td class="text-center"><?= htmlspecialchars($message['time']) ?></td>
 
-                            <td class="text-center">
-                                <?php if ($message['isRead'] == 0) { ?>
-                                    <button type="button" class="btn read-btn" data-id="<?= $message['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/see-message.svg" alt="icono leer mensaje" style="height: 20px;"></button>
-                                <?php } else { ?> <img src="<?= CONFIG['assets'] ?>img/seen-icon.svg" alt="icono de mensaje visto" style="height: 28px;">
-                                <?php }  ?>
-                                <div><?= $message['isRead'] == 0 ? 'Marcar como visto' : 'Visto' ?></div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
+<div class="container p-4 d-flex flex-column min-vh-100">
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th class="text-center">De</th>
+                <th class="text-center">Mensaje</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Hora</th>
+                <th class="text-center">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (is_array(viewbag("messages"))) : ?>
+                <?php foreach (viewbag("messages") as $message) : ?>
                     <tr>
-                        <td colspan="3" class="text-white">No hay datos disponibles</td>
+                        <td class="text-center"><?= htmlspecialchars($message['clientName']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($message['message']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($message['date']) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($message['time']) ?></td>
+
+                        <td class="text-center">
+                            <?php if ($message['isRead'] == 0) { ?>
+                                <button type="button" class="btn read-btn" data-id="<?= $message['id'] ?>"><img src="<?= CONFIG['assets'] ?>img/see-message.svg" alt="icono leer mensaje" style="height: 20px;"></button>
+                            <?php } else { ?> <img src="<?= CONFIG['assets'] ?>img/seen-icon.svg" alt="icono de mensaje visto" style="height: 28px;">
+                            <?php }  ?>
+                            <div><?= $message['isRead'] == 0 ? 'Marcar como visto' : 'Visto' ?></div>
+                        </td>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="3" class="text-white">No hay datos disponibles</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 
 <?php include(CONFIG['public_path'] . 'footer.php'); ?>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

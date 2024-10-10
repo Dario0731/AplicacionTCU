@@ -1,10 +1,18 @@
 <?php include(CONFIG['public_path'] . 'header.admin.php'); ?>
 
 <div class="container p-4">
-        <div class="pt-2 pb-2"><p class="h2">Administrar integrantes del grupo</p></div>
-    <div class="pt-2 text-center"><p class="h1"><!--Nombre del grupo:--> <?= viewbag("grupos")[0]['groupName']; ?></p></div>
-    <div class="pt-2 pb-4 text-center"><p class="h5"><!--Descripción del grupo:--> <?= viewbag("grupos")[0]['groupComments']; ?></p></div>
-    <div class="pt-2 pb-2"><p class="h2">Integrantes del grupo</p></div>
+    <div class="pt-2 pb-2">
+        <p class="h2">Administrar integrantes del grupo</p>
+    </div>
+    <div class="pt-2 text-center">
+        <p class="h1"><!--Nombre del grupo:--> <?= viewbag("grupos")[0]['groupName']; ?></p>
+    </div>
+    <div class="pt-2 pb-4 text-center">
+        <p class="h5"><!--Descripción del grupo:--> <?= viewbag("grupos")[0]['groupComments']; ?></p>
+    </div>
+    <div class="pt-2 pb-2">
+        <p class="h2">Integrantes del grupo</p>
+    </div>
     <div class="" style="height: 100%;">
         <table class="table table-striped table-dark">
             <thead>
@@ -42,7 +50,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         <?php if (isset($_SESSION['redirect-info'])) : ?>
             Swal.fire({
                 icon: '<?php echo $_SESSION['redirect-info']['type']; ?>',
@@ -57,71 +65,70 @@
         <?php endif; ?>
     });
 
-$(document).ready(function () {
-    $('.delete-btn').on('click', function () {
-        var clientId = $(this).data('id');
-        var groupId = $(this).data('groupid'); // Ajustado para coincidir con el atributo 'data-groupid'
+    $(document).ready(function() {
+        $('.delete-btn').on('click', function() {
+            var clientId = $(this).data('id');
+            var groupId = $(this).data('groupid'); // Ajustado para coincidir con el atributo 'data-groupid'
 
-        var row = $(this).closest('tr');
+            var row = $(this).closest('tr');
 
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "¡No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminarlo!',
-            cancelButtonText: 'Cancelar',
-            background: 'linear-gradient(to bottom, #011242, #001136)',
-            color: '#fff',
-            iconColor: '#fff'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/AplicacionTCU/ClientGroup/removeClient', // Asegúrate de ajustar la ruta según tu estructura de carpetas
-                    type: 'POST',
-                    data: {
-                        id: clientId,
-                        groupID: groupId // Ajustado para coincidir con el nombre del parámetro en PHP
-                    },
-                    success: function (response) {
-                        try {
-                            var result = JSON.parse(response);
-                            if (result.status === 'success') {
-                                row.remove();
-                                Swal.fire(
-                                    '¡Eliminado!',
-                                    'El cliente ha sido eliminado del grupo.',
-                                    'success'
-                                );
-                            } else {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo!',
+                cancelButtonText: 'Cancelar',
+                background: 'linear-gradient(to bottom, #011242, #001136)',
+                color: '#fff',
+                iconColor: '#fff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/AplicacionTCU/ClientGroup/removeClient', // Asegúrate de ajustar la ruta según tu estructura de carpetas
+                        type: 'POST',
+                        data: {
+                            id: clientId,
+                            groupID: groupId // Ajustado para coincidir con el nombre del parámetro en PHP
+                        },
+                        success: function(response) {
+                            try {
+                                var result = JSON.parse(response);
+                                if (result.status === 'success') {
+                                    row.remove();
+                                    Swal.fire(
+                                        '¡Eliminado!',
+                                        'El cliente ha sido eliminado del grupo.',
+                                        'success'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Error',
+                                        result.message,
+                                        'error'
+                                    );
+                                }
+                            } catch (e) {
+                                console.error('Error parsing JSON:', e);
                                 Swal.fire(
                                     'Error',
-                                    result.message,
+                                    'Hubo un problema con la solicitud.',
                                     'error'
                                 );
                             }
-                        } catch (e) {
-                            console.error('Error parsing JSON:', e);
+                        },
+                        error: function() {
                             Swal.fire(
                                 'Error',
                                 'Hubo un problema con la solicitud.',
                                 'error'
                             );
                         }
-                    },
-                    error: function () {
-                        Swal.fire(
-                            'Error',
-                            'Hubo un problema con la solicitud.',
-                            'error'
-                        );
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
     });
-});
-
 </script>

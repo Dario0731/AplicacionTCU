@@ -21,7 +21,7 @@ if (count($parts) >= 5) {
     $conection = $parts[5];
 }
 ?>
-<div class="container">
+<div class="container d-flex flex-column min-vh-100">
     <div class="row justify-content-center pt-3">
         <div class="col-md-6">
             <?php if ($conection == 0) { ?>
