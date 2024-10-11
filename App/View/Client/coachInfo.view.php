@@ -10,7 +10,7 @@ $last_name = $parts[2];
 $image_path = $parts[3];
 $phone = $parts[4];
 ?>
-<div class="container">
+<div class="container d-flex flex-column min-vh-100">
     <div class="row justify-content-center px-5 py-3">
         <a href="<?= route('client', 'home') ?>" class="px-5">
             <img src="<?= CONFIG['assets'] ?>img/leave-arrow.svg" alt="imagen de volver atrás" style="height: 27px;">

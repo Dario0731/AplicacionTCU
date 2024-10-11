@@ -1,6 +1,6 @@
 <?php include(CONFIG['public_path'] . 'header.client.php') ?>
 
-<div class="container" style="height: 100%;">
+<div class="container d-flex flex-column min-vh-100">
     <div class="row justify-content-center pt-5">
         <div class="col-md-6">
             <p class="h4 text-center">Actualizar contraseña</p>

@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js"></script>
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/main.min.css' rel='stylesheet' />
 
-<div class="container">
+<div class="container d-flex flex-column min-vh-100">
     <div class="text-center my-3">
         <label for="datePicker" class="form-label text-light">Ingrese la fecha que desea buscar</label>
         <input type="date" class="form-control text-center" id="datePicker">

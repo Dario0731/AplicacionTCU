@@ -10,7 +10,7 @@ $last_name = $parts[2];
 $phone = $parts[3];
 $birthdate = $parts[4];
 ?>
-<div class="container" style="height: 100%;">
+<div class="container d-flex flex-column min-vh-100">
     <div class="row justify-content-center pt-5">
         <div class="col-md-6">
             <p class="h4 text-center">Actualizar datos</p>

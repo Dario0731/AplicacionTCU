@@ -14,9 +14,6 @@
                         <a href="<?= route('client', 'progress') ?>" class="dropdown-item text-white navbar-gradient" href="#">
                             Mi progreso
                         </a>
-                        <a class="dropdown-item text-white navbar-gradient" href="#">
-                            Ver Clases
-                        </a>
                     </div>
                 </li>
                 <li class="nav-item px-3">
